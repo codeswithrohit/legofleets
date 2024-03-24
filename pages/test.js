@@ -1,31 +1,12 @@
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
-import axios from 'axios';
-import { firebase } from '../Firebase/config';
-
-const db = firebase.firestore();
-
-const BookingSummary = () => {
-  const loadScript = (src) => {
-    return new Promise((resovle) => {
-      const script = document.createElement("script");
-      script.src = src;
-
-      script.onload = () => {
-        resovle(true);
-      };
-
-      script.onerror = () => {
-        resovle(false);
-      };
-
-      document.body.appendChild(script);
-    });
-  };
+import { firebase } from "../Firebase/config";
+import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
+const ContactSummary = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const handleBack = () => {
+    router.back(); // Navigate to the previous page
+  };
   const {
     selectedVehicleType,
     selectedBrand,
@@ -37,18 +18,28 @@ const BookingSummary = () => {
     selectedPickupDate,
     selectedDistance,
     selectedService,
-    selectedDropoffDate,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    youaddress,
-    comment,
+    selectedDropoffDate
   } = router.query;
-
-  const submitBookingData = async () => {
-    try {
-      await db.collection('bookings').add({
+  // ... (your existing code)
+  console.log({
+    selectedVehicleType,
+    selectedBrand,
+    selectedPrice,
+    selectedPassenger,
+    selectedSuitcase,
+    selectedPickupLocation,
+    selectedDropoffLocation,
+    selectedPickupDate,
+    selectedDistance,
+    selectedService,
+    selectedDropoffDate
+  });
+  const handleProceedToPayment = () => {
+    // Assuming you want to redirect to "bookingsummary" page
+    // You can modify the pathname and query as per your requirements
+    router.push({
+      pathname: '/bookingsummary',
+      query: {
         selectedVehicleType,
         selectedBrand,
         selectedPrice,
@@ -58,106 +49,19 @@ const BookingSummary = () => {
         selectedDropoffLocation,
         selectedPickupDate,
         selectedDistance,
-        selectedService,
         selectedDropoffDate,
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        youaddress,
-        comment,
-      });
-    } catch (error) {
-      console.error('Error submitting booking data:', error);
-    }
+        selectedService,
+        // Add form data to the query
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        youaddress: document.getElementById('youaddress').value,
+        comment: document.getElementById('comment').value,
+        // Add other necessary data from the contact details form
+      },
+    });
   };
-
-  const initiatePayment = async () => {
-    try {
-      setLoading(true);
-      // Submit booking data to the database
-      await submitBookingData();
-
-      // Display payment modal
-      const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
-      if (!res) {
-        toast.error('Failed to load Razorpay SDK. Please try again later.');
-        return;
-      }
-
-      const amountInPaise = selectedPrice * 100;
-
-      const options = {
-        key: 'rzp_test_td8CxckGpxFssp',
-        currency: 'INR',
-        amount: amountInPaise,
-        name: 'Legofleets',
-        description: 'Thanks for purchasing',
-        image: 'logo.png',
-        handler: async function (response) {
-          // Handle payment success
-          console.log('Payment Successful:', response);
-          toast.success('Payment Successful!');
-          router.push(`/confirmation?firstName=${firstName}`);
-          // Send confirmation email
-          await axios.post('/api/sendEmail', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-          });
-          await axios.post('/api/sendMessage', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-          });
-
-          // Redirect to confirmation page
-          
-        },
-        prefill: {
-          name: `${firstName} ${lastName}`,
-          email: email,
-        },
-      };
-
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
-    } catch (error) {
-      console.error('Error initiating payment:', error);
-      toast.error('Failed to initiate payment. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
 
   
   return (
@@ -169,24 +73,18 @@ const BookingSummary = () => {
             <div class="p-8 lg:overflow-auto lg:h-[calc(100vh-60px)]">
               <div class="space-y-6 mt-10">
               <div class="lg:border-l lg:pl-8">
-            <h3 class="text-xl font-bold text-white">Customer Details</h3>
             <ul class="text-white mt-6 space-y-4">
-              <li class="flex flex-wrap gap-4 text-sm">Name <span class="ml-auto font-bold">Rohit Kumar</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Email <span class="ml-auto font-bold">hrohit320@gmail.com</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Mobile No. <span class="ml-auto font-bold">7667411501</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Flat /House<span class="ml-auto font-bold">Ward No.6</span></li>
-              <li class=" border-t pt-4"></li>
+              
                           <h3 class="text-xl font-bold text-white">Booking Details</h3>
-                           <li class="flex flex-wrap gap-4 text-sm">Service <span class="ml-auto font-bold">Rohit Kumar</span></li>
-                           <li class="flex flex-wrap gap-4 text-sm">Pickup location <span class="ml-auto font-bold">Rohit Kumar</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Drop-off location <span class="ml-auto font-bold">hrohit320@gmail.com</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Vehicle<span class="ml-auto font-bold">7667411501</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">Ward No.6</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">Ward No.6</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">Ward No.6</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Dop-off Date<span class="ml-auto font-bold">Ward No.6</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">Ward No.6</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Comment<span class="ml-auto font-bold">Ward No.6</span></li>
+                           <li class="flex flex-wrap gap-4 text-sm">Service <span class="ml-auto font-bold">{selectedService}</span></li>
+                           <li class="flex flex-wrap gap-4 text-sm">Pickup location <span class="ml-auto font-bold">{selectedPickupLocation}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Drop-off location <span class="ml-auto font-bold">{selectedDropoffLocation}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Vehicle<span class="ml-auto font-bold">{selectedVehicleType}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">{selectedPassenger}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">{selectedSuitcase}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">{selectedPickupDate}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Dop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
               <li class=" border-t pt-4"></li>
             </ul>
           </div>
@@ -194,7 +92,7 @@ const BookingSummary = () => {
               </div>
             </div>
             <div class="absolute left-0 bottom-0 bg-[#444] w-full p-4">
-              <h4 class="flex flex-wrap gap-4 text-base text-white">Total <span class="ml-auto">$84.00</span></h4>
+              <h4 class="flex flex-wrap gap-4 text-base text-white">Total <span class="ml-auto">₹{selectedPrice}</span></h4>
             </div>
           </div>
         </div>
@@ -205,7 +103,7 @@ const BookingSummary = () => {
               <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
               <div class="grid sm:grid-cols-2 gap-6">
                 <div class="relative flex items-center">
-                  <input type="text" placeholder="First Name"
+                  <input aria-label="firstName" required  type="text" name="firstName" id="firstName" placeholder="Enter Your First name"
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                     viewBox="0 0 24 24">
@@ -216,7 +114,7 @@ const BookingSummary = () => {
                   </svg>
                 </div>
                 <div class="relative flex items-center">
-                  <input type="text" placeholder="Last Name"
+                  <input aria-label="lastName" required  type="text" name="lastName" id="lastName" placeholder="Enter Your Last name"
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                     viewBox="0 0 24 24">
@@ -227,7 +125,7 @@ const BookingSummary = () => {
                   </svg>
                 </div>
                 <div class="relative flex items-center">
-                  <input type="email" placeholder="Email"
+                  <input  aria-label="emailAddress" required type="email" name="email" id="email" placeholder="Email address" 
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                     viewBox="0 0 682.667 682.667">
@@ -247,7 +145,7 @@ const BookingSummary = () => {
                   </svg>
                 </div>
                 <div class="relative flex items-center">
-                  <input type="number" placeholder="Phone No."
+                  <input aria-label="phoneNumber" required  type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 64 64">
                     <path
@@ -258,20 +156,31 @@ const BookingSummary = () => {
               </div>
             </div>
             <div class="mt-6">
-              <h3 class="text-lg font-bold text-[#333] mb-6">Shipping Address</h3>
+              <h3 class="text-lg font-bold text-[#333] mb-6">Your Address</h3>
               <div class="grid sm:grid-cols-2 gap-6">
-                <input type="text" placeholder="Address Line"
+                <input   aria-label="youaddress"
+     
+     name="youaddress"
+     id="youaddress"
+     required
+     placeholder="Flat/House Number"
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
-                <input type="text" placeholder="City"
+                <input   aria-label="youaddress"
+
+value={selectedPickupLocation}
+required
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
-                <input type="text" placeholder="State"
+                <input  aria-label="comment"
+
+name="comment"
+id="comment"
+placeholder="Your comment/message"
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
-                <input type="text" placeholder="Zip Code"
-                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+
               </div>
               <div class="flex gap-6 max-sm:flex-col mt-10">
-                <button type="button" class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-[#333]">Cancel</button>
-                <button type="button" class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-[#333] text-white hover:bg-[#222]">Complete Purchase</button>
+                <button onClick={handleBack} class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-[#333]">Back</button>
+                <button onClick={handleProceedToPayment} class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-[#333] text-white hover:bg-[#222]">Reviw Order</button>
               </div>
             </div>
           </form>
@@ -282,4 +191,4 @@ const BookingSummary = () => {
   )
 }
 
-export default BookingSummary
+export default ContactSummary

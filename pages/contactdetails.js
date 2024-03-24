@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { firebase } from "../Firebase/config";
 import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
-function MyApp() {
+const ContactSummary = () => {
   const router = useRouter();
   const handleBack = () => {
     router.back(); // Navigate to the previous page
@@ -34,9 +34,10 @@ function MyApp() {
     selectedService,
     selectedDropoffDate
   });
-  const handleProceedToPayment = () => {
+  const handleProceedToPayment = (event) => {
     // Assuming you want to redirect to "bookingsummary" page
     // You can modify the pathname and query as per your requirements
+    event.preventDefault();
     router.push({
       pathname: '/bookingsummary',
       query: {
@@ -63,11 +64,41 @@ function MyApp() {
     });
   };
 
-    return (
-        <div className="bg-white dark:bg-white min-h-screen">
-            <div className="flex items-center justify-center p-2">
-                <div className=" ">
-                <div className="md:px-16 md:py-12 px-6 py-4">
+  
+  return (
+    <div className='min-h-screen'>
+      <div class="font-[sans-serif] bg-gray-50">
+      <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full">
+        <div class="bg-[#3f3f3f] lg:h-screen lg:sticky lg:top-0">
+          <div class="relative h-full">
+            <div class="p-8 lg:overflow-auto lg:h-[calc(100vh-60px)]">
+              <div class="space-y-6 mt-10">
+              <div class="lg:border-l lg:pl-8">
+            <ul class="text-white mt-6 space-y-4">
+              
+                          <h3 class="text-xl font-bold text-white">Booking Details</h3>
+                           <li class="flex flex-wrap gap-4 text-sm">Service <span class="ml-auto font-bold">{selectedService}</span></li>
+                           <li class="flex flex-wrap gap-4 text-sm">Pickup location <span class="ml-auto font-bold">{selectedPickupLocation}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Drop-off location <span class="ml-auto font-bold">{selectedDropoffLocation}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Vehicle<span class="ml-auto font-bold">{selectedVehicleType}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">{selectedPassenger}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">{selectedSuitcase}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">{selectedPickupDate}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Dop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
+              <li class=" border-t pt-4"></li>
+            </ul>
+          </div>
+                
+              </div>
+            </div>
+            <div class="absolute left-0 bottom-0 bg-[#444] w-full p-4">
+              <h4 class="flex flex-wrap gap-4 text-base text-white">Total <span class="ml-auto">₹{selectedPrice}</span></h4>
+            </div>
+          </div>
+        </div>
+        <div class="xl:col-span-2 h-max rounded-md p-8 sticky top-0">
+        <div className=" px-6 py-4">
     <h2 className="sr-only">Steps</h2>
   
     <div
@@ -190,263 +221,98 @@ function MyApp() {
       </ol>
     </div>
   </div>
-                    <div className="hidden lg:block">
-                        <div style={{ display: 'flex', flexDirection: 'row', }}>
-                            <div className="w-35">
-                            <div style={{ margin: 'auto', fontFamily: 'Arial, sans-serif', backgroundColor: '#f2f2f2', padding: '20px', borderRadius: '5px', }}>
-                                <h2 style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '20px' }}>Summary</h2>
-                                <div>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Service Type</strong> <br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedService}</span></p>
-{/* 
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p> */}
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDropoffLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupDate}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedDropoffDate}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Vehicle</strong><br /> <span style={{ color: '#777', fontSize: '28px' }}>{selectedVehicleType}</span></p>
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
-                                        <div style={{ flex: '1', textAlign: 'center' }}>
-                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDistance}</span></p>
-                                        </div>
-                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
-                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
-                                        </div> */}
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginLeft: '24px' }}>
-                            <div className="lg:container lg:mx-auto grid grid-cols-9 lg:grid-cols-12">
-            <div className="col-span-9 lg:col-span-8 xl:col-span-9 bg-white h-auto  relative lg:px-10 p-6 lg:py-2">
-                <p onClick={handleBack}>
-                    <svg className="inline" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 1L1 5L5 9" stroke="#4B5563" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="cursor-pointer text-gray-500 font-normal text-base ml-2.5">Back</span>
-                </p>
-                <h3 className="font-semibold text-gray-800 text-4xl">Contact Details</h3>
-
-                <div className="mt-2 lg:mt-2">
-                    <p className="font-normal text-sm text-gray-600 mb-3">Your details</p>
-                    <h3 className="text-2xl text-gray-800 font-medium">Enter your details</h3>
-
-                    <form className="mt-8" autoComplete="off">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-                            <input aria-label="firstName" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="firstName" id="firstName" placeholder="Enter Your First name" />
-                            <input aria-label="lastName" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="lastName" id="lastName" placeholder="Enter Your Last name" />
-                            <input aria-label="emailAddress" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="email" name="email" id="email" placeholder="Email address" />
-                            <input aria-label="phoneNumber" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" />
-                            <input
-          aria-label="youaddress"
-          className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" // Adjust height as needed
-          name="youaddress"
-          id="youaddress"
-          required
-          placeholder="Flat/House Number"
-        />
-                            <input
-          aria-label="youaddress"
-          className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" // Adjust height as needed
-          value={selectedPickupLocation}
-          required
-        />
-                       
-                            <textarea
-          aria-label="comment"
-          className="border-2 border-gray-300 p-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none h-20 w-96" // Adjust height as needed
-          name="comment"
-          id="comment"
-          placeholder="Your comment/message"
-        ></textarea>
-                        </div>
-                        {/* <div class="mt-6 border-t border-b py-2">
-  <div class="flex items-center justify-between">
-    <p class="text-sm font-medium text-gray-900">Subtotal</p>
-    <p class="font-semibold text-gray-900">₹ {selectedPrice}</p>
-  </div>
-  <div class="flex items-center justify-between">
-    <p class="text-sm font-medium text-gray-900">To Pay (30% deposit)</p>
-    <p class="font-semibold text-gray-900">₹ {(selectedPrice * 0.3).toFixed(2)}</p>
-  </div>
-</div>
-<div class="mt-6 flex items-center justify-between">
-  <p class="text-sm font-medium text-gray-900">On Cash Pay</p>
-  <p class="text-2xl font-semibold text-gray-900">₹ {(selectedPrice - (selectedPrice * 0.3)).toFixed(2)}</p>
-</div> */}
-
-                    </form>
-                    
+          <h2 class="text-2xl font-bold text-[#333]">Complete your order</h2>
+          <form class="mt-10">
+            <div>
+              <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
+              <div class="grid sm:grid-cols-2 gap-6">
+                <div class="relative flex items-center">
+                  <input aria-label="firstName" required  type="text" name="firstName" id="firstName" placeholder="Enter Your First name"
+                    class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
+                    viewBox="0 0 24 24">
+                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                    <path
+                      d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                      data-original="#000000"></path>
+                  </svg>
                 </div>
-                {/* <p class="mt-8 text-lg font-medium">Payment Methods</p>
-    <form class="mt-5 grid gap-6">
-      <div class="relative">
-        <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
-        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_1">
-          <img class="w-14 object-contain" src="https://img.freepik.com/premium-vector/dollar-money-icon-cash-sign-bill-symbol-flat-payment-dollar-currency-icon_41737-1266.jpg?w=2000" alt="" />
-          <div class="ml-5">
-            <span class="mt-2 font-semibold">Cash On Delivery</span>
-            <p class="text-slate-500 text-sm leading-6">Message</p>
-          </div>
-        </label>
-      </div>
-      <div class="relative">
-        <input class="peer hidden" id="radio_2" type="radio" name="radio" checked />
-        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_2">
-          <img class="w-14 object-contain" src="https://static.vecteezy.com/system/resources/previews/019/040/306/original/paytm-logo-icon-free-vector.jpg" alt="" />
-          <div class="ml-5">
-            <span class="mt-2 font-semibold">Paytm</span>
-            <p class="text-slate-500 text-sm leading-6">Message</p>
-          </div>
-        </label>
-      </div>
-    </form> */}
-
-                
-
-<button
-        className="bg-gray-800 hover:bg-gray-900 text-white p-4 text-lg my-3 mt-10 w-full md:w-auto"
-        onClick={handleProceedToPayment}
-      >
-        Proceed to Payment
-      </button>
-            </div>
-            
-           
-        </div>
-                            </div>
-
-
-
-
-                        </div>
-                    </div>
-
-                    <div className="md:hidden">
-                    <div className="lg:container lg:mx-auto grid grid-cols-9 lg:grid-cols-12">
-            <div className="col-span-9 lg:col-span-8 xl:col-span-9 bg-white h-auto lg:h-screen relative lg:px-10 p-6 lg:py-12">
-                <p>
-                    <svg className="inline" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 1L1 5L5 9" stroke="#4B5563" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="cursor-pointer text-gray-500 font-normal text-base ml-2.5">Back</span>
-                </p>
-                <h3 className="font-semibold text-gray-800 text-4xl mt-2">Contact Details</h3>
-
-              
-                <div className="mt-7 lg:mt-20">
-                    <p className="font-normal text-sm text-gray-600 mb-3">Your details</p>
-                    <h3 className="text-2xl text-gray-800 font-medium">Enter your details</h3>
-
-                    <form className="mt-8" autoComplete="off">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
-                            <input aria-label="firstName" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="firstName" id="firstName" placeholder="Enter Your First name" />
-                            <input aria-label="lastName" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="lastName" id="lastName" placeholder="Enter Your Last name" />
-                            <input aria-label="emailAddress" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="email" name="email" id="email" placeholder="Email address" />
-                            <input aria-label="phoneNumber" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" />
-                            <textarea
-          aria-label="youaddress"
-          className="border-2 border-gray-300 mr-2 p-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none h-40 " // Adjust height as needed
-          name="youaddress"
-          id="youaddress"
-          placeholder="Enter Your Address"
-        ></textarea>
-                            <textarea
-          aria-label="comment"
-          className="border-2 border-gray-300 p-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none h-40 " // Adjust height as needed
-          name="comment"
-          id="comment"
-          placeholder="Your comment/message"
-        ></textarea>
-                        </div>
-                        {/* <div class="mt-6 border-t border-b py-2">
-  <div class="flex items-center justify-between">
-    <p class="text-sm font-medium text-gray-900">Subtotal</p>
-    <p class="font-semibold text-gray-900">₹ {selectedPrice}</p>
-  </div>
-  <div class="flex items-center justify-between">
-    <p class="text-sm font-medium text-gray-900">To Pay (30% deposit)</p>
-    <p class="font-semibold text-gray-900">₹ {(selectedPrice * 0.3).toFixed(2)}</p>
-  </div>
-</div>
-<div class="mt-6 flex items-center justify-between">
-  <p class="text-sm font-medium text-gray-900">On Cash Pay</p>
-  <p class="text-2xl font-semibold text-gray-900">₹ {(selectedPrice - (selectedPrice * 0.3)).toFixed(2)}</p>
-</div> */}
-
-                    </form>
-                    
+                <div class="relative flex items-center">
+                  <input aria-label="lastName" required  type="text" name="lastName" id="lastName" placeholder="Enter Your Last name"
+                    class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
+                    viewBox="0 0 24 24">
+                    <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                    <path
+                      d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                      data-original="#000000"></path>
+                  </svg>
                 </div>
-                {/* <p class="mt-8 text-lg font-medium">Payment Methods</p>
-    <form class="mt-5 grid gap-6">
-      <div class="relative">
-        <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
-        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_1">
-          <img class="w-14 object-contain" src="https://img.freepik.com/premium-vector/dollar-money-icon-cash-sign-bill-symbol-flat-payment-dollar-currency-icon_41737-1266.jpg?w=2000" alt="" />
-          <div class="ml-5">
-            <span class="mt-2 font-semibold">Cash On Delivery</span>
-            <p class="text-slate-500 text-sm leading-6">Message</p>
-          </div>
-        </label>
-      </div>
-      <div class="relative">
-        <input class="peer hidden" id="radio_2" type="radio" name="radio" checked />
-        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_2">
-          <img class="w-14 object-contain" src="https://static.vecteezy.com/system/resources/previews/019/040/306/original/paytm-logo-icon-free-vector.jpg" alt="" />
-          <div class="ml-5">
-            <span class="mt-2 font-semibold">Paytm</span>
-            <p class="text-slate-500 text-sm leading-6">Message</p>
-          </div>
-        </label>
-      </div>
-    </form> */}
-
-<button
-        className="bg-gray-800 hover:bg-gray-900 text-white p-4 text-lg my-3 mt-10 w-full md:w-auto"
-        onClick={handleProceedToPayment}
-      >
-        Proceed to Payment
-      </button>
-            </div>
-           
-        </div>
-                            <div className="bg-gray-200 p-2 rounded-md">
-                            <h2 style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '20px' }}>Summary</h2>
-                                <div>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Service Type</strong> <br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedService}</span></p>
-
-                                    {/* <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p> */}
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDropoffLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupDate}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Vehicle</strong><br /> <span style={{ color: '#777', fontSize: '28px' }}>{selectedVehicleType}</span></p>
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
-                                        <div style={{ flex: '1', textAlign: 'center' }}>
-                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDistance}</span></p>
-                                        </div>
-                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
-                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
-                                        </div> */}
-                                    </div>
-                                </div>
-                            </div>
-
-
-                    </div>
-
-
-
-
-
-
+                <div class="relative flex items-center">
+                  <input  aria-label="emailAddress" required type="email" name="email" id="email" placeholder="Email address" 
+                    class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
+                    viewBox="0 0 682.667 682.667">
+                    <defs>
+                      <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                        <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                      </clipPath>
+                    </defs>
+                    <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                      <path fill="none" stroke-miterlimit="10" stroke-width="40"
+                        d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
+                        data-original="#000000"></path>
+                      <path
+                        d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
+                        data-original="#000000"></path>
+                    </g>
+                  </svg>
                 </div>
+                <div class="relative flex items-center">
+                  <input aria-label="phoneNumber" required  type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"
+                    class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                  <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 64 64">
+                    <path
+                      d="m52.148 42.678-6.479-4.527a5 5 0 0 0-6.963 1.238l-1.504 2.156c-2.52-1.69-5.333-4.05-8.014-6.732-2.68-2.68-5.04-5.493-6.73-8.013l2.154-1.504a4.96 4.96 0 0 0 2.064-3.225 4.98 4.98 0 0 0-.826-3.739l-4.525-6.478C20.378 10.5 18.85 9.69 17.24 9.69a4.69 4.69 0 0 0-1.628.291 8.97 8.97 0 0 0-1.685.828l-.895.63a6.782 6.782 0 0 0-.63.563c-1.092 1.09-1.866 2.472-2.303 4.104-1.865 6.99 2.754 17.561 11.495 26.301 7.34 7.34 16.157 11.9 23.011 11.9 1.175 0 2.281-.136 3.29-.406 1.633-.436 3.014-1.21 4.105-2.302.199-.199.388-.407.591-.67l.63-.899a9.007 9.007 0 0 0 .798-1.64c.763-2.06-.007-4.41-1.871-5.713z"
+                      data-original="#000000"></path>
+                  </svg>
+                </div>
+              </div>
             </div>
+            <div class="mt-6">
+              <h3 class="text-lg font-bold text-[#333] mb-6">Your Address</h3>
+              <div class="grid sm:grid-cols-2 gap-6">
+                <input   aria-label="youaddress"
+     
+     name="youaddress"
+     id="youaddress"
+     required
+     placeholder="Flat/House Number"
+                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                <input   aria-label="youaddress"
+
+value={selectedPickupLocation}
+required
+                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                <input  aria-label="comment"
+
+name="comment"
+id="comment"
+placeholder="Your comment/message"
+                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+
+              </div>
+              <div class="flex gap-6 max-sm:flex-col mt-10">
+                <button onClick={handleBack} class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-[#333]">Back</button>
+                <button onClick={handleProceedToPayment} class="rounded-md px-6 py-3 w-full text-sm font-semibold bg-[#333] text-white hover:bg-[#222]">Reviw Order</button>
+              </div>
+            </div>
+          </form>
         </div>
-    );
+      </div>
+    </div>
+    </div>
+  )
 }
 
-export default MyApp;
+export default ContactSummary

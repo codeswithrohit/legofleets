@@ -1,32 +1,12 @@
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
-import axios from 'axios';
-import { firebase } from '../Firebase/config';
-
-const db = firebase.firestore();
-
-const BookingSummary = () => {
-
-  const loadScript = (src) => {
-    return new Promise((resovle) => {
-      const script = document.createElement("script");
-      script.src = src;
-
-      script.onload = () => {
-        resovle(true);
-      };
-
-      script.onerror = () => {
-        resovle(false);
-      };
-
-      document.body.appendChild(script);
-    });
-  };
+import { firebase } from "../Firebase/config";
+import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
+function MyApp() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const handleBack = () => {
+    router.back(); // Navigate to the previous page
+  };
   const {
     selectedVehicleType,
     selectedBrand,
@@ -38,18 +18,28 @@ const BookingSummary = () => {
     selectedPickupDate,
     selectedDistance,
     selectedService,
-    selectedDropoffDate,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    youaddress,
-    comment,
+    selectedDropoffDate
   } = router.query;
-
-  const submitBookingData = async () => {
-    try {
-      await db.collection('bookings').add({
+  // ... (your existing code)
+  console.log({
+    selectedVehicleType,
+    selectedBrand,
+    selectedPrice,
+    selectedPassenger,
+    selectedSuitcase,
+    selectedPickupLocation,
+    selectedDropoffLocation,
+    selectedPickupDate,
+    selectedDistance,
+    selectedService,
+    selectedDropoffDate
+  });
+  const handleProceedToPayment = () => {
+    // Assuming you want to redirect to "bookingsummary" page
+    // You can modify the pathname and query as per your requirements
+    router.push({
+      pathname: '/bookingsummary',
+      query: {
         selectedVehicleType,
         selectedBrand,
         selectedPrice,
@@ -59,113 +49,25 @@ const BookingSummary = () => {
         selectedDropoffLocation,
         selectedPickupDate,
         selectedDistance,
-        selectedService,
         selectedDropoffDate,
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        youaddress,
-        comment,
-      });
-    } catch (error) {
-      console.error('Error submitting booking data:', error);
-    }
+        selectedService,
+        // Add form data to the query
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        youaddress: document.getElementById('youaddress').value,
+        comment: document.getElementById('comment').value,
+        // Add other necessary data from the contact details form
+      },
+    });
   };
 
-  const initiatePayment = async () => {
-    try {
-      setLoading(true);
-      // Submit booking data to the database
-      await submitBookingData();
-
-      // Display payment modal
-      const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
-      if (!res) {
-        toast.error('Failed to load Razorpay SDK. Please try again later.');
-        return;
-      }
-
-      const amountInPaise = selectedPrice * 100;
-
-      const options = {
-        key: 'rzp_test_td8CxckGpxFssp',
-        currency: 'INR',
-        amount: amountInPaise,
-        name: 'Legofleets',
-        description: 'Thanks for purchasing',
-        image: 'logo.png',
-        handler: async function (response) {
-          // Handle payment success
-          console.log('Payment Successful:', response);
-          toast.success('Payment Successful!');
-          router.push(`/confirmation?firstName=${firstName}`);
-          // Send confirmation email
-          await axios.post('/api/sendEmail', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-          });
-          await axios.post('/api/sendMessage', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-          });
-
-          // Redirect to confirmation page
-          
-        },
-        prefill: {
-          name: `${firstName} ${lastName}`,
-          email: email,
-        },
-      };
-
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
-    } catch (error) {
-      console.error('Error initiating payment:', error);
-      toast.error('Failed to initiate payment. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  
-  return (
-    <div  >
-    
-              <div className="md:px-16 md:py-12 px-6 py-4">
-              <h3 className="text-xl lg:text-2xl dark:text-white font-bold leading-5 text-center mb-8 text-gray-800">Booking Summary</h3>
+    return (
+        <div className="bg-white dark:bg-white min-h-screen">
+            <div className="flex items-center justify-center p-2">
+                <div className=" ">
+                <div className="md:px-16 md:py-12 px-6 py-4">
     <h2 className="sr-only">Steps</h2>
   
     <div
@@ -250,9 +152,9 @@ const BookingSummary = () => {
           </svg>
         </li>
   
-        <li className="relative flex justify-end text-green-600">
+        <li className="relative flex justify-end">
           <span
-            className="absolute -bottom-[1.75rem] end-0 rounded-full bg-green-600 text-white"
+            className="absolute -bottom-[1.75rem] end-0 rounded-full bg-gray-600 text-white"
           >
             <svg
               className="h-5 w-5"
@@ -288,115 +190,263 @@ const BookingSummary = () => {
       </ol>
     </div>
   </div>
-    <div className="flex justify-center items-center min-h-screen">
-      
-      <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-full flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+                    <div className="hidden lg:block">
+                        <div style={{ display: 'flex', flexDirection: 'row', }}>
+                            <div className="w-35">
+                            <div style={{ margin: 'auto', fontFamily: 'Arial, sans-serif', backgroundColor: '#f2f2f2', padding: '20px', borderRadius: '5px', }}>
+                                <h2 style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '20px' }}>Summary</h2>
+                                <div>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Service Type</strong> <br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedService}</span></p>
+{/* 
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p> */}
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupLocation}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDropoffLocation}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupDate}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedDropoffDate}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Vehicle</strong><br /> <span style={{ color: '#777', fontSize: '28px' }}>{selectedVehicleType}</span></p>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
+                                        <div style={{ flex: '1', textAlign: 'center' }}>
+                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDistance}</span></p>
+                                        </div>
+                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
+                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
+                                        </div> */}
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
 
-        <div className="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
-          <div className="flex flex-col justify-start items-start flex-shrink-0">
-            <div className="flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200">
-              {/* <img src="https://i.ibb.co/5TSg7f6/Rectangle-18.png" alt="avatar" /> */}
-              <div className="flex justify-start items-start flex-col space-y-2">
-                <p className="text-base dark:text-white font-semibold leading-4 text-left text-gray-800">{firstName} {lastName}</p>
-                <p className="text-sm dark:text-gray-300 leading-5 text-gray-600">{email}</p>
-                <p className="cursor-pointer text-sm leading-5 ">{phoneNumber}</p>
-              </div>
-            </div>
-            {/* <div className="flex justify-center text-gray-800 dark:text-white md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">
-              <img className="dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/order-summary-3-svg1.svg" alt="email"/>
-              <img className="hidden dark:block" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/order-summary-3-svg1dark.svg" alt="email"/>
-              <p className="cursor-pointer text-sm leading-5 ">{phoneNumber}</p>
-            </div> */}
-          </div>
-          <div className="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-            <div className="flex justify-center md:justify-start xl:flex flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row items-center md:items-start">
-              <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
-                <p className="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Pickup Location</p>
-                <p className="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">{selectedPickupLocation}</p>
-              </div>
-              <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4">
-                <p className="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Drop-off Location</p>
-                <p className="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">{selectedDropoffLocation}</p>
-              </div>
-              <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4">
-                <p className="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Your Address</p>
-                <p className="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">{youaddress}</p>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        <div className="flex justify-center items-center mt-8 mb-4">
-  <div className="bg-gray-100 dark:bg-gray-800 border border-gray-300 rounded-md p-6">
-    {/* <h4 className="text-lg font-semibold mb-4">Booking Details</h4> */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      <div>
-        <p className="text-sm text-gray-600"><strong>Vehicle Type:</strong></p>
-        <p className="text-base">{selectedVehicleType}</p>
-      </div>
-      {/* <div>
-        <p className="text-sm text-gray-600"><strong>Brand:</strong></p>
-        <p className="text-base">{selectedBrand}</p>
-      </div> */}
-      <div>
-        <p className="text-sm text-gray-600"><strong>Price:</strong></p>
-        <p className="text-base">₹ {selectedPrice}</p>
-      </div>
-      <div>
-        <p className="text-sm text-gray-600"><strong>Passenger:</strong></p>
-        <p className="text-base">{selectedPassenger}</p>
-      </div>
-      <div>
-        <p className="text-sm text-gray-600"><strong>Suitcase:</strong></p>
-        <p className="text-base">{selectedSuitcase}</p>
-      </div>
-      <div>
-        <p className="text-sm text-gray-600"><strong>Pickup Date:</strong></p>
-        <p className="text-base">{selectedPickupDate}</p>
-      </div>
-      <div>
-        <p className="text-sm text-gray-600"><strong>Drop off Date:</strong></p>
-        <p className="text-base">{selectedDropoffDate}</p>
-      </div>
-      <div>
-        <p className="text-sm text-gray-600"><strong>Distance:</strong></p>
-        <p className="text-base">{selectedDistance}</p>
-      </div>
-      <div>
-        <p className="text-sm text-gray-600"><strong>Service:</strong></p>
-        <p className="text-base">{selectedService}</p>
-      </div>
-      <div className="col-span-2">
-        <p className="text-sm text-gray-600"><strong>Comment:</strong></p>
-        <p className="text-base">{comment}</p>
-      </div>
-    </div>
+                            <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginLeft: '24px' }}>
+                            <div className="lg:container lg:mx-auto grid grid-cols-9 lg:grid-cols-12">
+            <div className="col-span-9 lg:col-span-8 xl:col-span-9 bg-white h-auto  relative lg:px-10 p-6 lg:py-2">
+                <p onClick={handleBack}>
+                    <svg className="inline" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 1L1 5L5 9" stroke="#4B5563" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="cursor-pointer text-gray-500 font-normal text-base ml-2.5">Back</span>
+                </p>
+                <h3 className="font-semibold text-gray-800 text-4xl">Contact Details</h3>
+
+                <div className="mt-2 lg:mt-2">
+                    <p className="font-normal text-sm text-gray-600 mb-3">Your details</p>
+                    <h3 className="text-2xl text-gray-800 font-medium">Enter your details</h3>
+
+                    <form className="mt-8" autoComplete="off">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                            <input aria-label="firstName" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="firstName" id="firstName" placeholder="Enter Your First name" />
+                            <input aria-label="lastName" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="lastName" id="lastName" placeholder="Enter Your Last name" />
+                            <input aria-label="emailAddress" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="email" name="email" id="email" placeholder="Email address" />
+                            <input aria-label="phoneNumber" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" />
+                            <input
+          aria-label="youaddress"
+          className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" // Adjust height as needed
+          name="youaddress"
+          id="youaddress"
+          required
+          placeholder="Flat/House Number"
+        />
+                            <input
+          aria-label="youaddress"
+          className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" // Adjust height as needed
+          value={selectedPickupLocation}
+          required
+        />
+                       
+                            <textarea
+          aria-label="comment"
+          className="border-2 border-gray-300 p-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none h-20 w-96" // Adjust height as needed
+          name="comment"
+          id="comment"
+          placeholder="Your comment/message"
+        ></textarea>
+                        </div>
+                        {/* <div class="mt-6 border-t border-b py-2">
+  <div class="flex items-center justify-between">
+    <p class="text-sm font-medium text-gray-900">Subtotal</p>
+    <p class="font-semibold text-gray-900">₹ {selectedPrice}</p>
+  </div>
+  <div class="flex items-center justify-between">
+    <p class="text-sm font-medium text-gray-900">To Pay (30% deposit)</p>
+    <p class="font-semibold text-gray-900">₹ {(selectedPrice * 0.3).toFixed(2)}</p>
   </div>
 </div>
+<div class="mt-6 flex items-center justify-between">
+  <p class="text-sm font-medium text-gray-900">On Cash Pay</p>
+  <p class="text-2xl font-semibold text-gray-900">₹ {(selectedPrice - (selectedPrice * 0.3)).toFixed(2)}</p>
+</div> */}
 
-{loading ? (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-        <div className="relative w-16 h-16">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-4 border-gray-200 rounded-full animate-spin"></div>
+                    </form>
+                    
+                </div>
+                {/* <p class="mt-8 text-lg font-medium">Payment Methods</p>
+    <form class="mt-5 grid gap-6">
+      <div class="relative">
+        <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
+        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_1">
+          <img class="w-14 object-contain" src="https://img.freepik.com/premium-vector/dollar-money-icon-cash-sign-bill-symbol-flat-payment-dollar-currency-icon_41737-1266.jpg?w=2000" alt="" />
+          <div class="ml-5">
+            <span class="mt-2 font-semibold">Cash On Delivery</span>
+            <p class="text-slate-500 text-sm leading-6">Message</p>
           </div>
-        </div>
+        </label>
       </div>
-      
-      ) : null}
-      <div className="flex w-full justify-center items-center md:justify-center md:items-center">
-        <button
-          onClick={initiatePayment}
-          className="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800"
-        >
-          Pay Now ₹{selectedPrice}
-        </button>
+      <div class="relative">
+        <input class="peer hidden" id="radio_2" type="radio" name="radio" checked />
+        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_2">
+          <img class="w-14 object-contain" src="https://static.vecteezy.com/system/resources/previews/019/040/306/original/paytm-logo-icon-free-vector.jpg" alt="" />
+          <div class="ml-5">
+            <span class="mt-2 font-semibold">Paytm</span>
+            <p class="text-slate-500 text-sm leading-6">Message</p>
+          </div>
+        </label>
       </div>
-      <ToastContainer />
-      </div>
-    </div>
-    </div>
-  );
-};
+    </form> */}
 
-export default BookingSummary;
+                
+
+<button
+        className="bg-gray-800 hover:bg-gray-900 text-white p-4 text-lg my-3 mt-10 w-full md:w-auto"
+        onClick={handleProceedToPayment}
+      >
+        Proceed to Payment
+      </button>
+            </div>
+            
+           
+        </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div className="md:hidden">
+                    <div className="lg:container lg:mx-auto grid grid-cols-9 lg:grid-cols-12">
+            <div className="col-span-9 lg:col-span-8 xl:col-span-9 bg-white h-auto lg:h-screen relative lg:px-10 p-6 lg:py-12">
+                <p>
+                    <svg className="inline" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 1L1 5L5 9" stroke="#4B5563" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="cursor-pointer text-gray-500 font-normal text-base ml-2.5">Back</span>
+                </p>
+                <h3 className="font-semibold text-gray-800 text-4xl mt-2">Contact Details</h3>
+
+              
+                <div className="mt-7 lg:mt-20">
+                    <p className="font-normal text-sm text-gray-600 mb-3">Your details</p>
+                    <h3 className="text-2xl text-gray-800 font-medium">Enter your details</h3>
+
+                    <form className="mt-8" autoComplete="off">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
+                            <input aria-label="firstName" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="firstName" id="firstName" placeholder="Enter Your First name" />
+                            <input aria-label="lastName" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="lastName" id="lastName" placeholder="Enter Your Last name" />
+                            <input aria-label="emailAddress" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="email" name="email" id="email" placeholder="Email address" />
+                            <input aria-label="phoneNumber" className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" />
+                            <textarea
+          aria-label="youaddress"
+          className="border-2 border-gray-300 mr-2 p-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none h-40 " // Adjust height as needed
+          name="youaddress"
+          id="youaddress"
+          placeholder="Enter Your Address"
+        ></textarea>
+                            <textarea
+          aria-label="comment"
+          className="border-2 border-gray-300 p-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none h-40 " // Adjust height as needed
+          name="comment"
+          id="comment"
+          placeholder="Your comment/message"
+        ></textarea>
+                        </div>
+                        {/* <div class="mt-6 border-t border-b py-2">
+  <div class="flex items-center justify-between">
+    <p class="text-sm font-medium text-gray-900">Subtotal</p>
+    <p class="font-semibold text-gray-900">₹ {selectedPrice}</p>
+  </div>
+  <div class="flex items-center justify-between">
+    <p class="text-sm font-medium text-gray-900">To Pay (30% deposit)</p>
+    <p class="font-semibold text-gray-900">₹ {(selectedPrice * 0.3).toFixed(2)}</p>
+  </div>
+</div>
+<div class="mt-6 flex items-center justify-between">
+  <p class="text-sm font-medium text-gray-900">On Cash Pay</p>
+  <p class="text-2xl font-semibold text-gray-900">₹ {(selectedPrice - (selectedPrice * 0.3)).toFixed(2)}</p>
+</div> */}
+
+                    </form>
+                    
+                </div>
+                {/* <p class="mt-8 text-lg font-medium">Payment Methods</p>
+    <form class="mt-5 grid gap-6">
+      <div class="relative">
+        <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
+        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_1">
+          <img class="w-14 object-contain" src="https://img.freepik.com/premium-vector/dollar-money-icon-cash-sign-bill-symbol-flat-payment-dollar-currency-icon_41737-1266.jpg?w=2000" alt="" />
+          <div class="ml-5">
+            <span class="mt-2 font-semibold">Cash On Delivery</span>
+            <p class="text-slate-500 text-sm leading-6">Message</p>
+          </div>
+        </label>
+      </div>
+      <div class="relative">
+        <input class="peer hidden" id="radio_2" type="radio" name="radio" checked />
+        <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+        <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_2">
+          <img class="w-14 object-contain" src="https://static.vecteezy.com/system/resources/previews/019/040/306/original/paytm-logo-icon-free-vector.jpg" alt="" />
+          <div class="ml-5">
+            <span class="mt-2 font-semibold">Paytm</span>
+            <p class="text-slate-500 text-sm leading-6">Message</p>
+          </div>
+        </label>
+      </div>
+    </form> */}
+
+<button
+        className="bg-gray-800 hover:bg-gray-900 text-white p-4 text-lg my-3 mt-10 w-full md:w-auto"
+        onClick={handleProceedToPayment}
+      >
+        Proceed to Payment
+      </button>
+            </div>
+           
+        </div>
+                            <div className="bg-gray-200 p-2 rounded-md">
+                            <h2 style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '20px' }}>Summary</h2>
+                                <div>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Service Type</strong> <br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedService}</span></p>
+
+                                    {/* <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p> */}
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupLocation}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDropoffLocation}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{selectedPickupDate}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Vehicle</strong><br /> <span style={{ color: '#777', fontSize: '28px' }}>{selectedVehicleType}</span></p>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
+                                        <div style={{ flex: '1', textAlign: 'center' }}>
+                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{selectedDistance}</span></p>
+                                        </div>
+                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
+                                            <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
+                                        </div> */}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default MyApp;
