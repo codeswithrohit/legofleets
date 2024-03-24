@@ -128,8 +128,8 @@ const MumbaiNational = () => {
     
 
   return (
-    <div className="py-8 px-2 md:px-0">
-                  <div className="max-w-8xl md:-mt-20 mx-auto p-4 bg-white rounded-lg border border-[#541e50] flex flex-col md:flex-row md:items-center">
+    <div className="md:mt-4 px-0 md:px-0">
+                  <div className="max-w-8xl md:-mt-20 mx-auto p-4 bg-white rounded-sm border border-[#541e50] flex flex-col md:flex-row md:items-center">
   <div className="flex flex-col flex-1">
     <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
     {isLoaded && (
@@ -151,7 +151,7 @@ const MumbaiNational = () => {
           value={pickupLocation}
           onChange={(e) => setPickupLocation(e.target.value)}
           placeholder="Enter pickup location"
-          className="p-3 outline-none rounded-xl border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+          className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
         />
       </Autocomplete>
     )}
@@ -172,7 +172,7 @@ const MumbaiNational = () => {
         onChange={(e) => setDropoffLocation(e.target.value)}
         type="text"
         placeholder="Enter drop-off location"
-        className="p-3 outline-none rounded-xl border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+        className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
       />
     </Autocomplete>
   )}
@@ -185,7 +185,7 @@ const MumbaiNational = () => {
       dateFormat="MMMM d, yyyy"
       placeholderText="Select Date"
       minDate={new Date()}
-      className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
     />
   </div>
   <div className="flex flex-col flex-1 md:ml-4">
@@ -205,24 +205,29 @@ const MumbaiNational = () => {
           : undefined
       }
       maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-      className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
     />
   </div>
   <div className="flex flex-col flex-1 md:ml-4">
-    <label className="text-sm text-gray-600 mb-1">Select Drop-off Date</label>
+  <>
+    <label className="text-sm text-gray-600 mb-1">Select Drop-off Date & Time</label>
     <DatePicker
-  selected={endDate}
-  onChange={(date) => setEndDate(date)}
-  dateFormat="MMMM d, yyyy"
-  placeholderText="Select Date"
-  minDate={new Date()} // Set minDate to restrict past dates
-  className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
-/>
+      selected={endDate}
+      onChange={(date) => setEndDate(date)}
+      showTimeSelect
+      timeFormat="HH:mm"
+      timeIntervals={15}
+      dateFormat="MMMM d, yyyy h:mm aa"
+      placeholderText="Select Date and Time"
+      minDate={startDate || new Date()} // Set minDate to startDate if it's selected, otherwise default to today
+      className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
+    />
+  </>
+</div>
 
-  </div>
 </div>
 <button
-  className="py-3 px-8 md:ml-6 w-full bg-[#541e50] text-white rounded-xl hover:bg-[#541e50] transition-all mt-2 md:mt-5 flex items-center justify-center"
+  className="py-3 px-8  w-full bg-[#541e50] text-white rounded-sm hover:bg-[#541e50] transition-all mt-2  flex items-center justify-center"
   onClick={handleMumbaiNationalSearch}
 >
   <span className="text-center">Search</span>
@@ -237,7 +242,7 @@ const MumbaiNational = () => {
 
                   {modalOpen && (
   <div className="fixed inset-0 z-50 flex justify-center items-center">
-    <div className="modal-container bg-white w-80 md:w-96 p-8 rounded-lg shadow-lg animate-fade-in">
+    <div className="modal-container bg-white w-80 md:w-96 p-8 rounded-sm shadow-lg animate-fade-in">
       <div className="modal-content text-center">
         <div className="flex items-center justify-center mb-4">
           <FaPhone className="text-4xl text-blue-500 mr-2" />

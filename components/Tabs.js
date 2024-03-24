@@ -31,27 +31,27 @@ const TabsComponent = ({ items, selectedPackage, activeTab }) => {
   }, [selectedPackage, activeTab]);
 
   return (
-    <div className='flex justify-center items-center mt-12'>
+    <div className='flex justify-center items-center bg-white mt-2'>
       <div className='max-w-full flex flex-col gap-y-2 w-full'>
-        <h2 style={{ color: '#541e50' }} className="text-center font-bold text-3xl  mb-4">Find Your Ideal Car</h2>
-        <div className='grid grid-cols-3 gap-4  md:grid-cols-6 px-8 md:mt-0 mt-24 '>
+        {/* <h2 style={{ color: '#541e50' }} className="text-center font-bold text-3xl  mb-4">Find Your Ideal Car</h2> */}
+        <div className='grid grid-cols-3 gap-8 gap-2  md:grid-cols-6 px-2 md:mt-0 '>
           {items.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
               <button
                 onClick={() => setSelectedTab(index)}
-                className={`outline-none w-24 md:w-48 h-16 md:p-0 p-2 rounded-xl  flex items-center justify-center ${
+                className={`outline-none w-24 md:w-24 h-12 md:p-0 p-2 rounded-sm  flex items-center justify-center ${
                   selectedTab === index ? 'bg-[#541e50] text-white' : 'bg-gray-700 text-white'
                 }`}
                 ref={index === 0 ? firstBtnRef : null}
               >
-                <span className="ml-2 text-white md:text-lg text-sm font-bold">{item.title}</span>
+                <span className=" text-center text-white md:text-xs text-sm font-bold">{item.title}</span>
               </button>
               <div className={` hidden md:block w-10 h-4 ${selectedTab === index ? 'bg-[#541e50]' : 'bg-transparent'}`}></div>
             </div>
           ))}
         </div>
 
-        <div className="py-8 px-2 md:px-0">
+        <div className="md:mt-8 px-2 md:px-0">
           {items.map((item, index) => (
             <div key={index} className={`${selectedTab === index ? '' : 'hidden'}`}>
               {index === 0 && <AirportServices />}

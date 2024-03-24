@@ -53,7 +53,7 @@ const Testimonial = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-white -mt-16">
+    <section className="bg-white dark:bg-white mt-16">
       <div className="flex flex-col items-center justify-center w-full px-6 mx-auto text-center">
         <div className="text-sm font-bold tracking-wider text-[#541e50] uppercase">Testimonials</div>
         <h2 className="text-3xl font-bold leading-snug tracking-tight text-gray-800 lg:leading-tight lg:text-4xl dark:text-white">Heres what our customers said</h2>

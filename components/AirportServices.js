@@ -176,13 +176,13 @@ const AirportServices = () => {
       const maxTime = new Date().setHours(23, 59, 59, 999); // Set maxTime to the end of the day
     
   return (
-<div className="py-8 px-2 md:px-0">
-  <div className="max-w-7xl md:-mt-20 mx-auto p-4 bg-white rounded-lg border border-[#541e50]">
-  <div className="flex justify-center mb-4">
-  <button className={`tab ${selectedOption === 'PuneToMumbai' ? 'active text-white bg-[#541e50] p-2 rounded-lg hover:bg-[#541e50]' : 'text-gray-500 p-2 rounded-lg bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('PuneToMumbai')}>
+<div className="md:mt-4 px-0 md:px-0">
+  <div className="max-w-7xl md:-mt-20 mx-auto p-4 bg-white rounded-sm border border-[#541e50]">
+  <div className="flex justify-center text-xs font-bold mb-4">
+  <button className={`tab ${selectedOption === 'PuneToMumbai' ? 'active text-white bg-[#541e50] p-2 rounded-sm hover:bg-[#541e50]' : 'text-gray-500 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('PuneToMumbai')}>
     Pune To Mumbai Airport
   </button>
-  <button className={`tab ${selectedOption === 'MumbaiToPune' ? 'active text-white bg-[#541e50] p-2 rounded-lg hover:bg-[#541e50]' : 'text-gray-500 p-2 rounded-lg bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('MumbaiToPune')}>
+  <button className={`tab ${selectedOption === 'MumbaiToPune' ? 'active text-white bg-[#541e50] p-2 rounded-sm hover:bg-[#541e50]' : 'text-gray-500 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('MumbaiToPune')}>
     Mumbai Airport To Pune
   </button>
 </div>
@@ -213,7 +213,7 @@ const AirportServices = () => {
              value={pickupLocation}
              onChange={(e) => setPickupLocation(e.target.value)}
              placeholder="Enter  pickup location"
-             className="p-3 outline-none rounded-xl border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+             className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
            />
          </Autocomplete>
          
@@ -240,7 +240,7 @@ const AirportServices = () => {
                 value={dropoffLocation}
                 onChange={(e) => setDropoffLocation(e.target.value)}
                 placeholder="Enter drop-off location"
-                className="p-3 outline-none rounded-xl border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
               />
             </Autocomplete>
           )}
@@ -253,7 +253,7 @@ const AirportServices = () => {
     dateFormat="MMMM d, yyyy"
     placeholderText="Select Date"
     minDate={new Date()}
-    className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
+    className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
   />
 </div>
 <div className="flex flex-col flex-1 md:ml-4">
@@ -273,13 +273,13 @@ const AirportServices = () => {
               : undefined
           }
           maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-          className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
+          className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
         />
       </div>
 
         <div className="flex flex-col flex-1  mt-4 md:mt-5">
           <button
-            className="py-3 w-full px-8 md:ml-2 bg-[#541e50] text-white rounded-xl hover:bg-[#541e50] transition-all flex items-center justify-center"
+            className="py-3 w-full px-8 md:ml-2 bg-[#541e50] text-white rounded-sm hover:bg-[#541e50] transition-all flex items-center justify-center"
             onClick={handleMumbaiToPuneAirportSearch}
           >
             <span className="text-center">Search</span>
@@ -312,7 +312,7 @@ const AirportServices = () => {
                 value={pickupLocation}
                 onChange={(e) => setPickupLocation(e.target.value)}
                 placeholder="Enter pickup location"
-                className="p-3 outline-none rounded-xl border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
               />
             </Autocomplete>
           )}
@@ -338,7 +338,7 @@ const AirportServices = () => {
                 value={dropoffLocation}
                 onChange={(e) => setDropoffLocation(e.target.value)}
                 placeholder="Enter drop-off location"
-                className="p-3 outline-none rounded-xl border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
               />
             </Autocomplete>
           )}
@@ -351,7 +351,7 @@ const AirportServices = () => {
     dateFormat="MMMM d, yyyy"
     placeholderText="Select Date"
     minDate={new Date()}
-    className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
+    className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
   />
 </div>
 <div className="flex flex-col flex-1 md:ml-4">
@@ -371,14 +371,14 @@ const AirportServices = () => {
               : undefined
           }
           maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-          className="p-3 px-8 outline-none text-gray-400 rounded-xl border border-[#541e50] focus:ring-[#541e50]"
+          className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
         />
       </div>
 
 
-        <div className="flex flex-col flex-1  mt-4 md:mt-5">
+        <div className="flex flex-col flex-1  mt-4 md:mt-6">
           <button
-            className="py-3 w-full px-8 md:ml-2 bg-[#541e50] text-white rounded-xl hover:bg-[#541e50] transition-all flex items-center justify-center"
+            className="py-3 w-full px-8 md:ml-2 bg-[#541e50] text-white rounded-sm hover:bg-[#541e50] transition-all flex items-center justify-center"
             onClick={handlePuneToMumbaiAirportSearch}
           >
             <span className="text-center">Search</span>
