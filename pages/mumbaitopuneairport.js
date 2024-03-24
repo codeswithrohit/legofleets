@@ -46,7 +46,19 @@ const handleFilter = () => {
   return filteredData;
 };
 
-    
+const getPassengerOptions = () => {
+  switch (selectedType.toLowerCase()) {
+    case 'sedan':
+      return ['1', '2', '3', '4'];
+    case 'minisuv':
+      return ['1', '2', '3', '4', '5'];
+    case 'suv':
+      return ['1', '2', '3', '4', '5'];
+    default:
+      return [];
+  }
+};
+
     // Suitcase options based on vehicle type and passenger count
     const getSuitcaseOptions = () => {
         if (selectedType.toLowerCase() === 'sedan') {
@@ -283,17 +295,15 @@ const handleFilter = () => {
                                     <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px',  }}>
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
                     <select
-                      id="passengers"
-                      style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
-                      value={selectedPassengers}
-                      onChange={(e) => setSelectedPassengers(e.target.value)}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
+    id="passengers"
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
+    value={selectedPassengers}
+    onChange={(e) => setSelectedPassengers(e.target.value)}
+  >
+    {getPassengerOptions().map((option, index) => (
+      <option key={index} value={option}>{option}</option>
+    ))}
+  </select>
                                     </div>
                                     <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px', }}>
   <label htmlFor="suitcase" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Suitcase</label>
@@ -465,17 +475,15 @@ const handleFilter = () => {
                                 <div >
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
                     <select
-                      id="passengers"
-                      style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
-                      value={selectedPassengers}
-                      onChange={(e) => setSelectedPassengers(e.target.value)}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
+    id="passengers"
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
+    value={selectedPassengers}
+    onChange={(e) => setSelectedPassengers(e.target.value)}
+  >
+    {getPassengerOptions().map((option, index) => (
+      <option key={index} value={option}>{option}</option>
+    ))}
+  </select>
                                     </div>
                                     <div style={{ flex: '1',  borderRadius: '8px', }}>
   <label htmlFor="suitcase" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Suitcase</label>

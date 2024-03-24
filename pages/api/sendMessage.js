@@ -5,21 +5,45 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed', message: 'Only POST requests are allowed' });
   }
 
-  const { phoneNumber,firstName } = req.body;
-  const body = `Hi ${firstName}, thank you for choosing Legofleets Services. Your booking with Legofleets has been completed successfully.`;
- // Corrected message body
-  
-  console.log(phoneNumber);
+  const formData = req.body;
+  const textBody = `
+    Booking Confirmation By Legofleets
 
-  const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN); // Removed unnecessary ${} around process.env variables
+    Dear ${formData.firstName} ${formData.lastName},
+
+    Thank you for booking with us!
+    
+    Here are your booking details:
+    - Vehicle Type: ${formData.selectedVehicleType}
+    - Price: ${formData.selectedPrice}
+    - Passenger: ${formData.selectedPassenger}
+    - Suitcase: ${formData.selectedSuitcase}
+    - Pickup Location: ${formData.selectedPickupLocation}
+    - Dropoff Location: ${formData.selectedDropoffLocation}
+    - Pickup Date: ${formData.selectedPickupDate}
+    - Distance: ${formData.selectedDistance}
+    - Service: ${formData.selectedService}
+    - Dropoff Date: ${formData.selectedDropoffDate}
+    - Email: ${formData.email}
+    - Phone Number: ${formData.phoneNumber}
+    - Your Address: ${formData.yourAddress}
+    - Comment: ${formData.comment}
+    
+    We look forward to serving you!
+    
+    Best regards,
+    LegoFleets
+  `;
+
+  const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
   try {
     const message = await client.messages.create({
-      body,
+      body: textBody,
       from: `whatsapp:${process.env.TWILIO_PHONE_NUMBER}`,
       to: `whatsapp:+917667411501`
     });
-    
+
     console.log('Message SID:', message.sid);
     return res.status(200).json({ success: true, message: 'Message sent successfully' });
   } catch (error) {

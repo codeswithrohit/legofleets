@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   // Define an array of routes where Navbar and Footer should not be shown
-  const restrictedRoutes = ['/Admin/dashboard', '/Admin/AddCar'];
+  const restrictedRoutes = ['/Admin/dashboard', '/Admin/AddCar', '/confirmation']; // Add '/confirmation' route
 
   // Check if the current route is in the restrictedRoutes array
   const shouldHideNavbarAndFooter = restrictedRoutes.includes(router.pathname);

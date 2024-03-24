@@ -9,16 +9,16 @@ const db = firebase.firestore();
 
 const BookingSummary = () => {
   const loadScript = (src) => {
-    return new Promise((resovle) => {
+    return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = src;
 
       script.onload = () => {
-        resovle(true);
+        resolve(true);
       };
 
       script.onerror = () => {
-        resovle(false);
+        resolve(false);
       };
 
       document.body.appendChild(script);
@@ -48,7 +48,12 @@ const BookingSummary = () => {
 
   const submitBookingData = async () => {
     try {
-      await db.collection('bookings').add({
+      // Get the current date
+      const currentDate = new Date();
+      // Format the current date as required (e.g., "03/24/2024")
+      const formattedCurrentDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+  
+      const docRef = await db.collection('bookings').add({
         selectedVehicleType,
         selectedBrand,
         selectedPrice,
@@ -66,17 +71,33 @@ const BookingSummary = () => {
         phoneNumber,
         youaddress,
         comment,
+        bookingDate: formattedCurrentDate, // Add the current booking date
+        orderId: generateOrderId(), // Call a function to generate the order ID
       });
+      return docRef.id; // Return the ID of the newly added document
     } catch (error) {
       console.error('Error submitting booking data:', error);
+      return null;
     }
   };
+  
+  // Function to generate a unique order ID
+  const generateOrderId = () => {
+    // Generate a random number and concatenate it with the current timestamp
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+  };
+  
 
   const initiatePayment = async () => {
     try {
       setLoading(true);
       // Submit booking data to the database
-      await submitBookingData();
+      const docId = await submitBookingData();
+
+      if (!docId) {
+        toast.error('Failed to submit booking data.');
+        return;
+      }
 
       // Display payment modal
       const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
@@ -98,7 +119,7 @@ const BookingSummary = () => {
           // Handle payment success
           console.log('Payment Successful:', response);
           toast.success('Payment Successful!');
-          router.push(`/confirmation?firstName=${firstName}`);
+          router.push(`/confirmation?id=${docId}`); // Redirect to confirmation page with Firebase document ID
           // Send confirmation email
           await axios.post('/api/sendEmail', {
             selectedVehicleType,
@@ -119,28 +140,6 @@ const BookingSummary = () => {
             youaddress,
             comment,
           });
-          await axios.post('/api/sendMessage', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-          });
-
-          // Redirect to confirmation page
-          
         },
         prefill: {
           name: `${firstName} ${lastName}`,
