@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { firebase } from "../Firebase/config";
 import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
 function MyApp() {
-    const [showMoreInfo, setShowMoreInfo] = useState(false);
+    const [showMoreInfo, setShowMoreInfo] = useState(true);
     const [selectedPassengers, setSelectedPassengers] = useState("1");
     const [selectedSuitcase, setSelectedSuitcase] = useState("3 Medium, 2 Small");
     const [selectedType, setSelectedType] = useState("sedan");
@@ -35,6 +35,18 @@ function MyApp() {
       const calculatedHours = Math.ceil(timeDiff / (1000 * 60 * 60));
       setHours(calculatedHours); // Set the hours state
     }, [pickupDate, dropDate]);
+    const getPassengerOptions = () => {
+      switch (selectedType.toLowerCase()) {
+        case 'sedan':
+          return ['1', '2', '3', '4'];
+        case 'minisuv':
+          return ['1', '2', '3', '4', '5'];
+        case 'suv':
+          return ['1', '2', '3', '4', '5'];
+        default:
+          return [];
+      }
+    };
     
     const handleFilter = () => {
       const filteredData = travelData.filter((item) => {
@@ -184,7 +196,7 @@ function MyApp() {
     <h2 className="sr-only">Steps</h2>
   
     <div
-      className="after:mt-4 after:block after:h-1 after:w-full after:rounded-lg after:bg-gray-200"
+      className="after:mt-4 after:block after:h-1 after:w-full after:rounded-sm after:bg-gray-200"
     >
       <ol className="grid grid-cols-3 text-sm font-medium text-gray-500">
         <li className="relative flex justify-start text-green-600">
@@ -331,9 +343,9 @@ function MyApp() {
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>
                                         </div>
-                                        <div style={{ flex: '1', textAlign: 'center' }}>
+                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -343,26 +355,25 @@ function MyApp() {
                                 <h2 className="text-[#541e50]" style={{ textAlign: 'center', fontSize: '1.5rem', margin: '0 0 1rem' }}>Vehicle Filter</h2>
                                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                            
-                                    <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px',  }}>
-                                    <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
-                    <select
-                      id="passengers"
-                      style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
-                      value={selectedPassengers}
-                      onChange={(e) => setSelectedPassengers(e.target.value)}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                                    </div>
+                                <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px' }}>
+  <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
+  <select
+    id="passengers"
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
+    value={selectedPassengers}
+    onChange={(e) => setSelectedPassengers(e.target.value)}
+  >
+    {getPassengerOptions().map((option, index) => (
+      <option key={index} value={option}>{option}</option>
+    ))}
+  </select>
+</div>
+
                                     <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px', }}>
   <label htmlFor="suitcase" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Suitcase</label>
   <select
     id="suitcase"
-    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
     value={selectedSuitcase}
     onChange={(e) => setSelectedSuitcase(e.target.value)}
   >
@@ -374,23 +385,23 @@ function MyApp() {
 
                                 </div>
                                 <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
+  <div className="py-2 px-16 rounded-sm">
     <fieldset>
       <div className="flex justify-center gap-4">
         <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('sedan')}
         >
           Sedan
         </button>
         <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('miniSuv')}
         >
           MiniSUV
         </button>
         <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('suv')}
         >
           SUV
@@ -440,9 +451,9 @@ function MyApp() {
           ) : (
             filteredTravelData.map((item, index) => (
                 <div key={index} className="relative mb-2 mt-2 max-w-xs md:max-w-3xl mx-auto">
-                <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-[#541e50] bg-white">
+                <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-sm shadow-lg p-3 border border-[#541e50] bg-white">
                   <div style={{ width: '30%' }}>
-                    <img src={item.carImage} alt={item.brand} className="rounded-xl" />
+                    <img src={item.carImage} alt={item.brand} className="rounded-sm" />
                   </div>
                   <div style={{ width: '70%', paddingLeft: '20px' }}>
                     <h3 className="font-black text-gray-800 md:text-3xl text-xl uppercase">{item.vehicleType}</h3>
@@ -467,7 +478,7 @@ function MyApp() {
                         <div>
   {selectedType.toLowerCase() === 'sedan' && (
    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+   <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
    <p className="text-gray-700 mb-2">
@@ -485,7 +496,7 @@ function MyApp() {
 
   {selectedType.toLowerCase() === 'minisuv' && (
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+    <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
     <p className="text-gray-700 mb-2">
@@ -503,7 +514,7 @@ function MyApp() {
 
   {selectedType.toLowerCase() === 'suv' && (
  <div style={{ textAlign: 'center', marginTop: '20px' }}>
- <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+ <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
  <p className="text-gray-700 mb-2">
@@ -520,7 +531,7 @@ function MyApp() {
   )}
 </div>
                     )}
-                    <button className="bg-[#541e50] w-full hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
+                    <button className="bg-[#541e50] w-full hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-sm mt-2" onClick={() => handleSelect(item)}>
                       Book This Vehicle
                     </button>
                   </div>
@@ -542,27 +553,25 @@ function MyApp() {
                     <div className="md:hidden">
                     <div >
                                 <h2 className="text-[#541e50] text-center mb-4 text-xl font-bold" >Vehicle Filter</h2>
-                                <div className="flex flex-col bg-gray-200 p-2 rounded-md">
+                                <div className="flex flex-col bg-gray-200 p-2 rounded-sm">
                                     <div >
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
-                    <select
-                      id="passengers"
-                      style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
-                      value={selectedPassengers}
-                      onChange={(e) => setSelectedPassengers(e.target.value)}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
+                                    <select
+    id="passengers"
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
+    value={selectedPassengers}
+    onChange={(e) => setSelectedPassengers(e.target.value)}
+  >
+    {getPassengerOptions().map((option, index) => (
+      <option key={index} value={option}>{option}</option>
+    ))}
+  </select>
                                     </div>
                                     <div >
                                     <label htmlFor="suitcase" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Suitcase</label>
   <select
     id="suitcase"
-    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
     value={selectedSuitcase}
     onChange={(e) => setSelectedSuitcase(e.target.value)}
   >
@@ -572,23 +581,23 @@ function MyApp() {
   </select>
                                     </div>
                                     <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
+  <div className="py-2 px-16 rounded-sm">
     <fieldset>
       <div className="flex justify-center gap-4">
         <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('sedan')}
         >
           Sedan
         </button>
         <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('miniSuv')}
         >
           MiniSUV
         </button>
         <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('suv')}
         >
           SUV
@@ -639,14 +648,14 @@ function MyApp() {
             <p>No Data</p>
           ) : (
             filteredTravelData.map((item, index) => (
-                <div key={index} className="rounded-xl shadow-lg border border-[#541e50] bg-white p-3 mb-4 mt-2">
+                <div key={index} className="rounded-sm shadow-lg border border-[#541e50] bg-white p-3 mb-4 mt-2">
   <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0">
     <div style={{ width: '100%', textAlign: 'center' }}>
-      <img src={item.carImage} alt={item.brand} className="rounded-xl w-full" />
+      <img src={item.carImage} alt={item.brand} className="rounded-sm w-full" />
     </div>
     <div style={{ width: '100%', paddingLeft: '0px' }}>
       <h3 className="font-black text-gray-800 md:text-3xl text-xl text-center mt-2 uppercase">{item.vehicleType}</h3>
-      <button className="bg-[#541e50] hover:bg-[#541e50] w-full mt-2 mb-2 text-white font-bold py-2 px-4 rounded-xl" onClick={() => handleSelect(item)}>
+      <button className="bg-[#541e50] hover:bg-[#541e50] w-full mt-2 mb-2 text-white font-bold py-2 px-4 rounded-sm" onClick={() => handleSelect(item)}>
           Book This Vehicle
         </button>
       <p className="text-4xl font-black font-normal text-[#541e50] text-center">{`₹${item.price}`}</p>
@@ -672,7 +681,7 @@ function MyApp() {
             <div>
             {selectedType.toLowerCase() === 'sedan' && (
              <div style={{ textAlign: 'center', marginTop: '20px' }}>
-             <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+             <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
              <p className="text-gray-700 mb-2">
@@ -690,7 +699,7 @@ function MyApp() {
           
             {selectedType.toLowerCase() === 'minisuv' && (
               <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+              <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
               <p className="text-gray-700 mb-2">
@@ -708,7 +717,7 @@ function MyApp() {
           
             {selectedType.toLowerCase() === 'suv' && (
            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-           <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+           <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
            <p className="text-gray-700 mb-2">
@@ -735,7 +744,7 @@ function MyApp() {
                                     
                                 </div>
                             </div>
-                            <div className="bg-gray-200 p-2 rounded-md">
+                            <div className="bg-gray-200 p-2 rounded-sm">
                             <h2 style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '20px' }}>Summary</h2>
                                 <div>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Service Type</strong> <br /> <span style={{ color: '#777', fontSize: '14px' }}>Pune Local</span></p>
@@ -758,9 +767,9 @@ function MyApp() {
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>
                                         </div>
-                                        <div style={{ flex: '1', textAlign: 'center' }}>
+                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

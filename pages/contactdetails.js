@@ -236,7 +236,7 @@ function MyApp() {
                             <input aria-label="firstName" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="firstName" id="firstName" placeholder="Enter Your First name" />
                             <input aria-label="lastName" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="text" name="lastName" id="lastName" placeholder="Enter Your Last name" />
                             <input aria-label="emailAddress" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="email" name="email" id="email" placeholder="Email address" />
-                            <input aria-label="phoneNumber" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="phone" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" />
+                            <input aria-label="phoneNumber" required className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" />
                             <input
           aria-label="youaddress"
           className="border-b-2 border-gray-300 pb-3 text-base text-gray-600 font-normal placeholder-gray-600 focus:outline-none" // Adjust height as needed
