@@ -6,6 +6,7 @@ export default async function handler(req, res) {
   }
 
   const formData = req.body;
+  const confirmationLink = `${process.env.NEXT_PUBLIC_HOST}/confirmation?id=${formData.docId}`;
   const textBody = `
     Booking Confirmation By Legofleets
 
@@ -34,7 +35,7 @@ export default async function handler(req, res) {
     Best regards,
     LegoFleets
 
-    View and download your booking details: ${process.env.NEXT_PUBLIC_HOST}/confirmation?id=${formData.docId}
+    View and download your booking details: ${confirmationLink}
   `;
 
   const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
