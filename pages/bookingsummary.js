@@ -139,7 +139,28 @@ const BookingSummary = () => {
             phoneNumber,
             youaddress,
             comment,
+            docId
           });
+          // await axios.post('/api/sendMessage', {
+          //   selectedVehicleType,
+          //   selectedBrand,
+          //   selectedPrice,
+          //   selectedPassenger,
+          //   selectedSuitcase,
+          //   selectedPickupLocation,
+          //   selectedDropoffLocation,
+          //   selectedPickupDate,
+          //   selectedDistance,
+          //   selectedService,
+          //   selectedDropoffDate,
+          //   firstName,
+          //   lastName,
+          //   email,
+          //   phoneNumber,
+          //   youaddress,
+          //   comment,
+          //   docId
+          // });
         },
         prefill: {
           name: `${firstName} ${lastName}`,

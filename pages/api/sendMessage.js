@@ -33,6 +33,8 @@ export default async function handler(req, res) {
     
     Best regards,
     LegoFleets
+
+    View and download your booking details: ${process.env.NEXT_PUBLIC_HOST}/confirmation?id=${formData.docId}
   `;
 
   const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);

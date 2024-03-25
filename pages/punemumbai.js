@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { firebase } from "../Firebase/config";
 import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
 function MyApp() {
-    const [showMoreInfo, setShowMoreInfo] = useState(false);
+    const [showMoreInfo, setShowMoreInfo] = useState(true);
     const [selectedPassengers, setSelectedPassengers] = useState("1");
     const [selectedSuitcase, setSelectedSuitcase] = useState("3 Medium, 2 Small");
     const [selectedType, setSelectedType] = useState("sedan");
