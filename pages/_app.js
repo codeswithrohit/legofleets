@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import AdminNav from '@/components/AdminNav'; // Import AdminNav component
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }) {
@@ -12,12 +13,16 @@ export default function App({ Component, pageProps }) {
   // Check if the current route is in the restrictedRoutes array
   const shouldHideNavbarAndFooter = restrictedRoutes.includes(router.pathname);
 
+  // Check if the current route is an Admin route
+  const isAdminRoute = router.pathname.startsWith('/Admin');
+
   return (
     <div>
-      {/* Render Navbar and Footer conditionally */}
-      {!shouldHideNavbarAndFooter && <Navbar />}
+      {/* Render Navbar, AdminNav, and Footer conditionally */}
+      {!shouldHideNavbarAndFooter && !isAdminRoute && <Navbar />}
+      {isAdminRoute && <AdminNav />}
       <Component {...pageProps} />
-      {!shouldHideNavbarAndFooter && <Footer />}
+      {!shouldHideNavbarAndFooter && !isAdminRoute && <Footer />}
     </div>
   );
 }

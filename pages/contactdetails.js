@@ -35,9 +35,15 @@ const ContactSummary = () => {
     selectedDropoffDate
   });
   const handleProceedToPayment = (event) => {
-    // Assuming you want to redirect to "bookingsummary" page
-    // You can modify the pathname and query as per your requirements
     event.preventDefault();
+    // Check if any required field is empty
+    const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'youaddress'];
+    const emptyFields = requiredFields.filter(field => !document.getElementById(field).value);
+    if (emptyFields.length > 0) {
+      alert('Please fill in all required fields: ' + emptyFields.join(', '));
+      return;
+    }
+    // Proceed to payment review
     router.push({
       pathname: '/bookingsummary',
       query: {
@@ -52,14 +58,12 @@ const ContactSummary = () => {
         selectedDistance,
         selectedDropoffDate,
         selectedService,
-        // Add form data to the query
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
         email: document.getElementById('email').value,
         phoneNumber: document.getElementById('phoneNumber').value,
         youaddress: document.getElementById('youaddress').value,
         comment: document.getElementById('comment').value,
-        // Add other necessary data from the contact details form
       },
     });
   };
