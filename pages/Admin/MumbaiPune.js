@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { firebase } from '../Firebase/config';
+import { firebase } from '../../Firebase/config';
 import 'firebase/firestore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import AdminNav from '../../components/AdminNav';
 const db = firebase.firestore();
 
 const DestinationForm = () => {
@@ -95,6 +95,8 @@ const DestinationForm = () => {
 
   return (
     <div className="px-16 py-12 min-h-screen bg-white flex flex-col justify-center">
+          <AdminNav />
+        <div className='lg:ml-64' >
       {loading ? ( // Render spinner if loading is true
         <div className="flex justify-center items-center h-full">
           <svg
@@ -165,7 +167,7 @@ const DestinationForm = () => {
             </button></>
       )}
 
-   
+</div>
 
       <ToastContainer />
     </div>

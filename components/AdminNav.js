@@ -1,12 +1,7 @@
-
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Disclosure } from "@headlessui/react";
 import {
   MdOutlineSpaceDashboard,
-  MdOutlineAnalytics,
-  MdOutlineIntegrationInstructions,
-  MdOutlineMoreHoriz,
-  MdOutlineSettings,
   MdOutlineLogout,
 } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -80,6 +75,18 @@ function SideNavbar() {
         router.pathname === '/Admin/AddCar' ? 'text-white' : 'text-gray-800 group-hover:text-white'
       } font-semibold`}>
         Vehicle
+      </h3>
+    </Link>
+              <Link href='/Admin/MumbaiPune' className={`flex  mb-2 justify-start items-center gap-4 pl-5 p-2 rounded-md group cursor-pointer m-auto ${
+      router.pathname === '/Admin/MumbaiPune' ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-900'
+    }`}>
+      <CgProfile className={`text-2xl ${
+        router.pathname === '/Admin/MumbaiPune' ? 'text-white' : 'text-gray-600 group-hover:text-white'
+      }`} />
+      <h3 className={`text-base ${
+        router.pathname === '/Admin/MumbaiPune' ? 'text-white' : 'text-gray-800 group-hover:text-white'
+      } font-semibold`}>
+        Mumbai Pune
       </h3>
     </Link>
              

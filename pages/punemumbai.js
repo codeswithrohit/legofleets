@@ -2,6 +2,8 @@ import React, { useState,useEffect } from "react";
 import { useRouter } from 'next/router';
 import { firebase } from "../Firebase/config";
 import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
+const db = firebase.firestore();
+
 function MyApp() {
     const [showMoreInfo, setShowMoreInfo] = useState(true);
     const [selectedPassengers, setSelectedPassengers] = useState("1");
@@ -26,64 +28,27 @@ function MyApp() {
   
     const [travelData, setTravelData] = useState([]);
 
-
-    const locationPrices = {
-      
-      'Destination Type A': {
-        locations: [
-          'Lonavala', 'Panvel', 'Khopoli', 'Khandala', 'Belapur', 'Kharghar', 'Nerul', 'Sanpada',
-          'Seawood', 'Vashi', 'Airoli', 'Rabale', 'Mulund East', 'Mulund West', 'Bhandup East',
-          'Bhandup West', 'Mankhurd', 'Ghatkopar East', 'Ghatkopar West', 'Koparkhirane', 'Ghansoli',
-          'Chembur', 'Sion', 'Vikroli', 'Vile Parle', 'Andheri East', 'Andheri West', 'Sakinaka',
-          'Powai', 'Kanjurmarg East', 'Kanjurmarg West', 'Chandivali', 'Kurla East', 'Kurla West',
-          'Bandra Kurla Complex (BKC)', 'Bandra East', 'Matunga', 'Kingcircle', 'Dadar East',
-          'Dadar West', 'Shivajipark', 'Mahim', 'Parel', 'Lower Parel', 'Sidhhivinayak mandir', 'Wadala'
-        ],
-        prices: {
-          sedan: 3500,
-          minisuv: 4500,
-          suv: 6000
+    const [locationPrices, setLocationPrices] = useState({});
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const snapshot = await db.collection('PuneMumbai').get();
+          const data = snapshot.docs.reduce((acc, doc) => {
+            acc[doc.id] = doc.data();
+            return acc;
+          }, {});
+          setLocationPrices(data);
+          setLoading(false); // Set loading to false after data is fetched
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false); // Set loading to false if an error occurs
         }
-      },
-      'Destination Type B': {
-        locations: [
-          'Mahalaxmi', 'Byculla', 'Mazgaon', 'Mumbadevi', 'Kalbadevi', 'Mumbai Central', 'Taj Hotel Mumbai',
-          'Santacruz East', 'Santacruz West', 'Colaba', 'Nariman Point', 'Gateway of India', 'Churchgate',
-          'Victoriya Terminus', 'Chhatrapati Shivaji Terminus', 'Worli', 'Girgaon', 'Girgaon Chowpatty',
-          'Haji Ali', 'Charni Road', 'Grant Road', 'MazgaonDock Yard', 'Malabar Hill', 'Juhu Chawpatty',
-          'Khar', 'Juhu', 'Yari road', 'BandraWest', 'Prabha Devi', 'Goregaon East', 'Goregaon West',
-          'Malad East', 'Malad West', 'Kandivali East', 'Kandivali West', 'Charkop', 'Juhu Beach',
-          'Versova', 'Borivali East', 'Borivali West', 'Thane East', 'Thane West'
-        ],
-        prices: {
-          sedan: 4000,
-          minisuv: 5000,
-          suv: 7000
-        }
-      },
-      'Destination Type C': {
-        locations: [
-          'Dahisar East', 'Dahisar West', 'Mira Road East', 'Mira Road West', 'Vasai East', 'Vasai West',
-          'Bhayandar East', 'Bhayandar West', 'Virar East', 'Virar West'
-        ],
-        prices: {
-          sedan: 5000,
-          minisuv: 6000,
-          suv: 8000
-        }
-      },
-      'Destination Type D': {
-        locations: [
-          'Kalyan East', 'Kalyan West', 'Dombivli East', 'Dombivli West', 'Badlapur', 'Karjat'
-        ],
-        prices: {
-          sedan: 4500,
-          minisuv: 5500,
-          suv: 7500
-        }
-      }
-      // Add more destination types in a similar structure for other locations
-    };
+      };
+  
+      fetchData();
+    }, []);
+  
+    console.log("formdata",locationPrices)
     
   
     // Inside handleFilter function
