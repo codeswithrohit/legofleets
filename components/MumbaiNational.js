@@ -115,6 +115,12 @@ const MumbaiNational = () => {
       const handleDateChange = (date) => {
         setStartDate(date);
       };
+
+      const handleDropoffDateChange = (date) => {
+        // Extract the date portion from the selected date
+        const selectedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        setEndDate(selectedDate);
+      };
     
       const currentTime = new Date();
       const currentHours = currentTime.getHours();
@@ -129,7 +135,7 @@ const MumbaiNational = () => {
 
   return (
     <div className="md:mt-4 px-0 md:px-0">
-                  <div className="max-w-8xl md:-mt-20 mx-auto p-4 bg-white rounded-sm border border-[#541e50] flex flex-col md:flex-row md:items-center">
+                  <div className="max-w-5xl md:-mt-20 mx-auto p-4 bg-white rounded-lg border border-[#541e50] flex flex-col md:flex-row md:items-center">
   <div className="flex flex-col flex-1">
     <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
     {isLoaded && (
@@ -150,13 +156,13 @@ const MumbaiNational = () => {
           type="text"
           value={pickupLocation}
           onChange={(e) => setPickupLocation(e.target.value)}
-          placeholder="Enter pickup location"
-          className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+          placeholder="Pickup location"
+          className="p-3 outline-none w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
         />
       </Autocomplete>
     )}
   </div>
-  <div className="flex flex-col flex-1 md:ml-4">
+  <div className="flex flex-col flex-1 ">
   <label className="text-sm text-gray-600 mb-1">Drop-Off Location </label>
   {isLoaded && (
     <Autocomplete
@@ -171,13 +177,13 @@ const MumbaiNational = () => {
         value={dropoffLocation}
         onChange={(e) => setDropoffLocation(e.target.value)}
         type="text"
-        placeholder="Enter drop-off location"
-        className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+        placeholder="Drop-off location"
+        className="p-3 outline-none w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
       />
     </Autocomplete>
   )}
 </div>
-  <div className="flex flex-col flex-1 md:ml-4">
+  <div className="flex flex-col flex-1 ">
     <label className="text-sm text-gray-600 mb-1">Select Pickup Date</label>
     <DatePicker
       selected={startDate}
@@ -185,10 +191,10 @@ const MumbaiNational = () => {
       dateFormat="MMMM d, yyyy"
       placeholderText="Select Date"
       minDate={new Date()}
-      className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
     />
   </div>
-  <div className="flex flex-col flex-1 md:ml-4">
+  <div className="flex flex-col flex-1 ">
     <label className="text-sm text-gray-600 mb-1">Select Pickup Time</label>
     <DatePicker
       selected={startDate}
@@ -205,29 +211,24 @@ const MumbaiNational = () => {
           : undefined
       }
       maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-      className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
     />
   </div>
-  <div className="flex flex-col flex-1 md:ml-4">
-  <>
-    <label className="text-sm text-gray-600 mb-1">Select Drop-off Date & Time</label>
-    <DatePicker
-      selected={endDate}
-      onChange={(date) => setEndDate(date)}
-      showTimeSelect
-      timeFormat="HH:mm"
-      timeIntervals={15}
-      dateFormat="MMMM d, yyyy h:mm aa"
-      placeholderText="Select Date and Time"
-      minDate={startDate || new Date()} // Set minDate to startDate if it's selected, otherwise default to today
-      className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-[#541e50]"
-    />
-  </>
-</div>
-
-</div>
-<button
-  className="py-3 px-8  w-full bg-[#541e50] text-white rounded-sm hover:bg-[#541e50] transition-all mt-2  flex items-center justify-center"
+  <div className="flex flex-col flex-1 ">
+    <>
+      <label className="text-sm text-gray-600 mb-1">Select Drop-off Date</label>
+      <DatePicker
+        selected={endDate}
+        onChange={handleDropoffDateChange} // Use the modified handler function
+        dateFormat="MMMM d, yyyy" // Only show the date without time
+        placeholderText="Select Date"
+        minDate={startDate || new Date()} // Set minDate to startDate if it's selected, otherwise default to today
+        className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+      />
+    </>
+  </div>
+  <button
+  className="py-3 px-8  w-full md:w-36 h-10 ml-0 md:ml-4 bg-[#541e50] text-white rounded-lg hover:bg-[#541e50] transition-all mt-4  flex items-center justify-center"
   onClick={handleMumbaiNationalSearch}
 >
   <span className="text-center">Search</span>
@@ -239,10 +240,12 @@ const MumbaiNational = () => {
     />
   </svg>
 </button>
+</div>
+
 
                   {modalOpen && (
   <div className="fixed inset-0 z-50 flex justify-center items-center">
-    <div className="modal-container bg-white w-80 md:w-96 p-8 rounded-sm shadow-lg animate-fade-in">
+    <div className="modal-container bg-white w-80 md:w-96 p-8 rounded-lg shadow-lg animate-fade-in">
       <div className="modal-content text-center">
         <div className="flex items-center justify-center mb-4">
           <FaPhone className="text-4xl text-blue-500 mr-2" />
@@ -253,7 +256,7 @@ const MumbaiNational = () => {
         </div>
         <button
           onClick={() => setModalOpen(false)}
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none w-full md:w-36 h-10"
         >
           Close
         </button>

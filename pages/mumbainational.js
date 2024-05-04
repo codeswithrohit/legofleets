@@ -214,8 +214,8 @@ useEffect(() => {
             selectedSuitcase: selectedSuitcase,
             selectedPickupLocation: pickupLocation,
             selectedDropoffLocation: dropoffLocation,
-            selectedPickupDate: new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
-            selectedDropoffDate: new Date(dropDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
+            selectedPickupDate: pickupDate,
+            selectedDropoffDate: dropDate,
             selectedDistance: distance,
             selectedService:'Mumbai National ',
           },
@@ -361,16 +361,16 @@ useEffect(() => {
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+        {pickupDate}
     </span>
 </p>
 <p style={{ marginBottom: '10px', textAlign: 'center' }}>
-    <strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE, TIME</strong><br /> 
+    <strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(dropDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+{dropDate}
     </span>
 </p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Hour</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{daysAndNights.days} days and {daysAndNights.nights}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total days/nights</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{daysAndNights.days} days and {daysAndNights.nights} nights</span></p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>
@@ -787,13 +787,13 @@ useEffect(() => {
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+        {pickupDate}
     </span>
 </p>
 <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(dropDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+{dropDate}
     </span>
 </p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>

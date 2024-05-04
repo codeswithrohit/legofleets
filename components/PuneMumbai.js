@@ -136,12 +136,12 @@ const PuneMumbai = () => {
       };
   return (
     <div className="md:mt-4 px-0 md:px-0">
-    <div className="max-w-7xl md:-mt-20 mx-auto p-4 bg-white rounded-sm border border-[#541e50]">
-    <div className="flex justify-center text-xs font-bold mb-4">
-  <button className={`tab ${selectedOption === 'PuneToMumbai' ? 'active text-white bg-[#541e50] p-2 rounded-sm hover:bg-[#541e50]' : 'text-gray-500 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('PuneToMumbai')}>
+    <div className="max-w-5xl md:-mt-20 mx-auto px-4 bg-white rounded-lg border border-[#541e50]">
+    <div className="flex justify-center text-xs font-bold mb-2 mt-1">
+  <button className={`tab ${selectedOption === 'PuneToMumbai' ? 'active text-white bg-[#541e50] p-2 rounded-lg hover:bg-[#541e50] text-xs ' : ' text-xs text-gray-500 p-2 rounded-lg bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('PuneToMumbai')}>
     Pune To Mumbai 
   </button>
-  <button className={`tab ${selectedOption === 'MumbaiToPune' ? 'active text-white bg-[#541e50] p-2 rounded-sm hover:bg-[#541e50]' : 'text-gray-500 p-2 rounded-sm bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('MumbaiToPune')}>
+  <button className={`tab ${selectedOption === 'MumbaiToPune' ? 'active text-white bg-[#541e50] p-2 rounded-lg hover:bg-[#541e50] text-xs ml-4 ' : ' text-xs ml-4 text-gray-500 p-2 rounded-lg bg-gray-200 hover:bg-gray-300'}`} onClick={() => setSelectedOption('MumbaiToPune')}>
     Mumbai  To Pune
   </button>
 </div>
@@ -149,7 +149,7 @@ const PuneMumbai = () => {
      
   
       {selectedOption === 'PuneToMumbai' && (
-      <div className="flex flex-col md:flex-row md:flex-wrap gap-4">
+      <div className="flex flex-col md:flex-row md:flex-wrap gap-4 mb-2">
         <div className="flex flex-col flex-1">
           <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
           {/* Autocomplete for Pickup Location */}
@@ -171,8 +171,8 @@ const PuneMumbai = () => {
                 type="text"
                 value={pickupLocation}
                 onChange={(e) => setPickupLocation(e.target.value)}
-                placeholder="Enter pickup location"
-                className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                placeholder="Pickup location"
+                className="p-3 outline-none w-full md:w-40 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
               />
             </Autocomplete>
           )}
@@ -186,7 +186,7 @@ const PuneMumbai = () => {
             onChange={handleLocationChange}
             options={options}
             placeholder="Drop-off Location"
-            className=" w-64 placeholder-gray-400 "
+            className=" w-full md:w-48 h-10 md:mt-2 mt-0  placeholder-gray-400 "
           />
         </div>
 
@@ -199,7 +199,7 @@ const PuneMumbai = () => {
             dateFormat="MMMM d, yyyy"
             placeholderText="Select Date"
             minDate={new Date()}
-            className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-purple-900"
+            className="p-3 px-8 outline-none w-full md:w-40 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-purple-900"
           />
         </div>
 
@@ -221,12 +221,12 @@ const PuneMumbai = () => {
                 : undefined
             }
             maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-            className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-purple-900"
+            className="p-3 px-8 outline-none w-full md:w-40 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-purple-900"
           />
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
         <button
-          className="py-3 w-full md:w-full  bg-[#541e50] text-white rounded-sm hover:bg-[#541e50] transition-all mt-2 md:mt-6 flex items-center justify-center px-4"
+          className="py-3 w-full md:w-40 h-10  bg-[#541e50] text-white rounded-lg hover:bg-[#541e50] transition-all mt-2 md:mt-6 flex items-center justify-center px-4"
           onClick={handlePuneToMumbaiSearch}
         >
           <span className="text-center">Search</span>
@@ -238,7 +238,7 @@ const PuneMumbai = () => {
 
   
 {selectedOption === 'MumbaiToPune' && (
-  <div className="flex flex-col md:flex-row md:flex-wrap gap-4">
+  <div className="flex flex-col md:flex-row md:flex-wrap gap-4 mb-2">
     <div className="flex flex-col ">
           <label className="text-gray-700 text-xs font-bold">Pickup Location:</label>
           {/* Select for Drop-off Location */}
@@ -246,8 +246,8 @@ const PuneMumbai = () => {
             value={selectedLocation}
             onChange={handleLocationChange}
             options={options}
-            placeholder="Drop-off Location"
-            className="w-64 placeholder-gray-400"
+            placeholder="Pickup Location"
+            className="w-full md:w-48 h-10 md:mt-2 mt-0  placeholder-gray-400"
           />
         </div>
 
@@ -272,8 +272,8 @@ const PuneMumbai = () => {
             value={dropoffLocation}
             onChange={(e) => setDropoffLocation(e.target.value)}
             type="text"
-            placeholder="Enter drop-off location"
-            className="p-3 outline-none rounded-sm border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+            placeholder="Drop-off location"
+            className="p-3 outline-none w-full md:w-40 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
           />
         </Autocomplete>
       )}
@@ -288,7 +288,7 @@ const PuneMumbai = () => {
         dateFormat="MMMM d, yyyy"
         placeholderText="Select Date"
         minDate={new Date()}
-        className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-purple-900"
+        className="p-3 px-8 outline-none w-full md:w-40 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-purple-900"
       />
     </div>
 
@@ -310,12 +310,12 @@ const PuneMumbai = () => {
             : undefined
         }
         maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-        className="p-3 px-8 outline-none text-gray-400 rounded-sm border border-[#541e50] focus:ring-purple-900"
+        className="p-3 px-8 outline-none w-full md:w-40 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-purple-900"
       />
     </div>
     <div className="flex flex-col flex-1 md:ml-4">
     <button
-      className="py-3 w-full md:w-full bg-[#541e50] md:mt-6 text-white rounded-sm hover:bg-[#541e50] transition-all mt-2  flex items-center justify-center px-4"
+      className="py-3 w-full md:w-40 h-10 bg-[#541e50] md:mt-6 text-white rounded-lg hover:bg-[#541e50] transition-all mt-2  flex items-center justify-center px-4"
       onClick={handleMumbaiToPuneSearch}
     >
       <span className="text-center">Search</span>
@@ -329,7 +329,7 @@ const PuneMumbai = () => {
     </div>
     {modalOpen && (
   <div className="fixed inset-0 z-50 flex justify-center items-center">
-    <div className="modal-container bg-white w-80 md:w-96 p-8 rounded-sm shadow-lg animate-fade-in">
+    <div className="modal-container bg-white w-80 md:w-96 p-8 rounded-lg shadow-lg animate-fade-in">
       <div className="modal-content text-center">
         <div className="flex items-center justify-center mb-4">
           <FaPhone className="text-4xl text-blue-500 mr-2" />

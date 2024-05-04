@@ -223,7 +223,7 @@ function MyApp() {
           selectedSuitcase: selectedSuitcase,
           selectedPickupLocation: pickupLocation,
           selectedDropoffLocation: dropoffLocation,
-          selectedPickupDate: new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
+          selectedPickupDate: pickupDate,
           selectedService:'Pune To Mumbai  ',
         },
       });
@@ -367,7 +367,7 @@ function MyApp() {
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupLocation}</span></p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{dropoffLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupDate}</span></p>
                                    
                                 </div>
                             </div>
@@ -375,7 +375,35 @@ function MyApp() {
 
                             <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px' ,marginLeft:'24px'}}>
                                 <h2 className="text-[#541e50]" style={{ textAlign: 'center', fontSize: '1.5rem', margin: '0 0 1rem' }}>Vehicle Filter</h2>
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-lg">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                  
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -414,33 +442,7 @@ function MyApp() {
 
 
                                 </div>
-                                <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+           
 
                                 <div class="flex flex-col justify-center ">
                              
@@ -505,61 +507,43 @@ function MyApp() {
                       </div>
                     </div>
                     {showMoreInfo && (
-                        <div>
-  {selectedType.toLowerCase() === 'sedan' && (
-   <div style={{ textAlign: 'center', marginTop: '20px' }}>
-   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-   <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-
-   <p className="text-gray-700 mb-2">
-     For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-   </p>
-   <p className="text-gray-700 mb-2">
-     After 8 hours, additional charges of ₹ 250 per hour will be added.
-   </p>
-   <p className="text-gray-700 mb-2">
-     After 80 kilometers, extra charges of ₹ 15 per kilometer will be applied.
-   </p>
- </div>
- </div>
-  )}
-
-  {selectedType.toLowerCase() === 'minisuv' && (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-
-    <p className="text-gray-700 mb-2">
-      For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-    </p>
-    <p className="text-gray-700 mb-2">
-      After 8 hours, additional charges of ₹ 300 per hour will be added.
-    </p>
-    <p className="text-gray-700 mb-2">
-      After 80 kilometers, extra charges of ₹ 18 per kilometer will be applied.
-    </p>
-  </div>
-  </div>
-  )}
-
-  {selectedType.toLowerCase() === 'suv' && (
- <div style={{ textAlign: 'center', marginTop: '20px' }}>
- <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
- <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-
- <p className="text-gray-700 mb-2">
-   For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
- </p>
- <p className="text-gray-700 mb-2">
-   After 8 hours, additional charges of ₹ 350 per hour will be added.
- </p>
- <p className="text-gray-700 mb-2">
-   After 80 kilometers, extra charges of ₹ 22 per kilometer will be applied.
- </p>
-</div>
-</div>
-  )}
-</div>
+                   <div>
+                   {selectedType.toLowerCase() === 'sedan' && (
+                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+                    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+                 
+                    <p className="text-gray-700 mb-2">
+                           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                         </p>
+                  </div>
+                  </div>
+                   )}
+                 
+                   {selectedType.toLowerCase() === 'minisuv' && (
+                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                     <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+                     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+                 
+                     <p className="text-gray-700 mb-2">
+                           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                         </p>
+                   </div>
+                   </div>
+                   )}
+                 
+                   {selectedType.toLowerCase() === 'suv' && (
+                  <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                  <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+                  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+                 
+                  <p className="text-gray-700 mb-2">
+                           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                         </p>
+                 </div>
+                 </div>
+                   )}
+                 </div>
                     )}
                     <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
                       Book This Vehicle
@@ -583,6 +567,33 @@ function MyApp() {
                     <div className="md:hidden">
                     <div >
                                 <h2 className="text-[#541e50] text-center mb-4 text-xl font-bold" >Vehicle Filter</h2>
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-lg">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div className="flex flex-col bg-gray-200 p-2 rounded-md">
                                     <div >
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
@@ -610,33 +621,7 @@ function MyApp() {
     ))}
   </select>
 </div>
-<div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+
                                 </div>
 
 
@@ -708,61 +693,43 @@ function MyApp() {
           )}
         </div>
         {showMoreInfo && (
-            <div>
-            {selectedType.toLowerCase() === 'sedan' && (
-             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-             <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-             <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-          
-             <p className="text-gray-700 mb-2">
-               For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-             </p>
-             <p className="text-gray-700 mb-2">
-               After 8 hours, additional charges of ₹ 250 per hour will be added.
-             </p>
-             <p className="text-gray-700 mb-2">
-               After 80 kilometers, extra charges of ₹ 15 per kilometer will be applied.
-             </p>
-           </div>
-           </div>
-            )}
-          
-            {selectedType.toLowerCase() === 'minisuv' && (
-              <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-          
-              <p className="text-gray-700 mb-2">
-                For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-              </p>
-              <p className="text-gray-700 mb-2">
-                After 8 hours, additional charges of ₹ 300 per hour will be added.
-              </p>
-              <p className="text-gray-700 mb-2">
-                After 80 kilometers, extra charges of ₹ 18 per kilometer will be applied.
-              </p>
-            </div>
-            </div>
-            )}
-          
-            {selectedType.toLowerCase() === 'suv' && (
+          <div>
+          {selectedType.toLowerCase() === 'sedan' && (
            <div style={{ textAlign: 'center', marginTop: '20px' }}>
            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-          
+        
            <p className="text-gray-700 mb-2">
-             For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-           </p>
-           <p className="text-gray-700 mb-2">
-             After 8 hours, additional charges of ₹ 350 per hour will be added.
-           </p>
-           <p className="text-gray-700 mb-2">
-             After 80 kilometers, extra charges of ₹ 22 per kilometer will be applied.
-           </p>
+                  Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                </p>
+         </div>
+         </div>
+          )}
+        
+          {selectedType.toLowerCase() === 'minisuv' && (
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+        
+            <p className="text-gray-700 mb-2">
+                  Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                </p>
           </div>
           </div>
-            )}
-          </div>
+          )}
+        
+          {selectedType.toLowerCase() === 'suv' && (
+         <div style={{ textAlign: 'center', marginTop: '20px' }}>
+         <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+         <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+        
+         <p className="text-gray-700 mb-2">
+                  Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                </p>
+        </div>
+        </div>
+          )}
+        </div>
         )}
       </div>
     </div>
@@ -782,7 +749,7 @@ function MyApp() {
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupLocation}</span></p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{dropoffLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupDate}</span></p>
                                    
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ const ContactSummary = () => {
   const handleBack = () => {
     router.back(); // Navigate to the previous page
   };
+
   const {
     selectedVehicleType,
     selectedBrand,
@@ -20,7 +21,16 @@ const ContactSummary = () => {
     selectedService,
     selectedDropoffDate
   } = router.query;
-  // ... (your existing code)
+  const [showFlightInputs, setShowFlightInputs] = useState(false);
+
+  useEffect(() => {
+    // Check if selected service requires flight details
+    if (selectedService === "Pune To Mumbai Airport " || selectedService === "Mumbai To Pune Airport ") {
+      setShowFlightInputs(true);
+    } else {
+      setShowFlightInputs(false);
+    }
+  }, [selectedService]);
   console.log({
     selectedVehicleType,
     selectedBrand,
@@ -64,6 +74,8 @@ const ContactSummary = () => {
         phoneNumber: document.getElementById('phoneNumber').value,
         youaddress: document.getElementById('youaddress').value,
         comment: document.getElementById('comment').value,
+        arrivaldeparturetime: showFlightInputs ? document.getElementById('arrivaldeparturetime').value : '',
+        flightnumber: showFlightInputs ? document.getElementById('flightnumber').value : '',
       },
     });
   };
@@ -298,6 +310,27 @@ const ContactSummary = () => {
 value={selectedPickupLocation}
 required
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+  {showFlightInputs && (
+    <div className="flex" >
+
+                                  <input   aria-label="flightnumber"
+     
+     name="flightnumber"
+     id="flightnumber"
+     required
+     placeholder="Enter Flight Number"
+                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
+                   <input
+        aria-label="arrival/departuretime"
+        name="arrival/departuretime"
+        id="arrival/departuretime"
+        type="time"
+        required
+        class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none"
+    />
+</div>
+  )}
+                  
                 <input  aria-label="comment"
 
 name="comment"

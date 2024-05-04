@@ -132,7 +132,7 @@ function MyApp() {
           selectedSuitcase: selectedSuitcase,
           selectedPickupLocation: pickupLocation,
           selectedDropoffLocation: dropoffLocation,
-          selectedPickupDate: new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
+          selectedPickupDate: pickupDate,
           selectedDistance: distance,
           selectedService:'Pune To Mumbai Airport ',
         },
@@ -277,7 +277,7 @@ function MyApp() {
                                     {/* <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p> */}
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupLocation}</span></p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{dropoffLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupDate}</span></p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>
@@ -292,7 +292,33 @@ function MyApp() {
                            
                             <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px' ,marginLeft:'24px'}}>
                                 <h2 className="text-[#541e50]" style={{ textAlign: 'center', fontSize: '1.5rem', margin: '0 0 1rem' }}>Vehicle Filter</h2>
-                                
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-sm">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                              
                                     <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px',  }}>
@@ -323,33 +349,7 @@ function MyApp() {
 </div>
 
                                 </div>
-                                <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-sm">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+            
 
                                 <div class="flex flex-col justify-center ">
                              
@@ -475,33 +475,7 @@ function MyApp() {
                     <div >
                                 <h2 className="text-[#541e50] text-center mb-4 text-xl font-bold" >Vehicle Filter</h2>
                                 <div className="flex flex-col bg-gray-200 p-2 rounded-sm">
-                                <div >
-                                    <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
-                    <select
-    id="passengers"
-    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
-    value={selectedPassengers}
-    onChange={(e) => setSelectedPassengers(e.target.value)}
-  >
-    {getPassengerOptions().map((option, index) => (
-      <option key={index} value={option}>{option}</option>
-    ))}
-  </select>
-                                    </div>
-                                    <div style={{ flex: '1',  borderRadius: '8px', }}>
-  <label htmlFor="suitcase" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Suitcase</label>
-  <select
-    id="suitcase"
-    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
-    value={selectedSuitcase}
-    onChange={(e) => setSelectedSuitcase(e.target.value)}
-  >
-    {getSuitcaseOptions().map((option, index) => (
-      <option key={index} value={option}>{option}</option>
-    ))}
-  </select>
-</div>
-                                    <div className="flex justify-center">
+                                <div className="flex justify-center">
   <div className="py-2 px-16 rounded-sm">
     <fieldset>
       <div className="flex justify-center gap-4">
@@ -528,6 +502,33 @@ function MyApp() {
     </fieldset>
   </div>
 </div>
+                                <div >
+                                    <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
+                    <select
+    id="passengers"
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '0px', border: '1px solid green' }}
+    value={selectedPassengers}
+    onChange={(e) => setSelectedPassengers(e.target.value)}
+  >
+    {getPassengerOptions().map((option, index) => (
+      <option key={index} value={option}>{option}</option>
+    ))}
+  </select>
+                                    </div>
+                                    <div style={{ flex: '1',  borderRadius: '8px', }}>
+  <label htmlFor="suitcase" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Suitcase</label>
+  <select
+    id="suitcase"
+    style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid green' }}
+    value={selectedSuitcase}
+    onChange={(e) => setSelectedSuitcase(e.target.value)}
+  >
+    {getSuitcaseOptions().map((option, index) => (
+      <option key={index} value={option}>{option}</option>
+    ))}
+  </select>
+</div>
+                          
                                 </div>
 
 
@@ -654,7 +655,7 @@ function MyApp() {
                                     {/* <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Transfer Type</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>One Way</span></p> */}
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP LOCATION</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupLocation}</span></p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Drop-off location</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{dropoffLocation}</span></p>
-                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}</span></p>
+                                    <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{pickupDate}</span></p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>

@@ -44,6 +44,8 @@ const BookingSummary = () => {
     phoneNumber,
     youaddress,
     comment,
+    arrivaldeparturetime,
+    flightnumber
   } = router.query;
 
   const submitBookingData = async () => {
@@ -71,6 +73,8 @@ const BookingSummary = () => {
         phoneNumber,
         youaddress,
         comment,
+        arrivaldeparturetime,
+    flightnumber,
         bookingDate: formattedCurrentDate, // Add the current booking date
         orderId: generateOrderId(), // Call a function to generate the order ID
       });
@@ -139,7 +143,9 @@ const BookingSummary = () => {
             phoneNumber,
             youaddress,
             comment,
-            docId
+            docId,
+            arrivaldeparturetime,
+    flightnumber
           });
           await axios.post('/api/sendMessage', {
             selectedVehicleType,
@@ -159,7 +165,9 @@ const BookingSummary = () => {
             phoneNumber,
             youaddress,
             comment,
-            docId
+            docId,
+            arrivaldeparturetime,
+    flightnumber
           });
         },
         prefill: {
@@ -178,7 +186,9 @@ const BookingSummary = () => {
     }
   };
 
-
+  const isFlightNumberAvailable = flightnumber && flightnumber !== '';
+  const istimedepAvailable = arrivaldeparturetime && arrivaldeparturetime !== '';
+  const isdropdate = selectedDropoffDate && selectedDropoffDate !== '';
   const handleBack = () => {
     router.back(); // Navigate to the previous page
   };
@@ -322,6 +332,12 @@ const BookingSummary = () => {
               <li class="flex flex-wrap gap-4 text-sm">Email <span class="ml-auto font-bold">{email}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Mobile No. <span class="ml-auto font-bold">{phoneNumber}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Flat /House<span class="ml-auto font-bold">{youaddress}</span></li>
+              {isFlightNumberAvailable && (
+                      <li className="flex flex-wrap gap-4 text-sm">Flight Number<span className="ml-auto font-bold">{flightnumber}</span></li>
+                    )}
+                     {istimedepAvailable && (
+              <li class="flex flex-wrap gap-4 text-sm">Arrival/Departure Time<span class="ml-auto font-bold">{arrivaldeparturetime}</span></li>
+                     )}
               <li class=" border-t pt-4"></li>
                           <h3 class="text-xl font-bold text-white">Booking Details</h3>
                            <li class="flex flex-wrap gap-4 text-sm">Service <span class="ml-auto font-bold">{selectedService}</span></li>
@@ -331,9 +347,12 @@ const BookingSummary = () => {
               <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">{selectedPassenger}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">{selectedSuitcase}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">{selectedPickupDate}</span></li>
+              {isdropdate && (
               <li class="flex flex-wrap gap-4 text-sm">Dop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
+              )}
               <li class="flex flex-wrap gap-4 text-sm">Comment<span class="ml-auto font-bold">{comment}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Comment<span class="ml-auto font-bold"></span></li>
               <li class=" border-t pt-4"></li>
             </ul>
           </div>
@@ -345,7 +364,7 @@ const BookingSummary = () => {
             <button
   onClick={initiatePayment}
   type="button"
-  className="min-w-[150px] px-6 py-3.5 text-sm bg-[#333] text-white rounded-md hover:bg-[#111] relative"
+  className="min-w-[150px] px-6 py-3.5 text-xs font-bold bg-[#333] text-white rounded-md hover:bg-[#111] relative"
 >
   {loading ? (
     <span className="flex items-center justify-center">

@@ -171,8 +171,8 @@ function MyApp() {
           selectedVehicleType: vehicleType,
           selectedBrand: brand,
           selectedPrice: price,
-          selectedPassenger: passenger,
-          selectedSuitcase: suitcase,
+          selectedPassenger: selectedPassengers,
+          selectedSuitcase: selectedSuitcase,
           selectedPickupLocation: pickupLocation,
           selectedDropoffLocation: dropoffLocation,
           selectedPickupDate: new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
@@ -323,13 +323,13 @@ function MyApp() {
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+        {pickupDate}
     </span>
 </p>
 <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(dropDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+        {dropDate}
     </span>
 </p>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Duration</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{hours} Hrs.</span></p>
@@ -347,6 +347,33 @@ function MyApp() {
 
                             <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px' ,marginLeft:'24px'}}>
                                 <h2 className="text-[#541e50]" style={{ textAlign: 'center', fontSize: '1.5rem', margin: '0 0 1rem' }}>Vehicle Filter</h2>
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-lg">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                                     <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px',  }}>
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
@@ -377,33 +404,7 @@ function MyApp() {
 
                                 </div>
 
-                                <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+                           
                                 <div class="flex flex-col justify-center ">
                              
                                 {loading ? ( // Show "Loading..." message while data is being fetched
@@ -545,6 +546,33 @@ function MyApp() {
                     <div className="md:hidden">
                     <div >
                                 <h2 className="text-[#541e50] text-center mb-4 text-xl font-bold" >Vehicle Filter</h2>
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-lg">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div className="flex flex-col bg-gray-200 p-2 rounded-md">
                                     <div >
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
@@ -572,33 +600,7 @@ function MyApp() {
     ))}
   </select>
                                     </div>
-                                    <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+                         
                                 </div>
 
 
@@ -746,13 +748,13 @@ function MyApp() {
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>PICKUP DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+        {pickupDate}
     </span>
 </p>
 <p style={{ marginBottom: '10px', textAlign: 'center' }}>
     <strong style={{ color: '#555', fontSize: '16px' }}>Drop-off DATE, TIME</strong><br /> 
     <span style={{ color: '#777', fontSize: '14px' }}>
-        {new Date(dropDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' })}
+        {dropDate}
     </span>
 </p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
