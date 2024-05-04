@@ -97,7 +97,7 @@ function SideNavbar() {
       </h3>
     </Link>
              
-    <Link href='/Admin/Message' className={`flex  mb-2 justify-start items-center gap-4 pl-5 p-2 rounded-md group cursor-pointer m-auto ${
+    {/* <Link href='/Admin/Message' className={`flex  mb-2 justify-start items-center gap-4 pl-5 p-2 rounded-md group cursor-pointer m-auto ${
       router.pathname === '/Admin/Message' ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-900'
     }`}>
       <IoIosAddCircle className={`text-2xl ${
@@ -108,7 +108,7 @@ function SideNavbar() {
       } font-semibold`}>
         Message
       </h3>
-    </Link>
+    </Link> */}
 
   
 

@@ -495,61 +495,43 @@ function MyApp() {
                       </div>
                     </div>
                     {showMoreInfo && (
-                        <div>
-  {selectedType.toLowerCase() === 'sedan' && (
-   <div style={{ textAlign: 'center', marginTop: '20px' }}>
-   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-   <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-
-   <p className="text-gray-700 mb-2">
-     For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-   </p>
-   <p className="text-gray-700 mb-2">
-     After 8 hours, additional charges of ₹ 250 per hour will be added.
-   </p>
-   <p className="text-gray-700 mb-2">
-     After 80 kilometers, extra charges of ₹ 15 per kilometer will be applied.
-   </p>
- </div>
- </div>
-  )}
-
-  {selectedType.toLowerCase() === 'minisuv' && (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-
-    <p className="text-gray-700 mb-2">
-      For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-    </p>
-    <p className="text-gray-700 mb-2">
-      After 8 hours, additional charges of ₹ 300 per hour will be added.
-    </p>
-    <p className="text-gray-700 mb-2">
-      After 80 kilometers, extra charges of ₹ 18 per kilometer will be applied.
-    </p>
-  </div>
-  </div>
-  )}
-
-  {selectedType.toLowerCase() === 'suv' && (
- <div style={{ textAlign: 'center', marginTop: '20px' }}>
- <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
- <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-
- <p className="text-gray-700 mb-2">
-   For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
- </p>
- <p className="text-gray-700 mb-2">
-   After 8 hours, additional charges of ₹ 350 per hour will be added.
- </p>
- <p className="text-gray-700 mb-2">
-   After 80 kilometers, extra charges of ₹ 22 per kilometer will be applied.
- </p>
-</div>
-</div>
-  )}
-</div>
+             <div>
+             {selectedType.toLowerCase() === 'sedan' && (
+              <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+           
+              <p className="text-gray-700 mb-2">
+                     Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                   </p>
+            </div>
+            </div>
+             )}
+           
+             {selectedType.toLowerCase() === 'minisuv' && (
+               <div style={{ textAlign: 'center', marginTop: '20px' }}>
+               <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+           
+               <p className="text-gray-700 mb-2">
+                     Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                   </p>
+             </div>
+             </div>
+             )}
+           
+             {selectedType.toLowerCase() === 'suv' && (
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+           
+            <p className="text-gray-700 mb-2">
+                     Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                   </p>
+           </div>
+           </div>
+             )}
+           </div>
                     )}
                     <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
                       Book This Vehicle
@@ -699,61 +681,43 @@ function MyApp() {
           )}
         </div>
         {showMoreInfo && (
-            <div>
-            {selectedType.toLowerCase() === 'sedan' && (
-             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-             <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-             <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-          
-             <p className="text-gray-700 mb-2">
-               For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-             </p>
-             <p className="text-gray-700 mb-2">
-               After 8 hours, additional charges of ₹ 250 per hour will be added.
-             </p>
-             <p className="text-gray-700 mb-2">
-               After 80 kilometers, extra charges of ₹ 15 per kilometer will be applied.
-             </p>
-           </div>
-           </div>
-            )}
-          
-            {selectedType.toLowerCase() === 'minisuv' && (
+             <div>
+             {selectedType.toLowerCase() === 'sedan' && (
               <div style={{ textAlign: 'center', marginTop: '20px' }}>
               <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-          
+           
               <p className="text-gray-700 mb-2">
-                For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-              </p>
-              <p className="text-gray-700 mb-2">
-                After 8 hours, additional charges of ₹ 300 per hour will be added.
-              </p>
-              <p className="text-gray-700 mb-2">
-                After 80 kilometers, extra charges of ₹ 18 per kilometer will be applied.
-              </p>
+                     Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                   </p>
             </div>
             </div>
-            )}
-          
-            {selectedType.toLowerCase() === 'suv' && (
-           <div style={{ textAlign: 'center', marginTop: '20px' }}>
-           <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-           <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-          
-           <p className="text-gray-700 mb-2">
-             For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
-           </p>
-           <p className="text-gray-700 mb-2">
-             After 8 hours, additional charges of ₹ 350 per hour will be added.
-           </p>
-           <p className="text-gray-700 mb-2">
-             After 80 kilometers, extra charges of ₹ 22 per kilometer will be applied.
-           </p>
-          </div>
-          </div>
-            )}
-          </div>
+             )}
+           
+             {selectedType.toLowerCase() === 'minisuv' && (
+               <div style={{ textAlign: 'center', marginTop: '20px' }}>
+               <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+           
+               <p className="text-gray-700 mb-2">
+                     Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                   </p>
+             </div>
+             </div>
+             )}
+           
+             {selectedType.toLowerCase() === 'suv' && (
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+           
+            <p className="text-gray-700 mb-2">
+                     Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+                   </p>
+           </div>
+           </div>
+             )}
+           </div>
         )}
       </div>
     </div>

@@ -114,7 +114,7 @@ function MyApp() {
       };
       fetchData();
     }, []);
-    console.log(travelData)
+    console.log("traveldata",travelData)
   
     const filteredTravelData = handleFilter();
 
@@ -148,7 +148,7 @@ function MyApp() {
     <h2 className="sr-only">Steps</h2>
   
     <div
-      className="after:mt-4 after:block after:h-1 after:w-full after:rounded-sm after:bg-gray-200"
+      className="after:mt-4 after:block after:h-1 after:w-full after:rounded-lg after:bg-gray-200"
     >
       <ol className="grid grid-cols-3 text-sm font-medium text-gray-500">
         <li className="relative flex justify-start text-green-600">
@@ -293,23 +293,23 @@ function MyApp() {
                             <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px' ,marginLeft:'24px'}}>
                                 <h2 className="text-[#541e50]" style={{ textAlign: 'center', fontSize: '1.5rem', margin: '0 0 1rem' }}>Vehicle Filter</h2>
                                 <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-sm">
+  <div className="py-2 px-16 rounded-lg">
     <fieldset>
       <div className="flex justify-center gap-4">
         <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('sedan')}
         >
           Sedan
         </button>
         <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('miniSuv')}
         >
           MiniSUV
         </button>
         <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('suv')}
         >
           SUV
@@ -390,9 +390,9 @@ function MyApp() {
           ) : (
             filteredTravelData.map((item, index) => (
                 <div key={index} className="relative mb-2 mt-2 max-w-xs md:max-w-3xl mx-auto">
-                <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-sm shadow-lg p-3 border border-[#541e50] bg-white">
+                <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-lg shadow-lg p-3 border border-[#541e50] bg-white">
                   <div style={{ width: '30%' }}>
-                    <img src={item.carImage} alt={item.brand} className="rounded-sm" />
+                    <img src={item.carImage} alt={item.brand} className="rounded-lg" />
                   </div>
                   <div style={{ width: '70%', paddingLeft: '20px' }}>
                     <h3 className="font-black text-gray-800 md:text-3xl text-xl uppercase">{item.vehicleType}</h3>
@@ -417,7 +417,7 @@ function MyApp() {
                         <div>
   {selectedType.toLowerCase() === 'sedan' && (
    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-   <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
    <p className="text-gray-700 mb-2">
@@ -429,7 +429,7 @@ function MyApp() {
 
   {selectedType.toLowerCase() === 'minisuv' && (
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-    <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
     <p className="text-gray-700 mb-2">
@@ -441,7 +441,7 @@ function MyApp() {
 
   {selectedType.toLowerCase() === 'suv' && (
  <div style={{ textAlign: 'center', marginTop: '20px' }}>
- <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+ <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
  <p className="text-gray-700 mb-2">
@@ -452,7 +452,7 @@ function MyApp() {
   )}
 </div>
                     )}
-                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-sm mt-2" onClick={() => handleSelect(item)}>
+                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-lg mt-2" onClick={() => handleSelect(item)}>
                       Book This Vehicle
                     </button>
                   </div>
@@ -474,25 +474,25 @@ function MyApp() {
                     <div className="md:hidden">
                     <div >
                                 <h2 className="text-[#541e50] text-center mb-4 text-xl font-bold" >Vehicle Filter</h2>
-                                <div className="flex flex-col bg-gray-200 p-2 rounded-sm">
+                                <div className="flex flex-col bg-gray-200 p-2 rounded-lg">
                                 <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-sm">
+  <div className="py-2 px-16 rounded-lg">
     <fieldset>
       <div className="flex justify-center gap-4">
         <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('sedan')}
         >
           Sedan
         </button>
         <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('miniSuv')}
         >
           MiniSUV
         </button>
         <button
-          className={`px-4 py-2 rounded-sm focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
           onClick={() => handleTypeChange('suv')}
         >
           SUV
@@ -570,14 +570,14 @@ function MyApp() {
             <p>No Data</p>
           ) : (
             filteredTravelData.map((item, index) => (
-                <div key={index} className="rounded-sm shadow-lg border border-[#541e50] bg-white p-3 mb-4 mt-2">
+                <div key={index} className="rounded-lg shadow-lg border border-[#541e50] bg-white p-3 mb-4 mt-2">
   <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0">
     <div style={{ width: '100%', textAlign: 'center' }}>
-      <img src={item.carImage} alt={item.brand} className="rounded-sm w-full" />
+      <img src={item.carImage} alt={item.brand} className="rounded-lg w-full" />
     </div>
     <div style={{ width: '100%', paddingLeft: '0px' }}>
       <h1 className="font-black text-gray-800 md:text-3xl text-xl text-center mt-2 uppercase">{item.vehicleType}</h1>
-      <button className="bg-[#541e50] hover:bg-[#541e50] w-full mt-2 mb-2 text-white font-bold py-2 px-4 rounded-sm" onClick={() => handleSelect(item)}>
+      <button className="bg-[#541e50] hover:bg-[#541e50] w-full mt-2 mb-2 text-white font-bold py-2 px-4 rounded-lg" onClick={() => handleSelect(item)}>
           Book This Vehicle
         </button>
       <p className="text-4xl font-black font-normal text-[#541e50] text-center">{`₹${item.price}`}</p>
@@ -603,7 +603,7 @@ function MyApp() {
             <div>
             {selectedType.toLowerCase() === 'sedan' && (
              <div style={{ textAlign: 'center', marginTop: '20px' }}>
-             <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+             <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
              <p className="text-gray-700 mb-2">
@@ -615,7 +615,7 @@ function MyApp() {
           
             {selectedType.toLowerCase() === 'minisuv' && (
               <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
               <p className="text-gray-700 mb-2">
@@ -627,7 +627,7 @@ function MyApp() {
           
             {selectedType.toLowerCase() === 'suv' && (
            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-           <div className="bg-gray-100 p-6 rounded-sm border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+           <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
            <p className="text-gray-700 mb-2">
           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
@@ -647,7 +647,7 @@ function MyApp() {
                                     
                                 </div>
                             </div>
-                            <div className="bg-gray-200 p-2 rounded-sm">
+                            <div className="bg-gray-200 p-2 rounded-lg">
                             <h2 style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '20px' }}>Summary</h2>
                                 <div>
                                     <p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Service Type</strong> <br /> <span style={{ color: '#777', fontSize: '14px' }}>Pune to Mumbai Airport</span></p>

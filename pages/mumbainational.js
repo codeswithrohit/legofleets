@@ -73,7 +73,7 @@ useEffect(() => {
         console.log('Distance Price:', distancePrice);
 
         // Calculate the served days' price
-        const servedDaysPrice = days * 300 * pricePerKmNum; // 300 per day multiplied by price per km
+        const servedDaysPrice = days * 300 * pricePerKmNum*2; // 300 per day multiplied by price per km
         console.log('Served Days Price:', servedDaysPrice);
 
         // Calculate the total driver allowance based on days and nights
@@ -386,6 +386,33 @@ useEffect(() => {
 
                             <div style={{ width: '80%', backgroundColor: 'white', padding: '20px', borderRadius: '8px' ,marginLeft:'24px'}}>
                                 <h2 className="text-[#541e50]" style={{ textAlign: 'center', fontSize: '1.5rem', margin: '0 0 1rem' }}>Vehicle Filter</h2>
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-lg">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                                     <div style={{ flex: '1', padding: '2rem', background: '#F3F4F6', borderRadius: '8px',  }}>
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
@@ -415,33 +442,7 @@ useEffect(() => {
 </div>
 
                                 </div>
-                                <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+                         
 
                                 <div class="flex flex-col justify-center ">
                              
@@ -584,6 +585,33 @@ useEffect(() => {
                     <div className="md:hidden">
                     <div >
                                 <h2 className="text-[#541e50] text-center mb-4 text-xl font-bold" >Vehicle Filter</h2>
+                                <div className="flex justify-center">
+  <div className="py-2 px-16 rounded-lg">
+    <fieldset>
+      <div className="flex justify-center gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('sedan')}
+        >
+          Sedan
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('miniSuv')}
+        >
+          MiniSUV
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => handleTypeChange('suv')}
+        >
+          SUV
+        </button>
+        {/* Add more buttons for additional options */}
+      </div>
+    </fieldset>
+  </div>
+</div>
                                 <div className="flex flex-col bg-gray-200 p-2 rounded-md">
                                     <div >
                                     <label htmlFor="passengers" style={{ display: 'block', fontSize: '1rem', marginBottom: '0.5rem', color: '#4B5563' }}>Passengers</label>
@@ -613,33 +641,7 @@ useEffect(() => {
     ))}
     </select>
                                     </div>
-                                    <div className="flex justify-center">
-  <div className="py-2 px-16 rounded-lg">
-    <fieldset>
-      <div className="flex justify-center gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'sedan' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('sedan')}
-        >
-          Sedan
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'miniSuv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('miniSuv')}
-        >
-          MiniSUV
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg focus:outline-none ${selectedType === 'suv' ? 'bg-[#541e50] text-white' : 'bg-gray-200 text-gray-700'}`}
-          onClick={() => handleTypeChange('suv')}
-        >
-          SUV
-        </button>
-        {/* Add more buttons for additional options */}
-      </div>
-    </fieldset>
-  </div>
-</div>
+                                  
                                 </div>
 
 
