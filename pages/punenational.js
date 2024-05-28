@@ -50,7 +50,7 @@ function MyApp() {
 useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
-    const snapshot = await firebase.firestore().collection('CarData').where('services', '==', 'Pune Local').get();
+    const snapshot = await firebase.firestore().collection('CarData').where('services', '==', 'Pune National').get();
 
     const modifiedData = snapshot.docs.map((doc) => doc.data());
 
@@ -72,7 +72,7 @@ useEffect(() => {
         console.log('Distance Price:', distancePrice);
 
         // Calculate the served days' price
-        const servedDaysPrice = days * 300 * pricePerKmNum *2 ; // 300 per day multiplied by price per km
+        const servedDaysPrice = days * 300 * pricePerKmNum  ; // 300 per day multiplied by price per km
         console.log('Served Days Price:', servedDaysPrice);
 
         // Calculate the total driver allowance based on days and nights
@@ -796,6 +796,7 @@ useEffect(() => {
       {dropDate}
     </span>
 </p>
+<p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total days/nights</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{daysAndNights.days} days and {daysAndNights.nights} nights</span></p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>

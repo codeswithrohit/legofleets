@@ -44,11 +44,22 @@ const ContactSummary = () => {
     selectedService,
     selectedDropoffDate
   });
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    youaddress: '',
+    comment: '',
+    arrivaldeparturetime: '',
+    flightnumber: '',
+  });
+  
   const handleProceedToPayment = (event) => {
     event.preventDefault();
     // Check if any required field is empty
     const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'youaddress'];
-    const emptyFields = requiredFields.filter(field => !document.getElementById(field).value);
+    const emptyFields = requiredFields.filter(field => !formData[field]);
     if (emptyFields.length > 0) {
       alert('Please fill in all required fields: ' + emptyFields.join(', '));
       return;
@@ -68,17 +79,18 @@ const ContactSummary = () => {
         selectedDistance,
         selectedDropoffDate,
         selectedService,
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        email: document.getElementById('email').value,
-        phoneNumber: document.getElementById('phoneNumber').value,
-        youaddress: document.getElementById('youaddress').value,
-        comment: document.getElementById('comment').value,
-        arrivaldeparturetime: showFlightInputs ? document.getElementById('arrivaldeparturetime').value : '',
-        flightnumber: showFlightInputs ? document.getElementById('flightnumber').value : '',
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        youaddress: formData.youaddress,
+        comment: formData.comment,
+        arrivaldeparturetime: showFlightInputs ? formData.arrivaldeparturetime : '',
+        flightnumber: showFlightInputs ? formData.flightnumber : '',
       },
     });
   };
+  
 
   
   return (
@@ -100,7 +112,7 @@ const ContactSummary = () => {
               <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">{selectedPassenger}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">{selectedSuitcase}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">{selectedPickupDate}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Dop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
+              <li class="flex flex-wrap gap-4 text-sm">Drop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
               <li class=" border-t pt-4"></li>
             </ul>
@@ -243,7 +255,8 @@ const ContactSummary = () => {
               <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
               <div class="grid sm:grid-cols-2 gap-6">
                 <div class="relative flex items-center">
-                  <input aria-label="firstName" required  type="text" name="firstName" id="firstName" placeholder="Enter Your First name"
+                  <input  value={formData.firstName}
+  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} aria-label="firstName" required  type="text" name="firstName" id="firstName" placeholder="Enter Your First name"
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                     viewBox="0 0 24 24">
@@ -254,7 +267,8 @@ const ContactSummary = () => {
                   </svg>
                 </div>
                 <div class="relative flex items-center">
-                  <input aria-label="lastName" required  type="text" name="lastName" id="lastName" placeholder="Enter Your Last name"
+                  <input  value={formData.lastName}
+  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} aria-label="lastName" required  type="text" name="lastName" id="lastName" placeholder="Enter Your Last name"
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                     viewBox="0 0 24 24">
@@ -265,7 +279,8 @@ const ContactSummary = () => {
                   </svg>
                 </div>
                 <div class="relative flex items-center">
-                  <input  aria-label="emailAddress" required type="email" name="email" id="email" placeholder="Email address" 
+                  <input  value={formData.email}
+  onChange={(e) => setFormData({ ...formData, email: e.target.value })}  aria-label="emailAddress" required type="email" name="email" id="email" placeholder="Email address" 
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-4"
                     viewBox="0 0 682.667 682.667">
@@ -285,7 +300,8 @@ const ContactSummary = () => {
                   </svg>
                 </div>
                 <div class="relative flex items-center">
-                  <input aria-label="phoneNumber" required  type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"
+                  <input  value={formData.phoneNumber}
+  onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} aria-label="phoneNumber" required  type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"
                     class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                   <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 64 64">
                     <path
@@ -298,7 +314,8 @@ const ContactSummary = () => {
             <div class="mt-6">
               <h3 class="text-lg font-bold text-[#333] mb-6">Your Address</h3>
               <div class="grid sm:grid-cols-2 gap-6">
-                <input   aria-label="youaddress"
+                <input  value={formData.youaddress}
+  onChange={(e) => setFormData({ ...formData, youaddress: e.target.value })}  aria-label="youaddress"
      
      name="youaddress"
      id="youaddress"
@@ -313,14 +330,16 @@ required
   {showFlightInputs && (
     <div className="flex" >
 
-                                  <input   aria-label="flightnumber"
+                                  <input  value={formData.flightnumber}
+  onChange={(e) => setFormData({ ...formData, flightnumber: e.target.value })}   aria-label="flightnumber"
      
      name="flightnumber"
      id="flightnumber"
      required
      placeholder="Enter Flight Number"
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
-                   <input
+                   <input  value={formData.arrivaldeparturetime}
+  onChange={(e) => setFormData({ ...formData, arrivaldeparturetime: e.target.value })}
         aria-label="arrival/departuretime"
         name="arrival/departuretime"
         id="arrival/departuretime"
@@ -331,7 +350,8 @@ required
 </div>
   )}
                   
-                <input  aria-label="comment"
+                <input  value={formData.comment}
+  onChange={(e) => setFormData({ ...formData, comment: e.target.value })}  aria-label="comment"
 
 name="comment"
 id="comment"

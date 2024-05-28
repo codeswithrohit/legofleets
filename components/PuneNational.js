@@ -60,8 +60,16 @@ const MumbaiNational = () => {
               (component) => component.long_name.toLowerCase() === 'mumbai' && component.types.includes('locality')
             );
     
-            if (isKarnataka || isMumbai) {
+           
+
+
+            if (isKarnataka) {
               alert('This location is not allowed.');
+              return;
+            }
+    
+            if ( isMumbai) {
+              alert('Please use "Pune <=> Mumbai" Tab for Pune to Mumbai or Mumbai to Pune trips.');
               return;
             }
     
@@ -100,7 +108,7 @@ const MumbaiNational = () => {
                     // Show modal if selected time is within the next 6 hours
                     setModalOpen(true);
                   } else {
-                  router.push(`/punenational?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate}&dropDate=${endDate}`);
+                  router.push(`/punenational?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate.toLocaleString()}&dropDate=${endDate.toLocaleString()}`);
                   }}
               } else {
                 console.log('Error:', status);
@@ -131,7 +139,7 @@ const MumbaiNational = () => {
     <div className="md:mt-4 px-0 md:px-0">
                   <div className="max-w-5xl md:-mt-20 mx-auto p-4 bg-white rounded-lg border border-[#541e50] flex flex-col md:flex-row md:items-center">
   <div className="flex flex-col flex-1">
-    <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
+    <label className="text-sm text-black mb-1">Pickup Location</label>
     {isLoaded && (
       <Autocomplete
         onLoad={onLoadPickup}
@@ -153,13 +161,13 @@ const MumbaiNational = () => {
           value={pickupLocation}
           onChange={(e) => setPickupLocation(e.target.value)}
           placeholder="Pickup location"
-          className="p-3 outline-none w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+          className="p-3 outline-none w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-black"
         />
       </Autocomplete>
     )}
   </div>
   <div className="flex flex-col flex-1 md:ml-4">
-  <label className="text-sm text-gray-600 mb-1">Drop-Off Location </label>
+  <label className="text-sm text-black mb-1">Drop-Off Location </label>
   {isLoaded && (
     <Autocomplete
       onLoad={(autocomplete) => (autocompleteDropoffRef.current = autocomplete)}
@@ -174,24 +182,24 @@ const MumbaiNational = () => {
         onChange={(e) => setDropoffLocation(e.target.value)}
         type="text"
         placeholder="Drop-off location"
-        className="p-3 outline-none w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+        className="p-3 outline-none w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-black"
       />
     </Autocomplete>
   )}
 </div>
   <div className="flex flex-col flex-1 md:ml-4">
-    <label className="text-sm text-gray-600 mb-1">Select Pickup Date</label>
+    <label className="text-sm text-black mb-1">Select Pickup Date</label>
     <DatePicker
       selected={startDate}
       onChange={(date) => setStartDate(date)}
-      dateFormat="MMMM d, yyyy"
+      dateFormat="dd-MMM-yy"
       placeholderText="Select Date"
       minDate={new Date()}
-      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
     />
   </div>
   <div className="flex flex-col flex-1 md:ml-4">
-    <label className="text-sm text-gray-600 mb-1">Select Pickup Time</label>
+    <label className="text-sm text-black mb-1">Select Pickup Time</label>
     <DatePicker
       selected={startDate}
       onChange={handleDateChange}
@@ -207,19 +215,19 @@ const MumbaiNational = () => {
           : undefined
       }
       maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
     />
   </div>
   <div className="flex flex-col flex-1 md:ml-4">
   <>
-    <label className="text-sm text-gray-600 mb-1">Select Drop-off Date</label>
+    <label className="text-sm text-black mb-1">Select Drop-off Date</label>
     <DatePicker
       selected={endDate}
       onChange={(date) => setEndDate(date)}
-      dateFormat="MMMM d, yyyy" // Only show the date without time
+      dateFormat="dd-MMM-yy" // Only show the date without time
       placeholderText="Select Date"
       minDate={startDate || new Date()} // Set minDate to startDate if it's selected, otherwise default to today
-      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+      className="p-3 px-8 outline-none w-full md:w-36 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
     />
   </>
 </div>

@@ -25,15 +25,17 @@ const Booking = () => {
         data.sort((a, b) => new Date(b.bookingDate) - new Date(a.bookingDate));
         setBookings(data);
         setLoading(false); // Set loading to false when data fetching is complete
+  
+        // Log bookings to the console
+        console.log("Bookings:", data);
       } catch (error) {
         console.error('Error fetching bookings:', error);
         setLoading(false); // Set loading to false in case of error as well
       }
     };
-
+  
     fetchBookings();
   }, []);
-
   
 
   return (

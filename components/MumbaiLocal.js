@@ -91,7 +91,7 @@ const MumbaiLocal = () => {
                       alert("The Vehicle must be released before mid-night or at the most 1am.");
                     } else {
                       // Proceed with redirecting to the booking page
-                      router.push(`/mumbailocal?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate}&dropDate=${endDate}`);
+                      router.push(`/mumbailocal?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate.toLocaleString()}&dropDate=${endDate.toLocaleString()}`);
                     }
                   }
                 }

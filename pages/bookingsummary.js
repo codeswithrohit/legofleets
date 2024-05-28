@@ -195,18 +195,21 @@ const BookingSummary = () => {
   return (
     <div className='min-h-screen'>
       
-      <div class="font-[sans-serif] bg-[#3f3f3f]">
-      <div className="md:px-16  bg-[#3f3f3f] px-6 py-4">
-              <h3 className="text-xl lg:text-2xl dark:text-white font-bold leading-5 text-center mb-8 text-white">Booking Summary</h3>
+      <div class="font-[sans-serif] bg-[#c9d454]">
+      <div class=" bg-[#541e50] w-full p-2 h-12">
+              <h3 className="text-xl text-center lg:text-2xl dark:text-white font-bold leading-5  mb-2 text-[#c9d454]">Booking Summary</h3>
+              </div>
+      <div className="md:px-16  bg-[#c9d454] px-6 py-4">
+      
     <h2 className="sr-only">Steps</h2>
   
     <div
       className="after:mt-4 after:block after:h-1 after:w-full after:rounded-lg after:bg-gray-200"
     >
-      <ol className="grid grid-cols-3 text-sm font-medium text-gray-500">
-        <li className="relative flex justify-start text-green-600">
+      <ol className="grid grid-cols-3 font-bold text-md font-medium text-gray-500">
+      <li className="relative flex justify-start text-[#541e50] font-bold">
           <span
-            className="absolute -bottom-[1.75rem] start-0 rounded-full bg-green-600 text-white"
+            className="absolute -bottom-[1.75rem] start-0 rounded-full bg-[#541e50] font-bold text-white"
           >
             <svg
               className="h-5 w-5"
@@ -222,7 +225,7 @@ const BookingSummary = () => {
             </svg>
           </span>
   
-          <span className="hidden sm:block"> Choose a Vehicle </span>
+          <span className="hidden sm:block text-md"> Choose a Vehicle </span>
   
           <svg
             className=" h-6 w-6 sm:hidden"
@@ -245,9 +248,9 @@ const BookingSummary = () => {
           </svg>
         </li>
   
-        <li className="relative flex justify-center text-green-600">
+        <li className="relative flex  justify-center text-[#541e50] font-bold">
           <span
-            className="absolute -bottom-[1.75rem] left-1/2 -translate-x-1/2 rounded-full bg-green-600 text-white"
+            className="absolute -bottom-[1.75rem] left-1/2 -translate-x-1/2 rounded-full bg-[#541e50] font-bold text-white"
           >
             <svg
               className="h-5 w-5"
@@ -263,7 +266,7 @@ const BookingSummary = () => {
             </svg>
           </span>
   
-          <span className="hidden sm:block"> Enter Contact Details </span>
+          <span className="hidden sm:block text-md"> Enter Contact Details </span>
   
         
           <svg
@@ -282,9 +285,9 @@ const BookingSummary = () => {
           </svg>
         </li>
   
-        <li className="relative flex justify-end text-green-600">
+        <li className="relative flex justify-end text-[#541e50] font-bold">
           <span
-            className="absolute -bottom-[1.75rem] end-0 rounded-full bg-green-600 text-white"
+            className="absolute -bottom-[1.75rem] end-0 rounded-full bg-[#541e50] font-bold text-white"
           >
             <svg
               className="h-5 w-5"
@@ -300,7 +303,7 @@ const BookingSummary = () => {
             </svg>
           </span>
   
-          <span className="hidden sm:block"> Booking Summary </span>
+          <span className="hidden sm:block text-md"> Booking Summary </span>
   
           <svg
             className="h-6 w-6 sm:hidden"
@@ -320,51 +323,51 @@ const BookingSummary = () => {
       </ol>
     </div>
   </div>
-      <div class="grid lg:grid-cols-1 xl:grid-cols-1 gap-4 h-full">
-        <div class="bg-[#3f3f3f]  lg:sticky lg:top-0">
+      <div class="grid lg:grid-cols-1 xl:grid-cols-1 gap-2 h-full">
+        <div class="bg-[#c9d454]  lg:sticky lg:top-0">
           <div class="relative h-full">
             <div class="p-8 lg:overflow-auto ">
-              <div class="space-y-6 mt-10">
+              <div class="space-y-2 ">
               <div class="lg:border-l lg:pl-8">
-            <h3 class="text-xl font-bold text-white">Customer Details</h3>
-            <ul class="text-white mt-6 space-y-4">
-              <li class="flex flex-wrap gap-4 text-sm">Name <span class="ml-auto font-bold">{firstName} {lastName}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Email <span class="ml-auto font-bold">{email}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Mobile No. <span class="ml-auto font-bold">{phoneNumber}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Flat /House<span class="ml-auto font-bold">{youaddress}</span></li>
+            <h3 class="text-xl font-bold text-[#541e50]">Customer Details</h3>
+            <ul class="text-white  mt-2 space-y-2">
+              <li class="font-bold text-md text-[#541e50]">Name:   <span class="ml-auto font-normal text-gray-900">{firstName} {lastName}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Email:   <span class="ml-auto font-normal text-gray-900">{email}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Mobile No.:   <span class="ml-auto font-normal text-gray-900">{phoneNumber}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Flat / House:  <span class="ml-auto font-normal text-gray-900">{youaddress}</span></li>
               {isFlightNumberAvailable && (
-                      <li className="flex flex-wrap gap-4 text-sm">Flight Number<span className="ml-auto font-bold">{flightnumber}</span></li>
+                      <li className="font-bold text-md">Flight Number<span className="ml-auto text-b;ack">{flightnumber}</span></li>
                     )}
                      {istimedepAvailable && (
-              <li class="flex flex-wrap gap-4 text-sm">Arrival/Departure Time<span class="ml-auto font-bold">{arrivaldeparturetime}</span></li>
+              <li class="font-bold text-md">Arrival/Departure Time<span class="ml-auto font-bold">{arrivaldeparturetime}</span></li>
                      )}
               <li class=" border-t pt-4"></li>
-                          <h3 class="text-xl font-bold text-white">Booking Details</h3>
-                           <li class="flex flex-wrap gap-4 text-sm">Service <span class="ml-auto font-bold">{selectedService}</span></li>
-                           <li class="flex flex-wrap gap-4 text-sm">Pickup location <span class="ml-auto font-bold">{selectedPickupLocation}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Drop-off location <span class="ml-auto font-bold">{selectedDropoffLocation}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Vehicle<span class="ml-auto font-bold uppercase">{selectedVehicleType}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">{selectedPassenger}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">{selectedSuitcase}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">{selectedPickupDate}</span></li>
+                          <h3 class="text-xl font-bold text-[#541e50]">Booking Details</h3>
+                           <li class="font-bold text-md text-[#541e50]">Service:  <span class="ml-auto font-normal text-gray-900">{selectedService}</span></li>
+                           <li class="font-bold text-md text-[#541e50]">Pickup location:  <span class="ml-auto font-normal text-gray-900">{selectedPickupLocation}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Drop-off location:  <span class="ml-auto font-normal text-gray-900">{selectedDropoffLocation}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Vehicle:  <span class="ml-auto font-normal text-gray-900 uppercase">{selectedVehicleType}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Passenger:  <span class="ml-auto font-normal text-gray-900">{selectedPassenger}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Suitcase:  <span class="ml-auto font-normal text-gray-900">{selectedSuitcase}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Pickup Date:  <span class="ml-auto font-normal text-gray-900">{selectedPickupDate}</span></li>
               {isdropdate && (
-              <li class="flex flex-wrap gap-4 text-sm">Dop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Dop-off Date:  <span class="ml-auto font-normal text-gray-900">{selectedDropoffDate}</span></li>
               )}
-              <li class="flex flex-wrap gap-4 text-sm">Comment<span class="ml-auto font-bold">{comment}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Comment<span class="ml-auto font-bold"></span></li>
+              <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900">{comment}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Distance:  <span class="ml-auto font-normal text-gray-900">{selectedDistance}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900"></span></li>
               <li class=" border-t pt-4"></li>
             </ul>
           </div>
                 
               </div>
             </div>
-            <div class="absolute flex flex-wrap justify-between gap-4 left-0 bottom-0 bg-[#444] w-full p-4">
-            <button onClick={handleBack} type="button" class="min-w-[150px] px-6 py-3.5 text-sm bg-white text-[#333] rounded-md max-sm:order-1">Back</button>
+            <div class="absolute flex flex-row justify-between gap-4 left-0 bottom-0 bg-[#541e50] w-full p-4">
+            <button onClick={handleBack} type="button" class="w-full px-6 py-3.5 font-bold  bg-[#c9d454] text-[#541e50] rounded-md max-sm:order-1">Back</button>
             <button
   onClick={initiatePayment}
   type="button"
-  className="min-w-[150px] px-6 py-3.5 text-xs font-bold bg-[#333] text-white rounded-md hover:bg-[#111] relative"
+  className="w-full px-6 py-3.5  font-bold bg-[#c9d454] text-[#541e50] rounded-md hover:bg-[#c9d454] relative"
 >
   {loading ? (
     <span className="flex items-center justify-center">

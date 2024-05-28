@@ -77,7 +77,7 @@ const PuneLocal = () => {
                   // Show message indicating drop-off is not available
                   alert("The Vehicle must be released before mid-night or at the most 1am.");
                 } else {
-                  router.push(`/punelocal?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate}&dropDate=${endDate}`);
+                  router.push(`/punelocal?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate.toLocaleString()}&dropDate=${endDate.toLocaleString()}`);
                 }
               }
             }

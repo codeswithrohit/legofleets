@@ -115,7 +115,7 @@ const PuneMumbai = () => {
         // Show modal if selected time is within the next 6 hours
         setModalOpen(true);
       } else {
-      router.push(`/mumbaipune?pickupLocation=${selectedLocation.value}&dropoffLocation=${dropoffLocation}&pickupDate=${startDate}`);
+      router.push(`/mumbaipune?pickupLocation=${selectedLocation.value}&dropoffLocation=${dropoffLocation}&pickupDate=${startDate.toLocaleString()}`);
     }};
     const handlePuneToMumbaiSearch = () => {
       const currentTime = new Date().getTime();
@@ -126,7 +126,7 @@ const PuneMumbai = () => {
         // Show modal if selected time is within the next 6 hours
         setModalOpen(true);
       } else {
-      router.push(`/punemumbai?pickupLocation=${pickupLocation}&dropoffLocation=${selectedLocation.value}&pickupDate=${startDate}`);
+      router.push(`/punemumbai?pickupLocation=${pickupLocation}&dropoffLocation=${selectedLocation.value}&pickupDate=${startDate.toLocaleString()}`);
       }};
       const [selectedOption, setSelectedOption] = useState('PuneToMumbai');
       const handleOptionChange = (e) => {

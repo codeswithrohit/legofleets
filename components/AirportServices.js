@@ -18,7 +18,6 @@ const AirportServices = () => {
     const autocompleteDropoffRef = useRef();
     const [modalOpen, setModalOpen] = useState(false);
   
-  
     /* for 1st tab */ 
   
   
@@ -91,7 +90,7 @@ const AirportServices = () => {
                         dropoffLocation,
                         distance: distance.text,
                         duration: duration.text,
-                        pickupDate: startDate.toISOString(),
+                        pickupDate: startDate.toLocaleString(),
                       },
                     });
                   }
@@ -139,7 +138,7 @@ const AirportServices = () => {
                         dropoffLocation,
                         distance: distance.text,
                         duration: duration.text,
-                        pickupDate: startDate.toISOString(),
+                        pickupDate: startDate.toLocaleString(),
                       },
                     });
                   }

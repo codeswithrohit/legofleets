@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { firebase } from "../../Firebase/config";
 import "firebase/firestore";
 import "firebase/storage";
@@ -16,6 +16,8 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+  const [selectedService, setSelectedService] = useState("Pune To Mumbai Airport"); 
   const [vehicleType, setVehicleType] = useState("");
   const [brand, setBrand] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -33,20 +35,23 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 console.log("formdata",formData)
-  const [carData, setCarData] = useState([]);
-  useEffect(() => {
-    const fetchCarData = async () => {
-      try {
-        const snapshot = await db.collection("CarData").get();
-        const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setCarData(data);
-      } catch (error) {
-        console.error("Error fetching car data:", error);
-      }
-    };
+const [carData, setCarData] = useState([]);
+useEffect(() => {
+  const fetchCarData = async () => {
+    setLoading(true); // Set loading to true when fetching data
+    try {
+      const snapshot = await db.collection("CarData").get();
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setCarData(data);
+      setLoading(false); // Set loading to false after data is fetched
+    } catch (error) {
+      console.error("Error fetching car data:", error);
+      setLoading(false); // Set loading to false if there's an error
+    }
+  };
 
-    fetchCarData();
-  }, []);
+  fetchCarData();
+}, []);
 
   const handleEdit = (car) => {
     setVehicleType(car.vehicleType);
@@ -64,6 +69,7 @@ console.log("formdata",formData)
     setEditingCarId(car.id);
     setShowForm(true);
   };
+  console.log(formData)
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -126,6 +132,14 @@ console.log("formdata",formData)
     }
   };
 
+  const filterCarData = (service) => {
+    setSelectedService(service);
+  };
+
+  const filteredCarData = selectedService
+    ? carData.filter((car) => car.services === selectedService)
+    : carData;
+
 
 
 
@@ -133,13 +147,13 @@ console.log("formdata",formData)
     <div className=' bg-white min-h-screen'>
     <AdminNav />
     <div className="lg:ml-64 w-full  bg-white">
-    <button
-          onClick={() => setShowForm(!showForm)} // Toggle the state when the button is clicked
-          className=" bg-blue-500 hover:bg-blue-700 mt-2 ml-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          {showForm ? 'Close Form' : 'Add Data'}
-        </button>
+  
+
+  
         {showForm && (
+                 <div className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 z-30 flex justify-center items-center">
+                 <div className="max-w-lg p-6 bg-white rounded-lg shadow-md overflow-y-auto" style={{ maxHeight: '80vh' }}>
+                 
       <form onSubmit={handleFormSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
   
         <div className="mb-4">
@@ -222,6 +236,7 @@ console.log("formdata",formData)
           required
             type="number"
             id="pricePerKm"
+            value={formData.pricePerKm}
             onChange={(e) => setFormData({ ...formData, pricePerKm: e.target.value })}
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -231,6 +246,7 @@ console.log("formdata",formData)
           <textarea
             type="text"
             id="info"
+            value={formData.info}
             onChange={(e) => setFormData({ ...formData, info: e.target.value })}
             className="h-40 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           ></textarea>
@@ -240,6 +256,7 @@ console.log("formdata",formData)
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicleType">Select Services:</label>
           <select
             id="services"
+            value={formData.services}
             onChange={(e) => setFormData({ ...formData, services: e.target.value })}
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
@@ -262,43 +279,118 @@ console.log("formdata",formData)
           >
             {isSubmitting ? 'Submitting...' : 'Submit'}
           </button>
-  
+          <button
+          onClick={() => setShowForm(!showForm)} // Toggle the state when the button is clicked
+          className=" bg-red-500 mb-8 hover:bg-red-700 mt-2 ml-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          {showForm ? 'Close Form' : 'Add Data'}
+        </button>
       </form>
+      </div>
+      </div>
         )}
     </div>
     <div className=" lg:ml-64 overflow-x-auto">
+    {loading ? (
+         <div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert'>
+         <span class='sr-only'>Loading...</span>
+          <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+        <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+        <div class='h-8 w-8 bg-black rounded-full animate-bounce'></div>
+      </div>
+        ) : (
+          <div>
+              <button
+          onClick={() => setShowForm(!showForm)} // Toggle the state when the button is clicked
+          className=" bg-blue-500 hover:bg-blue-700 mt-2 ml-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          {showForm ? 'Close Form' : 'Add Data'}
+        </button>
+        <div className="flex flex-wrap md:justify-start justify-center sm:grid-cols-3 text-xs lg:grid-cols-6 gap-4 py-4">
+  <button
+    onClick={() => filterCarData("Pune To Mumbai Airport")}
+    className={`py-2 px-4 rounded ${
+      selectedService === "Pune To Mumbai Airport" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    Pune To Mumbai Airport
+  </button>
+  <button
+    onClick={() => filterCarData("Mumbai To Pune Airport")}
+    className={`py-2 px-4 rounded ${
+      selectedService === "Mumbai To Pune Airport" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    Mumbai To Pune Airport
+  </button>
+  <button
+    onClick={() => filterCarData("Pune Local")}
+    className={`py-2 px-4 rounded ${
+      selectedService === "Pune Local" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    Pune Local
+  </button>
+  <button
+    onClick={() => filterCarData("Mumbai Local")}
+    className={`py-2 px-4 rounded ${
+      selectedService === "Mumbai Local" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    Mumbai Local
+  </button>
+  <button
+    onClick={() => filterCarData("Pune National")}
+    className={`py-2 px-4 rounded ${
+      selectedService === "Pune National" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    Pune National
+  </button>
+  <button
+    onClick={() => filterCarData("Mumbai National")}
+    className={`py-2 px-4 rounded ${
+      selectedService === "Mumbai National" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    Mumbai National
+  </button>
+</div>
+
       <h1 className="text-black font-bold text-center text-2xl mb-2" >All Car Data</h1>
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle Type</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Suitcase</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Passenger</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Services</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Info</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {carData.map((car) => (
-                <tr key={car.id}>
-                  <td className="px-6 py-4 whitespace-nowrap uppercase">{car.vehicleType}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{car.brand}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{car.suitcase}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{car.passenger}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{car.pricePerKm}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{car.services}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{car.info}</td>
-                  <td>
-                  <button onClick={() => handleEdit(car)}>Edit</button>
-                </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="lg:overflow-x-auto">
+  <div className="lg:min-w-full overflow-hidden lg:rounded-lg">
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle Type</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Services</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+        </tr>
+      </thead>
+      <tbody className="bg-white divide-y divide-gray-200">
+        {filteredCarData.map((car) => (
+          <tr key={car.id} className="hover:bg-gray-100 transition-colors">
+            <td className="px-6 py-4 whitespace-nowrap uppercase">{car.vehicleType}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{car.brand}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{car.pricePerKm}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{car.services}</td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <button onClick={() => handleEdit(car)} className="text-blue-600 hover:text-blue-900">Edit</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+          </div>
+        )}
         </div>
+        
     <ToastContainer/>
   </div>
   

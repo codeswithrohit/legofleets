@@ -757,13 +757,14 @@ function MyApp() {
         {dropDate}
     </span>
 </p>
+<p style={{ marginBottom: '10px', textAlign: 'center' }}><strong style={{ color: '#555', fontSize: '16px' }}>Duration</strong><br /> <span style={{ color: '#777', fontSize: '14px' }}>{hours} Hrs.</span></p>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '20px' }}>
                                         <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Distance</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{distance}</span></p>
                                         </div>
-                                        <div style={{ flex: '1', textAlign: 'center' }}>
+                                        {/* <div style={{ flex: '1', textAlign: 'center' }}>
                                             <p style={{ marginBottom: '10px' }}><strong style={{ color: '#555', fontSize: '16px' }}>Total Time</strong> <br /><span style={{ color: '#777', fontSize: '14px' }}>{duration}</span></p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
