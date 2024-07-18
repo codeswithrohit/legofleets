@@ -87,8 +87,16 @@ const BookingSummary = () => {
   
   // Function to generate a unique order ID
   const generateOrderId = () => {
-    // Generate a random number and concatenate it with the current timestamp
-    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    // Get the current year
+    const year = new Date().getFullYear();
+    
+    // Generate a random five-digit order number
+    const randomOrderNumber = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+    
+    // Concatenate "LF", the year, and the random order number
+    const orderId = `LF${year}${randomOrderNumber}`;
+    
+    return orderId;
   };
   
 
@@ -336,10 +344,10 @@ const BookingSummary = () => {
               <li class="font-bold text-md text-[#541e50]">Mobile No.:   <span class="ml-auto font-normal text-gray-900">{phoneNumber}</span></li>
               <li class="font-bold text-md text-[#541e50]">Flat / House:  <span class="ml-auto font-normal text-gray-900">{youaddress}</span></li>
               {isFlightNumberAvailable && (
-                      <li className="font-bold text-md">Flight Number<span className="ml-auto text-b;ack">{flightnumber}</span></li>
+                      <li className="font-bold text-[#541e50] text-md">Flight Number:  <span className="ml-auto text-gray-900">{flightnumber}</span></li>
                     )}
                      {istimedepAvailable && (
-              <li class="font-bold text-md">Arrival/Departure Time<span class="ml-auto font-bold">{arrivaldeparturetime}</span></li>
+              <li class="font-bold text-[#541e50] text-md">Arrival/Departure Time:  <span class="ml-auto font-bold text-gray-900">{arrivaldeparturetime}</span></li>
                      )}
               <li class=" border-t pt-4"></li>
                           <h3 class="text-xl font-bold text-[#541e50]">Booking Details</h3>

@@ -192,34 +192,22 @@ const AirportServices = () => {
     {selectedOption === 'MumbaiToPune' && (
       <div className="flex flex-col md:flex-row md:flex-wrap mb-2">
         <div className="flex flex-col flex-1">
-          <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
+          <label className="text-sm text-black mb-1">Pickup Location</label>
           {isLoaded && (
-           <Autocomplete
-           onLoad={onLoadPickup}
-           onPlaceChanged={() => onPlaceChanged(true)}
-           options={{
-             bounds: new window.google.maps.LatLngBounds(
-               new window.google.maps.LatLng(19.0896, 72.8656),
-               new window.google.maps.LatLng(19.1197, 72.8826)
-             ),
-             strictBounds: true,
-             types: ['airport'], // Use 'airport' as the type to limit results to airports
-             componentRestrictions: { country: 'IN' },
-           }}
-         >
-           <input
-             type="text"
-             value={pickupLocation}
-             onChange={(e) => setPickupLocation(e.target.value)}
-             placeholder="Enter  pickup location"
-             className="p-3 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
-           />
-         </Autocomplete>
+         <select
+         value={pickupLocation}
+         onChange={(e) => setPickupLocation(e.target.value)}
+         className="p-2 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+       >
+                 <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-2">Chhatrapati Shivaji Maharaj Airport – Terminal-2</option>
+         <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-1">Chhatrapati Shivaji Maharaj Airport – Terminal-1</option>
+
+       </select>
          
           )}
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-          <label className="text-sm text-gray-600 mb-1">Drop-Off Location</label>
+          <label className="text-sm text-black mb-1">Drop-Off Location</label>
           {isLoaded && (
             <Autocomplete
               onLoad={onLoadDropoff}
@@ -239,24 +227,24 @@ const AirportServices = () => {
                 value={dropoffLocation}
                 onChange={(e) => setDropoffLocation(e.target.value)}
                 placeholder="Enter drop-off location"
-                className="p-3 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-black"
               />
             </Autocomplete>
           )}
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-  <label className="text-sm text-gray-600 mb-1">Select Pickup Date</label>
+  <label className="text-sm text-black mb-1">Select Pickup Date</label>
   <DatePicker
     selected={startDate}
     onChange={(date) => setStartDate(date)}
-    dateFormat="MMMM d, yyyy"
+      dateFormat="dd-MMM-yy"
     placeholderText="Select Date"
     minDate={new Date()}
-    className="p-3 px-8 outline-none w-full md:w-48 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+    className="p-3 px-8 outline-none w-full md:w-48 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
   />
 </div>
 <div className="flex flex-col flex-1 md:ml-4">
-        <label className="text-sm text-gray-600 mb-1">Select Pickup Time</label>
+        <label className="text-sm text-black mb-1">Select Pickup Time</label>
         <DatePicker
           selected={startDate}
           onChange={handleDateChange}
@@ -272,7 +260,7 @@ const AirportServices = () => {
               : undefined
           }
           maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-          className="p-3 px-8 outline-none w-full md:w-48 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+          className="p-3 px-8 outline-none w-full md:w-48 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
         />
       </div>
 
@@ -291,7 +279,7 @@ const AirportServices = () => {
     {selectedOption === 'PuneToMumbai' && (
       <div className="flex flex-col md:flex-row md:flex-wrap  mb-2">
         <div className="flex flex-col flex-1">
-          <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
+          <label className="text-sm text-black mb-1">Pickup Location</label>
           {isLoaded && (
             <Autocomplete
               onLoad={onLoadPickup}
@@ -311,50 +299,37 @@ const AirportServices = () => {
                 value={pickupLocation}
                 onChange={(e) => setPickupLocation(e.target.value)}
                 placeholder="Enter pickup location"
-                className="p-3 outline-none w-full md:w-48 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 outline-none w-full md:w-48 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-black"
               />
             </Autocomplete>
           )}
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-          <label className="text-sm text-gray-600 mb-1">Drop-Off Location</label>
+          <label className="text-sm text-black mb-1">Drop-Off Location</label>
           {isLoaded && (
-            <Autocomplete
-              onLoad={onLoadDropoff}
-              onPlaceChanged={() => onPlaceChanged(false)}
-              options={{
-                bounds: new window.google.maps.LatLngBounds(
-                  new window.google.maps.LatLng(19.0896, 72.8656),
-                  new window.google.maps.LatLng(19.1197, 72.8826)
-                ),
-                strictBounds: true,
-                types: ['airport'], // Use 'airport' as the type to limit results to airports
-                componentRestrictions: { country: 'IN' },
-              }}
-            >
-              <input
-                type="text"
-                value={dropoffLocation}
-                onChange={(e) => setDropoffLocation(e.target.value)}
-                placeholder="Enter drop-off location"
-                className="p-3 outline-none w-full md:w-48 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
-              />
-            </Autocomplete>
+         <select
+         value={dropoffLocation}
+         onChange={(e) => setDropoffLocation(e.target.value)}
+         className="p-2 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+       >
+                 <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-2">Chhatrapati Shivaji Maharaj Airport – Terminal-2</option>
+         <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-1">Chhatrapati Shivaji Maharaj Airport – Terminal-1</option>
+       </select>
           )}
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-  <label className="text-sm text-gray-600 mb-1">Select Pickup Date</label>
+  <label className="text-sm text-black mb-1">Select Pickup Date</label>
   <DatePicker
     selected={startDate}
     onChange={(date) => setStartDate(date)}
-    dateFormat="MMMM d, yyyy"
+      dateFormat="dd-MMM-yy"
     placeholderText="Select Date"
     minDate={new Date()}
-    className="p-3 px-8 outline-none w-full md:w-48 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+    className="p-3 px-8 outline-none w-full md:w-48 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
   />
 </div>
 <div className="flex flex-col flex-1 md:ml-4">
-        <label className="text-sm text-gray-600 mb-1">Select Pickup Time</label>
+        <label className="text-sm text-black mb-1">Select Pickup Time</label>
         <DatePicker
           selected={startDate}
           onChange={handleDateChange}
@@ -370,7 +345,7 @@ const AirportServices = () => {
               : undefined
           }
           maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-          className="p-3 px-8 outline-none w-full md:w-48 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+          className="p-3 px-8 outline-none w-full md:w-48 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
         />
       </div>
 

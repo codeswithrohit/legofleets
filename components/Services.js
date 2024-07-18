@@ -31,7 +31,7 @@ const Services = () => {
           >
             <div className="bg-black  hover:bg-opacity-5 bg-opacity-30 w-full h-full  flex items-end justify-start">
               <p className="text-white text-2xl font-medium p-8">
-                WORLDWIDE TRANSPORTATION
+              Nationwide Transportation
               </p>
             </div>
           </div>
@@ -67,7 +67,7 @@ const Services = () => {
           >
             <div className="bg-black  hover:bg-opacity-5 bg-opacity-30 w-full h-full  flex items-end justify-start">
               <p className="text-white text-2xl font-medium p-8">
-                SPECIAL EVENT LIMOUSINE
+              Special Event Vehicles
               </p>
             </div>
           </div>
@@ -87,9 +87,66 @@ const Services = () => {
         </p>
       </div>
       <div className="">
-        {/* <Image src={Image1} alt="Picture of the author" /> */}
-      </div>
+      <div class="container relative flex flex-col justify-between h-full max-w-6xl px-10 mx-auto xl:px-0 mt-5">
+   
+    <div class="w-full">
+       
+        <div class="flex flex-col w-full mb-5 sm:flex-row">
+            <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-blue-400 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-blue-400 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Established in 1997</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">	Established in 1997, we have more than two decades of industry experience and have proudly served enormous amounts of customers all over the world</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-yellow-400 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-yellow-400 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Team</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-yellow-400 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">	We have a highly responsible team who is always focused on customer satisfaction </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/2">
+                <div class="relative h-full ml-0 md:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Driver</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">	Our drivers are highly experienced, reliable and trustworthy.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/2">
+                <div class="relative h-full ml-0 md:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Vehicle</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">	Our vehicles are well maintained, clean and comfortable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+
+</div>
+      </div>
     </div>
   )
 }

@@ -44,7 +44,7 @@ const TabsComponent = ({ items, selectedPackage, activeTab }) => {
                 }`}
                 ref={index === 0 ? firstBtnRef : null}
               >
-                <span className=" text-center text-white md:text-xs text-xs font-bold">{item.title}</span>
+                <span className=" text-center text-white md:text-sm text-xs font-bold">{item.title}</span>
               </button>
               <div className={`hidden md:block w-full h-4 ${selectedTab === index ? 'bg-[#541e50]' : 'bg-transparent'}`}></div>
             </div>

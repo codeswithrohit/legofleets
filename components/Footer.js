@@ -27,7 +27,7 @@ import {
       <div>
         <div className="bg-gray-100 py-16 px-16">
           <div className="container mx-auto flex flex-col space-y-24 ">
-            <div className="grid lg:grid-cols-3 gap-20">
+            {/* <div className="grid lg:grid-cols-3 gap-20">
               <div className="col-span-1 flex flex-row space-x-3">
                 <FaMapMarkedAlt className="w-12 h-12 text-[#541e50]  p-1" />
                 <div className="space-y-2">
@@ -55,7 +55,7 @@ import {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="grid lg:grid-cols-4 gap-8">
               <div className="col-span-1 space-y-8">
               <Image src='/logo.png'

@@ -112,7 +112,7 @@ const PuneLocal = () => {
     <div className="md:mt-4 px-0 md:px-0">
       <div className="max-w-5xl md:-mt-20 mx-auto p-4 bg-white rounded-lg border border-[#541e50] flex flex-col md:flex-row md:items-center">
         <div className="flex flex-col flex-1 ">
-          <label className="text-sm text-gray-600 mb-1">Pickup Location</label>
+          <label className="text-sm text-black mb-1">Pickup Location</label>
           {isLoaded && (
             <Autocomplete
               onLoad={onLoadPickup}
@@ -132,13 +132,13 @@ const PuneLocal = () => {
                 value={pickupLocation}
                 onChange={(e) => setPickupLocation(e.target.value)}
                 placeholder="Pickup location"
-                className="p-3 w-full md:w-36 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 w-full md:w-36 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50] placeholder-black"
               />
             </Autocomplete>
           )}
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-          <label className="text-sm text-gray-600 mb-1">Drop-Off Location</label>
+          <label className="text-sm text-black mb-1">Drop-Off Location</label>
           {isLoaded && (
             <Autocomplete
               onLoad={onLoadDropoff}
@@ -158,24 +158,24 @@ const PuneLocal = () => {
                 onChange={(e) => setDropoffLocation(e.target.value)}
                 type="text"
                 placeholder="Drop-off location"
-                className="p-3 outline-none rounded-lg w-full md:w-36 h-10 border border-[#541e50] focus:ring-[#541e50] placeholder-gray-400"
+                className="p-3 outline-none rounded-lg w-full md:w-36 h-10 border border-[#541e50] focus:ring-[#541e50] placeholder-black"
               />
             </Autocomplete>
           )}
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-          <label className="text-sm text-gray-600 mb-1">Select Pickup Date</label>
+          <label className="text-sm text-black mb-1">Select Pickup Date</label>
           <DatePicker
             selected={startDate}
             onChange={handleDateChange}
-            dateFormat="MMMM d, yyyy"
+              dateFormat="dd-MMM-yy"
             placeholderText="SDate"
             minDate={new Date()}
-            className="p-3 px-8 outline-none text-gray-400 w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+            className="p-3 px-8 outline-none text-black w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
           />
         </div>
         <div className="flex flex-col flex-1 md:ml-4">
-          <label className="text-sm text-gray-600 mb-1">Select Pickup Time</label>
+          <label className="text-sm text-black mb-1">Select Pickup Time</label>
           <DatePicker
             selected={startDate}
             onChange={handleDateChange}
@@ -191,12 +191,12 @@ const PuneLocal = () => {
                 : undefined
             }
             maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-            className="p-3 px-8 outline-none text-gray-400 w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+            className="p-3 px-8 outline-none text-black w-full md:w-36 h-10 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
           />
         </div>
         
         <div className="flex flex-col flex-1 md:ml-4">
-          <label className="text-sm text-gray-600 mb-1">Select Drop-off Time</label>
+          <label className="text-sm text-black mb-1">Select Drop-off Time</label>
           <DatePicker
             selected={endDate}
             onChange={(date) => setEndDate(date)}
@@ -212,7 +212,7 @@ const PuneLocal = () => {
                 : undefined
             }
             maxTime={startDate.getDate() === currentTime.getDate() ? new Date().setHours(23, 59, 59, 999) : undefined}
-            className="p-3 px-8 outline-none w-full md:w-36 h-10 text-gray-400 rounded-lg border border-[#541e50] focus:ring-[#541e50]"
+            className="p-3 px-8 outline-none w-full md:w-36 h-10 text-black rounded-lg border border-[#541e50] focus:ring-[#541e50]"
           />
         </div>
         <button

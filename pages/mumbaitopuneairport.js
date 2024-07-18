@@ -418,9 +418,14 @@ const getPassengerOptions = () => {
    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
-   <p className="text-gray-700 mb-2">
-          Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-        </p>
+   <p className="text-gray-700 mb-2 whitespace-pre-line">
+  Maximum wait time at pickup location is 20 mins. After 30 mins of waiting 
+                Rs.300 per hour will be charged extra.
+  Additional drop-off or pick-up points will be charged at Rs.300 and waiting 
+                 will be 20 minutes only.
+           Prices are inclusive of toll charges.
+</p>
+
  </div>
  </div>
   )}
@@ -430,9 +435,13 @@ const getPassengerOptions = () => {
     <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
-    <p className="text-gray-700 mb-2">
-          Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-        </p>
+      <p className="text-gray-700 mb-2 whitespace-pre-line">
+  Maximum wait time at pickup location is 20 mins. After 30 mins of waiting 
+                Rs.300 per hour will be charged extra.
+  Additional drop-off or pick-up points will be charged at Rs.300 and waiting 
+                 will be 20 minutes only.
+           Prices are inclusive of toll charges.
+</p>
   </div>
   </div>
   )}
@@ -442,9 +451,13 @@ const getPassengerOptions = () => {
  <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
- <p className="text-gray-700 mb-2">
-          Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-        </p>
+   <p className="text-gray-700 mb-2 whitespace-pre-line">
+  Maximum wait time at pickup location is 20 mins. After 30 mins of waiting 
+                Rs.300 per hour will be charged extra.
+  Additional drop-off or pick-up points will be charged at Rs.300 and waiting 
+                 will be 20 minutes only.
+           Prices are inclusive of toll charges.
+</p>
 </div>
 </div>
   )}
@@ -604,9 +617,13 @@ const getPassengerOptions = () => {
              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
-             <p className="text-gray-700 mb-2">
-          Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-        </p>
+               <p className="text-gray-700 mb-2 whitespace-pre-line">
+  Maximum wait time at pickup location is 20 mins. After 30 mins of waiting 
+                Rs.300 per hour will be charged extra.
+  Additional drop-off or pick-up points will be charged at Rs.300 and waiting 
+                 will be 20 minutes only.
+           Prices are inclusive of toll charges.
+</p>
            </div>
            </div>
             )}
@@ -616,9 +633,13 @@ const getPassengerOptions = () => {
               <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
-              <p className="text-gray-700 mb-2">
-          Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-        </p>
+                <p className="text-gray-700 mb-2 whitespace-pre-line">
+  Maximum wait time at pickup location is 20 mins. After 30 mins of waiting 
+                Rs.300 per hour will be charged extra.
+  Additional drop-off or pick-up points will be charged at Rs.300 and waiting 
+                 will be 20 minutes only.
+           Prices are inclusive of toll charges.
+</p>
             </div>
             </div>
             )}
@@ -627,9 +648,13 @@ const getPassengerOptions = () => {
            <div style={{ textAlign: 'center', marginTop: '20px' }}>
            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-           <p className="text-gray-700 mb-2">
-          Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-        </p>
+             <p className="text-gray-700 mb-2 whitespace-pre-line">
+  Maximum wait time at pickup location is 20 mins. After 30 mins of waiting 
+                Rs.300 per hour will be charged extra.
+  Additional drop-off or pick-up points will be charged at Rs.300 and waiting 
+                 will be 20 minutes only.
+           Prices are inclusive of toll charges.
+</p>
           </div>
           </div>
             )}
