@@ -5,6 +5,8 @@ const placesLibrary = ['places'];
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaPhone } from 'react-icons/fa';
+import { format } from 'date-fns';
+
 const AirportServices = () => {
     
     const router = useRouter();
@@ -90,7 +92,7 @@ const AirportServices = () => {
                         dropoffLocation,
                         distance: distance.text,
                         duration: duration.text,
-                        pickupDate: startDate.toLocaleString(),
+                        pickupDate: format(startDate, 'dd-MMM-yy h:mm aa'),
                       },
                     });
                   }
@@ -138,7 +140,7 @@ const AirportServices = () => {
                         dropoffLocation,
                         distance: distance.text,
                         duration: duration.text,
-                        pickupDate: startDate.toLocaleString(),
+                        pickupDate: format(startDate, 'dd-MMM-yy h:mm aa'),
                       },
                     });
                   }
@@ -372,7 +374,7 @@ const AirportServices = () => {
           <FaPhone className="text-4xl text-blue-500 mr-2" />
           <div>
             <p className="text-lg font-semibold">To book within 24 hours from now, please call me on :</p>
-            <p className="text-2xl font-bold mt-2">7667411501</p>
+            <p className="text-2xl font-bold mt-2">+91 7875120099</p>
           </div>
         </div>
         <button

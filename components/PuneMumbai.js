@@ -335,7 +335,7 @@ const PuneMumbai = () => {
           <FaPhone className="text-4xl text-blue-500 mr-2" />
           <div>
             <p className="text-lg font-semibold">To book within 24 hours from now, please call me on :</p>
-            <p className="text-2xl font-bold mt-2">7667411501</p>
+            <p className="text-2xl font-bold mt-2">+91 7875120099</p>
           </div>
         </div>
         <button

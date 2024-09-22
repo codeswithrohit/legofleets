@@ -4,8 +4,7 @@ const Terms = () => {
   return (
     <div className="bg-gray-100 py-10 px-5 lg:px-40">
       <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-blue-600 mb-6">APPENDIX-A</h1>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Legofleets Booking Terms & Conditions</h2>
+        <h2 className="text-4xl font-semibold text-blue-600 mb-4">Legofleets Booking Terms & Conditions</h2>
 
         <section className="mb-8">
           <h3 className="text-xl font-semibold text-gray-700 mb-3">1. General Terms Applicable to all services and bookings:</h3>

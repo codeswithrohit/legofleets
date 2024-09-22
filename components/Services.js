@@ -100,7 +100,7 @@ const Services = () => {
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Established in 1997</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">Established in 1997, we have more than two decades of industry experience and have proudly served enormous amounts of customers all over the world </p>
+                        <p class="mb-2 text-gray-600">With more than two decades of industry experience we serve national and international customers! </p>
                     </div>
                 </div>
             </div>
@@ -118,12 +118,12 @@ const Services = () => {
             </div>
             <div class="w-full sm:w-1/2">
                 <div class="relative h-full ml-0 md:mr-10">
-                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
-                    <div class="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-red-500 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-red-500 rounded-lg">
                         <div class="flex items-center -mt-1">
-                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Driver</h3>
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Drivers</h3>
                         </div>
-                        <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
+                        <p class="mt-3 mb-1 text-xs font-medium text-red-500 uppercase">------------</p>
                         <p class="mb-2 text-gray-600">	Our drivers are highly experienced, reliable and trustworthy.</p>
                     </div>
                 </div>
@@ -133,7 +133,7 @@ const Services = () => {
                     <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
                     <div class="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
                         <div class="flex items-center -mt-1">
-                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Vehicle</h3>
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Vehicles</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
                         <p class="mb-2 text-gray-600">	Our vehicles are well maintained, clean and comfortable</p>

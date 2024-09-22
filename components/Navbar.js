@@ -80,7 +80,7 @@ const Navbar = () => {
     const [drapdownState, setDrapdownState] = useState({ isActive: false, idx: null });
 
     const navigation = [
-        { title: "HOME", path: "/Home", isDrapdown: false, navs: dropdownNavs },
+        { title: "HOME", path: "/", isDrapdown: false, navs: dropdownNavs },
         { title: "CAR RENTAL SERVICE", path: "/services", isDrapdown: false },
         // { title: "TOUR PACKAGES", path: "/tourpackage", isDrapdown: false },
         { title: "ABOUT US", path: "/aboutus", isDrapdown: false },
@@ -144,7 +144,7 @@ const Navbar = () => {
                                             )}
                                         </button>
                                     ) : (
-                                        <Link style={{ color: '#541e50' }} href={item.path} className="block font-bold">
+                                        <Link style={{ color: '#541e50' }} href={item.path} className="block text-lg font-bold">
                                             {item.title}
                                         </Link>
                                     )}

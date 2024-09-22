@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     const message = await client.messages.create({
       body: textBody,
       from: `whatsapp:${process.env.TWILIO_PHONE_NUMBER}`,
-      to: `whatsapp:+917667411501`
+      to: `whatsapp:+917875120099`
     });
 
     console.log('Message SID:', message.sid);

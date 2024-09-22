@@ -175,7 +175,7 @@ const Invoice = () => {
           <p class="text-gray-500">“If you have any questions concerning this invoice, use the following contact information”</p>
           <div class="mt-2">
             <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">legofleets@info.com</p>
-            <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">+91 9850308715</p>
+            <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">+91 7875120099</p>
           </div>
         </div>
             {/* Other invoice details */}

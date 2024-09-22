@@ -61,8 +61,8 @@ const Contact = () => {
           <div className="row justify-content-center">
             <div className="col-xl-8">
               {/*=== Section Title ===*/}
-              <div className="section-title text-center  wow fadeInDown">
-                <span className="font-bold text-[#541e50] text-center text-3xl">Contact Us</span>
+              <div className="section-title text-center py-4  wow fadeInDown">
+                <span className="font-bold text-[#541e50] text-center text-3xl mt-4">Contact Us</span>
               </div>
             </div>
           </div>
@@ -71,8 +71,8 @@ const Contact = () => {
           <div className="row justify-content-center">
             <div class="font-[sans-serif] max-w-6xl mx-auto relative bg-white rounded my-2">
               <div class="grid lg:grid-cols-3 items-center">
-                <div class="grid sm:grid-cols-2 gap-4 md:z-20 relative lg:left-16 max-lg:mb-8">
-                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
+                <div class="grid sm:grid-cols-2 gap-4 md:z-20 relative -mt-20 lg:left-32 max-lg:mb-8">
+                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-[#c9d454] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
                     <FaMapMarkerAlt className="w-6 fill-[#541e50]" />
                     <h4 class="text-[#333] text-base font-extrabold ">
                       Office
@@ -82,14 +82,14 @@ const Contact = () => {
                      Pune , India
                     </p>
                   </div>
-                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
+                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-[#541e50] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
                     <a
                       href="tel:+918808502599"
                       class="flex flex-col items-center justify-center"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-6 fill-[#541e50]"
+                        class="w-6 fill-white"
                         viewBox="0 0 473.806 473.806"
                       >
                         <path
@@ -97,23 +97,23 @@ const Contact = () => {
                           data-original="#000000"
                         ></path>
                       </svg>
-                      <h4 class="text-[#333] text-base font-extrabold mt-4">
+                      <h4 class="text-white text-base font-extrabold mt-4">
                         Call
                       </h4>
-                      <p class="text-sm tect-gray-400 mt-2">+91-9850308715</p>
+                      <p class="text-sm text-white mt-2">+91-7875120099</p>
                     </a>
                   </div>
 
-                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-                    <MdEmail className="w-10 h-10 fill-blue-500" />
-                    <h4 class="text-[#333] text-base font-extrabold mt-4">
+                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-[#541e50] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
+                    <MdEmail className="w-10 h-10 fill-white" />
+                    <h4 class="text-white text-base font-extrabold mt-4">
                       Email
                     </h4>
-                    <p class="text-xs tect-gray-400 mt-2">
+                    <p class="text-xs text-white mt-2">
                     Info@Legofleets.com
                     </p>
                   </div>
-                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
+                  <div class="flex flex-col items-center justify-center rounded w-full h-44 p-4 text-center bg-[#c9d454] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
                     <a
                       href="https://wa.me/918808502599"
                       target="_blank"
@@ -124,23 +124,23 @@ const Contact = () => {
                       <h4 class="text-[#333] text-base font-extrabold mt-4">
                         WhatsApp
                       </h4>
-                      <p class="text-sm tect-gray-400 mt-2">+91-9850308715</p>
+                      <p class="text-sm tect-gray-400 mt-2">+91-7875120099</p>
                     </a>
                   </div>
                 </div>
-                <div class="lg:col-span-2 bg-[#541e50] rounded sm:p-10 p-4 z-10">
-                  <h2 class="text-3xl text-white text-center font-extrabold mb-6">
+                <div class="lg:col-span-2 bg-white rounded sm:p-10 -mt-2  z-10">
+                  {/* <h2 class="text-3xl text-black text-center font-extrabold mb-6">
                     Please write to us
-                  </h2>
+                  </h2> */}
                   <form onSubmit={handleSubmit}>
-                    <div class="max-w-sm mx-auto space-y-4">
+                    <div class="max-w-md mx-auto space-y-4">
                       <input
                         type="text"
                         placeholder="Name"
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleChange}
-                        class="w-full bg-gray-100 rounded py-3 px-6 text-sm outline-none"
+                        class="w-full bg-gray-100 rounded border-2 border-[#541e50] placeholder:text-black py-3 px-6 text-sm outline-none"
                       />
                       <input
                         type="email"
@@ -148,7 +148,7 @@ const Contact = () => {
                         name="emailAddress"
                         value={formData.emailAddress}
                         onChange={handleChange}
-                        class="w-full bg-gray-100 rounded py-3 px-6 text-sm outline-none"
+                        class="w-full bg-gray-100 rounded border-2 border-[#541e50] placeholder:text-black py-3 px-6 text-sm outline-none"
                       />
                       <input
                         type="tel"
@@ -156,21 +156,21 @@ const Contact = () => {
                         name="mobileNumber"
                         value={formData.mobileNumber}
                         onChange={handleChange}
-                        class="w-full bg-gray-100 rounded py-3 px-6 text-sm outline-none"
+                        class="w-full bg-gray-100 rounded border-2 border-[#541e50] placeholder:text-black py-3 px-6 text-sm outline-none"
                       />
                       <textarea
                         name="message"
                         placeholder="Message"
-                        rows="6"
+                        rows="8"
                         value={formData.message}
                         onChange={handleChange}
-                        class="w-full bg-gray-100 rounded px-6 text-sm pt-3 outline-none"
+                        class="w-full bg-gray-100 rounded px-6  border-2 border-[#541e50] text-sm placeholder:text-black pt-3 outline-none"
                       ></textarea>
                       <button
                         type="submit"
-                        class="text-[#333] mx-auto block relative bg-gray-100 hover:bg-gray-200 font-semibold rounded text-sm px-6 py-3"
+                        class="text-white mx-auto border-2 border-[#541e50] block relative bg-[#541e50] hover:bg-[#541e50] font-semibold rounded text-sm px-6 py-3"
                       >
-                        <svg
+                        {/* <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16px"
                           height="16px"
@@ -184,8 +184,8 @@ const Contact = () => {
                             clip-rule="evenodd"
                             data-original="#000000"
                           />
-                        </svg>
-                        Send Message
+                        </svg> */}
+                        Submit
                       </button>
                     </div>
                   </form>

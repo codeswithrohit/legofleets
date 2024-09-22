@@ -44,7 +44,7 @@ import {
                 <div className="space-y-2">
                   <p className="text-gray-500">PHONES</p>
                   <p className="text-gray-600 font-medium">
-                    BOOK A RIDE: +91 9850308715
+                    BOOK A RIDE: +91 7875120099
                   </p>
                 </div>
               </div>
@@ -67,7 +67,7 @@ import {
         />
   
                 <p className="text-gray-500">
-                Established in 1997 as Amit Tours & Travels, now called LEGOFLEETS, we take pride in providing reliable and punctual car rental services in from Pune and Mumbai to all over India, catering to the needs of both locals and tourists.
+                Established in 1997 as Amit Tours & Travels, now called LEGOFLEETS, we take pride in providing reliable and punctual car rental services  from Pune and Mumbai to all over India, catering to the needs of national and international tourists.
                 </p>
               </div>
               <div className="col-span-1 space-y-8">
@@ -77,27 +77,27 @@ import {
                 </div>
                 <div className="flex flex-col space-y-1">
                   <div  onClick={() => handleBookNow(0)} className="flex flex-row cursor-pointer items-center space-x-2">
-                    <FaAngleRight className="w-8 h-8 text-gray-500  p-1" />
+                   
                     <p className="text-gray-500">Airport Services</p>
                   </div>
                   <div  onClick={() => handleBookNow(1)} className="flex flex-row cursor-pointer items-center space-x-2">
-                    <FaAngleRight className="w-8 h-8 text-gray-500  p-1" />
+                   
                     <p className="text-gray-500">Pune-Mumbai</p>
                   </div>
                   <div  onClick={() => handleBookNow(2)} className="flex flex-row cursor-pointer items-center space-x-2">
-                    <FaAngleRight className="w-8 h-8 text-gray-500  p-1" />
+                   
                     <p className="text-gray-500">Pune Local</p>
                   </div>
                   <div  onClick={() => handleBookNow(3)} className="flex flex-row cursor-pointer items-center space-x-2">
-                    <FaAngleRight className="w-8 h-8 text-gray-500  p-1" />
+                   
                     <p className="text-gray-500">Mumbai Local</p>
                   </div>
                   <div  onClick={() => handleBookNow(4)} className="flex flex-row cursor-pointer items-center space-x-2">
-                    <FaAngleRight className="w-8 h-8 text-gray-500  p-1" />
+                   
                     <p className="text-gray-500">Pune National</p>
                   </div>
                   <div  onClick={() => handleBookNow(5)} className="flex flex-row cursor-pointer items-center space-x-2">
-                    <FaAngleRight className="w-8 h-8 text-gray-500  p-1" />
+                   
                     <p className="text-gray-500">Mumbai National</p>
                   </div>
                 </div>
@@ -105,7 +105,32 @@ import {
               <div className="col-span-1 space-y-8">
               <div className="flex flex-col space-y-4">
   <p className="text-gray-600 font-medium">LEGOFLEETS</p>
-  <p className="text-gray-500">Connect with us:</p>
+
+</div>
+                <div className="flex flex-col space-y-4">
+                  <div className="flex flex-row items-center space-x-4">
+                    <FaMapMarkerAlt className="w-6 h-6 text-gray-500  font-light" />
+                    <p className="text-gray-500">
+                    Undri, Pune. 
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center space-x-4">
+                    <FaPhone className="w-6 h-6 text-gray-500 " />
+                    <p className="text-gray-500">+91 7875120099</p>
+                  </div>
+                  <div className="flex flex-row items-center space-x-4">
+                  <FaEnvelope className="w-6 h-6 text-gray-500" />
+                    <p className="text-gray-500"> Info@Legofleets.com</p>
+                  </div>
+                  {/* <div className="flex flex-row items-center space-x-4">
+                    <FaCalendarWeek className="w-6 h-6 text-gray-500 " />
+                    <p className="text-gray-500">Mon-Sat: 07:00 - 17:00</p>
+                  </div> */}
+                </div>
+              </div>
+              <div className="col-span-1 space-y-8">
+              <div className="flex flex-col space-y-4">
+  <p className="text-gray-600 font-medium uppercase">Connect with us</p>
   
   <div className="flex space-x-4 items-center">
     <a
@@ -133,27 +158,9 @@ import {
       <FaInstagram size={24} />
     </a>
   </div>
+  <a className="underline" href="/contactus" >Contact Us</a>
 </div>
-                <div className="flex flex-col space-y-4">
-                  <div className="flex flex-row items-center space-x-4">
-                    <FaMapMarkerAlt className="w-6 h-6 text-gray-500  font-light" />
-                    <p className="text-gray-500">
-                    Undri, Pune. 
-                    </p>
-                  </div>
-                  <div className="flex flex-row items-center space-x-4">
-                    <FaPhone className="w-6 h-6 text-gray-500 " />
-                    <p className="text-gray-500">+91 9850308715</p>
-                  </div>
-                  <div className="flex flex-row items-center space-x-4">
-                  <FaEnvelope className="w-6 h-6 text-gray-500" />
-                    <p className="text-gray-500"> Info@Legofleets.com</p>
-                  </div>
-                  <div className="flex flex-row items-center space-x-4">
-                    <FaCalendarWeek className="w-6 h-6 text-gray-500 " />
-                    <p className="text-gray-500">Mon-Sat: 07:00 - 17:00</p>
-                  </div>
-                </div>
+            
               </div>
             
             </div>

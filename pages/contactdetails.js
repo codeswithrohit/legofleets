@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { firebase } from "../Firebase/config";
+import { format, addHours } from 'date-fns';
 import { ChevronDownIcon, ChevronUpIcon, UserIcon, ShoppingBagIcon } from '@heroicons/react/solid';
 const ContactSummary = () => {
   const router = useRouter();
@@ -22,10 +23,10 @@ const ContactSummary = () => {
     selectedDropoffDate
   } = router.query;
   const [showFlightInputs, setShowFlightInputs] = useState(false);
-
+console.log(selectedService)
   useEffect(() => {
     // Check if selected service requires flight details
-    if (selectedService === "Pune To Mumbai Airport " || selectedService === "Mumbai To Pune Airport ") {
+    if (selectedService === "Pune To Mumbai Airport " || selectedService === "Mumbai Airport To Pune  ") {
       setShowFlightInputs(true);
     } else {
       setShowFlightInputs(false);
@@ -54,11 +55,18 @@ const ContactSummary = () => {
     arrivaldeparturetime: '',
     flightnumber: '',
   });
-  
+  const calculatedDropoffDate = selectedDropoffDate 
+  ? selectedDropoffDate 
+  : addHours(new Date(selectedPickupDate), 6);  // Add 6 hours if drop-off date is missing
+
   const handleProceedToPayment = (event) => {
     event.preventDefault();
     // Check if any required field is empty
     const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'youaddress'];
+    if (showFlightInputs) {
+      requiredFields.push('arrivaldeparturetime', 'flightnumber');
+    }
+  
     const emptyFields = requiredFields.filter(field => !formData[field]);
     if (emptyFields.length > 0) {
       alert('Please fill in all required fields: ' + emptyFields.join(', '));
@@ -91,8 +99,7 @@ const ContactSummary = () => {
     });
   };
   
-
-  
+  if (!selectedPickupDate) return <div>Loading...</div>;
   return (
     <div className='min-h-screen'>
       <div class="font-[sans-serif] bg-gray-50">
@@ -111,8 +118,16 @@ const ContactSummary = () => {
               <li class="flex flex-wrap gap-4 text-sm">Vehicle<span class="ml-auto font-bold">{selectedVehicleType}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Passenger<span class="ml-auto font-bold">{selectedPassenger}</span></li>
               <li class="flex flex-wrap gap-4 text-sm">Suitcase<span class="ml-auto font-bold">{selectedSuitcase}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Pickup Date<span class="ml-auto font-bold">{selectedPickupDate}</span></li>
-              <li class="flex flex-wrap gap-4 text-sm">Drop-off Date<span class="ml-auto font-bold">{selectedDropoffDate}</span></li>
+              <li className="flex flex-wrap gap-4 text-sm">
+        Pickup Date & Time<span className="ml-auto font-bold">
+          {format(new Date(selectedPickupDate), 'dd-MMM-yy h:mm aa')}
+        </span>
+      </li>
+      <li className="flex flex-wrap gap-4 text-sm">
+        Drop-off Date & Time<span className="ml-auto font-bold">
+          {format(new Date(calculatedDropoffDate), 'dd-MMM-yy h:mm aa')}
+        </span>
+      </li>
               <li class="flex flex-wrap gap-4 text-sm">Distance<span class="ml-auto font-bold">{selectedDistance}</span></li>
               <li class=" border-t pt-4"></li>
             </ul>
@@ -252,7 +267,8 @@ const ContactSummary = () => {
           <h2 class="text-2xl font-bold text-[#333]">Complete your order</h2>
           <form class="mt-10">
             <div>
-              <h3 class="text-lg font-bold text-[#333] mb-6">Personal Details</h3>
+              <h3 class="text-lg font-bold text-[#333]">Personal Details</h3>
+              <span className="text-red-500 mb-2" >All information below is required</span>
               <div class="grid sm:grid-cols-2 gap-6">
                 <div class="relative flex items-center">
                   <input  value={formData.firstName}
@@ -320,7 +336,7 @@ const ContactSummary = () => {
      name="youaddress"
      id="youaddress"
      required
-     placeholder="Flat/House Number"
+     placeholder="Your Address"
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
                 <input   aria-label="youaddress"
 
@@ -355,7 +371,7 @@ required
 
 name="comment"
 id="comment"
-placeholder="Your comment/message"
+placeholder="Your comment/message (Optional) "
                   class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-b-2 focus:border-[#333] outline-none" />
 
               </div>

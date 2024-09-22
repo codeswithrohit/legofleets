@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaPhone } from 'react-icons/fa';
-
+import { format } from 'date-fns';
 const PuneLocal = () => {
   const router = useRouter();
   const [startDate, setStartDate] = useState(new Date());
@@ -77,7 +77,7 @@ const PuneLocal = () => {
                   // Show message indicating drop-off is not available
                   alert("The Vehicle must be released before mid-night or at the most 1am.");
                 } else {
-                  router.push(`/punelocal?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${startDate.toLocaleString()}&dropDate=${endDate.toLocaleString()}`);
+                  router.push(`/punelocal?pickupLocation=${pickupLocation}&dropoffLocation=${dropoffLocation}&distance=${distance.text}&duration=${duration.text}&pickupDate=${format(startDate, 'dd-MMM-yy h:mm aa')}&dropDate=${format(endDate, 'dd-MMM-yy h:mm aa')}`);
                 }
               }
             }
@@ -119,8 +119,8 @@ const PuneLocal = () => {
               onPlaceChanged={() => onPlaceChanged(true)}
               options={{
                 bounds: new window.google.maps.LatLngBounds(
-                  new window.google.maps.LatLng(18.4419, 73.1021),
-                  new window.google.maps.LatLng(18.6260, 73.9414)
+                  new window.google.maps.LatLng(18.525983604372357, 73.79522341182289),
+                  new window.google.maps.LatLng(18.63518348162437, 73.79522341182289)
                 ),
                 strictBounds: true,
                 types: ['geocode'],
@@ -145,8 +145,8 @@ const PuneLocal = () => {
               onPlaceChanged={() => onPlaceChanged(false)}
               options={{
                 bounds: new window.google.maps.LatLngBounds(
-                  new window.google.maps.LatLng(18.4419, 73.1021),
-                  new window.google.maps.LatLng(18.6260, 73.9414)
+                  new window.google.maps.LatLng(18.525983604372357, 73.79522341182289),
+                  new window.google.maps.LatLng(18.63518348162437, 73.79522341182289)
                 ),
                 strictBounds: true,
                 types: ['geocode'],
@@ -239,7 +239,7 @@ const PuneLocal = () => {
                 <FaPhone className="text-4xl text-blue-500 mr-2" />
                 <div>
                   <p className="text-lg font-semibold">To book within 24 hours from now, please call me on :</p>
-                  <p className="text-2xl font-bold mt-2">7667411501</p>
+                  <p className="text-2xl font-bold mt-2">+91 7875120099</p>
                 </div>
               </div>
               <button

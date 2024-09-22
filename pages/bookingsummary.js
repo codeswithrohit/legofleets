@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { firebase } from '../Firebase/config';
-
+import { format, addHours } from 'date-fns';
 const db = firebase.firestore();
 
 const BookingSummary = () => {
@@ -110,7 +110,7 @@ const BookingSummary = () => {
 
       // Concatenate "LF", the year, and the incremented serial number
       const serialString = newSerial.toString().padStart(5, '0');
-      const orderId = `LF${year}${serialString}`;
+      const orderId = `LF${year}$-{serialString}`;
 
       return orderId;
     } catch (error) {
@@ -213,6 +213,9 @@ const BookingSummary = () => {
       setLoading(false);
     }
   };
+  const calculatedDropoffDate = selectedDropoffDate 
+  ? selectedDropoffDate 
+  : addHours(new Date(selectedPickupDate), 6);  // Add 6 hours if drop-off date is missing
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -369,7 +372,7 @@ const BookingSummary = () => {
               <li class="font-bold text-md text-[#541e50]">Name:   <span class="ml-auto font-normal text-gray-900">{firstName} {lastName}</span></li>
               <li class="font-bold text-md text-[#541e50]">Email:   <span class="ml-auto font-normal text-gray-900">{email}</span></li>
               <li class="font-bold text-md text-[#541e50]">Mobile No.:   <span class="ml-auto font-normal text-gray-900">{phoneNumber}</span></li>
-              <li class="font-bold text-md text-[#541e50]">Flat / House:  <span class="ml-auto font-normal text-gray-900">{youaddress}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Address:  <span class="ml-auto font-normal text-gray-900">{youaddress}</span></li>
               {isFlightNumberAvailable && (
                       <li className="font-bold text-[#541e50] text-md">Flight Number:  <span className="ml-auto text-gray-900">{flightnumber}</span></li>
                     )}
@@ -384,13 +387,13 @@ const BookingSummary = () => {
               <li class="font-bold text-md text-[#541e50]">Vehicle:  <span class="ml-auto font-normal text-gray-900 uppercase">{selectedVehicleType}</span></li>
               <li class="font-bold text-md text-[#541e50]">Passenger:  <span class="ml-auto font-normal text-gray-900">{selectedPassenger}</span></li>
               <li class="font-bold text-md text-[#541e50]">Suitcase:  <span class="ml-auto font-normal text-gray-900">{selectedSuitcase}</span></li>
-              <li class="font-bold text-md text-[#541e50]">Pickup Date:  <span class="ml-auto font-normal text-gray-900">{selectedPickupDate}</span></li>
-              {isdropdate && (
-              <li class="font-bold text-md text-[#541e50]">Dop-off Date:  <span class="ml-auto font-normal text-gray-900">{selectedDropoffDate}</span></li>
-              )}
+              <li class="font-bold text-md text-[#541e50]">Pickup Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(selectedPickupDate), 'dd-MMM-yy h:mm aa')}</span></li>
+           
+              <li class="font-bold text-md text-[#541e50]">Dop-off Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(calculatedDropoffDate), 'dd-MMM-yy h:mm aa')}</span></li>
+            
               <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900">{comment}</span></li>
               <li class="font-bold text-md text-[#541e50]">Distance:  <span class="ml-auto font-normal text-gray-900">{selectedDistance}</span></li>
-              <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900"></span></li>
+              {/* <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900"></span></li> */}
               <li class=" border-t pt-4"></li>
             </ul>
           </div>
@@ -405,8 +408,8 @@ const BookingSummary = () => {
           onChange={handleCheckboxChange}
         />
         <span className="text-gray-700">
-           you are agreeing with the{" "}
-          <a href="/terms" className="text-blue-600 underline hover:text-blue-800">
+        By ticking this box,  you are agreeing with the{" "}
+          <a href="/terms" target="_blank"  className="text-blue-600 underline hover:text-blue-800">
             Terms & Conditions
           </a>{" "}
           for this booking.

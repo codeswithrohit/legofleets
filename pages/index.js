@@ -41,7 +41,7 @@ const Hero = () => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === imageList.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4000); // Change the interval as needed
+    }, 6000); // Change the interval as needed
 
     return () => clearInterval(intervalId);
   }, [currentImageIndex]);
