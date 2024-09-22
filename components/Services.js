@@ -83,7 +83,7 @@ const Services = () => {
       <div className="text-center space-y-3 ">
         <p className="text-xl font-medium text-[#541e50]">WHY CHOOSE US</p>
         <p className="text-4xl font-light text-gray-600">
-          Proudly Serving the Pune Area Since 2007
+        Proudly Serving the Pune and Mumbai Since 1997
         </p>
       </div>
       <div className="">
@@ -100,7 +100,7 @@ const Services = () => {
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Established in 1997</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">	Established in 1997, we have more than two decades of industry experience and have proudly served enormous amounts of customers all over the world</p>
+                        <p class="mb-2 text-gray-600">Established in 1997, we have more than two decades of industry experience and have proudly served enormous amounts of customers all over the world </p>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@ const Services = () => {
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Team</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-yellow-400 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">	We have a highly responsible team who is always focused on customer satisfaction </p>
+                        <p class="mb-2 text-gray-600">	We have a highly responsible team who is always focused on customer satisfaction </p>
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@ const Services = () => {
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Driver</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">	Our drivers are highly experienced, reliable and trustworthy.</p>
+                        <p class="mb-2 text-gray-600">	Our drivers are highly experienced, reliable and trustworthy.</p>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@ const Services = () => {
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Our Vehicle</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">	Our vehicles are well maintained, clean and comfortable</p>
+                        <p class="mb-2 text-gray-600">	Our vehicles are well maintained, clean and comfortable</p>
                     </div>
                 </div>
             </div>

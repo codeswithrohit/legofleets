@@ -50,11 +50,13 @@ const BookingSummary = () => {
 
   const submitBookingData = async () => {
     try {
-      // Get the current date
       const currentDate = new Date();
-      // Format the current date as required (e.g., "03/24/2024")
       const formattedCurrentDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
   
+      // Generate the order ID
+      const orderId = await generateOrderId();
+      if (!orderId) throw new Error("Failed to generate order ID");
+
       const docRef = await db.collection('bookings').add({
         selectedVehicleType,
         selectedBrand,
@@ -74,11 +76,11 @@ const BookingSummary = () => {
         youaddress,
         comment,
         arrivaldeparturetime,
-    flightnumber,
-        bookingDate: formattedCurrentDate, // Add the current booking date
-        orderId: generateOrderId(), // Call a function to generate the order ID
+        flightnumber,
+        bookingDate: formattedCurrentDate, 
+        orderId, // Store the generated order ID
       });
-      return docRef.id; // Return the ID of the newly added document
+      return docRef.id;
     } catch (error) {
       console.error('Error submitting booking data:', error);
       return null;
@@ -86,17 +88,35 @@ const BookingSummary = () => {
   };
   
   // Function to generate a unique order ID
-  const generateOrderId = () => {
+  const generateOrderId = async () => {
     // Get the current year
     const year = new Date().getFullYear();
-    
-    // Generate a random five-digit order number
-    const randomOrderNumber = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
-    
-    // Concatenate "LF", the year, and the random order number
-    const orderId = `LF${year}${randomOrderNumber}`;
-    
-    return orderId;
+
+    try {
+      // Get the current serial number from Firestore
+      const serialDocRef = db.collection('orderSerial').doc('currentSerial');
+      const serialDoc = await serialDocRef.get();
+
+      let currentSerial = 1; // Default to 1 if no serial is found
+      if (serialDoc.exists) {
+        currentSerial = serialDoc.data().serial;
+      }
+
+      // Increment the serial number
+      const newSerial = currentSerial + 1;
+
+      // Save the new serial number back to Firestore
+      await serialDocRef.set({ serial: newSerial });
+
+      // Concatenate "LF", the year, and the incremented serial number
+      const serialString = newSerial.toString().padStart(5, '0');
+      const orderId = `LF${year}${serialString}`;
+
+      return orderId;
+    } catch (error) {
+      console.error('Error generating order ID:', error);
+      return null;
+    }
   };
   
 
@@ -133,50 +153,50 @@ const BookingSummary = () => {
           toast.success('Payment Successful!');
           router.push(`/confirmation?id=${docId}`); // Redirect to confirmation page with Firebase document ID
           // Send confirmation email
-          await axios.post('/api/sendEmail', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-            docId,
-            arrivaldeparturetime,
-    flightnumber
-          });
-          await axios.post('/api/sendMessage', {
-            selectedVehicleType,
-            selectedBrand,
-            selectedPrice,
-            selectedPassenger,
-            selectedSuitcase,
-            selectedPickupLocation,
-            selectedDropoffLocation,
-            selectedPickupDate,
-            selectedDistance,
-            selectedService,
-            selectedDropoffDate,
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            youaddress,
-            comment,
-            docId,
-            arrivaldeparturetime,
-    flightnumber
-          });
+    //       await axios.post('/api/sendEmail', {
+    //         selectedVehicleType,
+    //         selectedBrand,
+    //         selectedPrice,
+    //         selectedPassenger,
+    //         selectedSuitcase,
+    //         selectedPickupLocation,
+    //         selectedDropoffLocation,
+    //         selectedPickupDate,
+    //         selectedDistance,
+    //         selectedService,
+    //         selectedDropoffDate,
+    //         firstName,
+    //         lastName,
+    //         email,
+    //         phoneNumber,
+    //         youaddress,
+    //         comment,
+    //         docId,
+    //         arrivaldeparturetime,
+    // flightnumber
+    //       });
+    //       await axios.post('/api/sendMessage', {
+    //         selectedVehicleType,
+    //         selectedBrand,
+    //         selectedPrice,
+    //         selectedPassenger,
+    //         selectedSuitcase,
+    //         selectedPickupLocation,
+    //         selectedDropoffLocation,
+    //         selectedPickupDate,
+    //         selectedDistance,
+    //         selectedService,
+    //         selectedDropoffDate,
+    //         firstName,
+    //         lastName,
+    //         email,
+    //         phoneNumber,
+    //         youaddress,
+    //         comment,
+    //         docId,
+    //         arrivaldeparturetime,
+    // flightnumber
+    //       });
         },
         prefill: {
           name: `${firstName} ${lastName}`,
@@ -193,6 +213,13 @@ const BookingSummary = () => {
       setLoading(false);
     }
   };
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
 
   const isFlightNumberAvailable = flightnumber && flightnumber !== '';
   const istimedepAvailable = arrivaldeparturetime && arrivaldeparturetime !== '';
@@ -370,12 +397,33 @@ const BookingSummary = () => {
                 
               </div>
             </div>
+            <label className="flex items-start space-x-3 cursor-pointer mb-40 px-6">
+        <input
+          type="checkbox"
+          className="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
+        <span className="text-gray-700">
+           you are agreeing with the{" "}
+          <a href="/terms" className="text-blue-600 underline hover:text-blue-800">
+            Terms & Conditions
+          </a>{" "}
+          for this booking.
+        </span>
+      </label>
             <div class="absolute flex flex-row justify-between gap-4 left-0 bottom-0 bg-[#541e50] w-full p-4">
             <button onClick={handleBack} type="button" class="w-full px-6 py-3.5 font-bold  bg-[#c9d454] text-[#541e50] rounded-md max-sm:order-1">Back</button>
             <button
   onClick={initiatePayment}
   type="button"
-  className="w-full px-6 py-3.5  font-bold bg-[#c9d454] text-[#541e50] rounded-md hover:bg-[#c9d454] relative"
+  className={`w-full px-6 py-3.5  font-bold bg-[#c9d454] text-[#541e50] rounded-md hover:bg-[#c9d454] relative ${
+    isChecked
+      ? "bg-blue-600 text-white hover:bg-blue-700"
+      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+  }`}
+  disabled={!isChecked}
+
 >
   {loading ? (
     <span className="flex items-center justify-center">

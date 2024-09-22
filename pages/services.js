@@ -66,7 +66,7 @@ const Services = () => {
       </table>
       <h2 className="text-2xl font-bold mb-6 text-[#541e50]">Our services:</h2>
       <ul className="list-disc pl-6">
-        <li className="text-lg">Mumbai Airport Transport</li>
+        <li className="text-lg">Airport Services</li>
         <li className="text-lg">Pune ↔ Mumbai</li>
         <li className="text-lg">Pune Local</li>
         <li className="text-lg">Mumbai Local</li>

@@ -11,6 +11,8 @@ import {
     FaFacebook,
     FaInstagram,
     FaWhatsapp,
+    FaEnvelope,
+    
   } from "react-icons/fa";
   import Image from "next/image";
   import Logo from "../public/logo.png";
@@ -65,13 +67,13 @@ import {
         />
   
                 <p className="text-gray-500">
-                Established in 1997 as Amit Tours & Travels, now called LEGOFLEETS, we take pride in providing reliable and punctual car rental services in Pune, catering to the needs of both locals and tourists. 
+                Established in 1997 as Amit Tours & Travels, now called LEGOFLEETS, we take pride in providing reliable and punctual car rental services in from Pune and Mumbai to all over India, catering to the needs of both locals and tourists.
                 </p>
               </div>
               <div className="col-span-1 space-y-8">
                 <div className="flex flex-col space-y-2">
                   <p className="text-gray-600 font-medium">OUR SERVICES</p>
-                  <p className="border-solid border border-[#541e50]  w-1/4 "></p>
+                  {/* <p className="border-solid border border-[#541e50]  w-1/4 "></p> */}
                 </div>
                 <div className="flex flex-col space-y-1">
                   <div  onClick={() => handleBookNow(0)} className="flex flex-row cursor-pointer items-center space-x-2">
@@ -101,15 +103,42 @@ import {
                 </div>
               </div>
               <div className="col-span-1 space-y-8">
-                <div className="flex flex-col space-y-2">
-                  <p className="text-gray-600 font-medium">Legofleets</p>
-                  <p className="border-solid border border-[#541e50]  w-1/4 "></p>
-                </div>
+              <div className="flex flex-col space-y-4">
+  <p className="text-gray-600 font-medium">LEGOFLEETS</p>
+  <p className="text-gray-500">Connect with us:</p>
+  
+  <div className="flex space-x-4 items-center">
+    <a
+      href="https://wa.me/1234567890"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-green-500 hover:text-green-600 transition duration-300"
+    >
+      <FaWhatsapp size={24} />
+    </a>
+    <a
+      href="https://facebook.com/yourprofile"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-600 hover:text-blue-700 transition duration-300"
+    >
+      <FaFacebook size={24} />
+    </a>
+    <a
+      href="https://instagram.com/yourprofile"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-pink-500 hover:text-pink-600 transition duration-300"
+    >
+      <FaInstagram size={24} />
+    </a>
+  </div>
+</div>
                 <div className="flex flex-col space-y-4">
                   <div className="flex flex-row items-center space-x-4">
                     <FaMapMarkerAlt className="w-6 h-6 text-gray-500  font-light" />
                     <p className="text-gray-500">
-                      2507 Parker Boulevard, Pune
+                    Undri, Pune. 
                     </p>
                   </div>
                   <div className="flex flex-row items-center space-x-4">
@@ -117,7 +146,7 @@ import {
                     <p className="text-gray-500">+91 9850308715</p>
                   </div>
                   <div className="flex flex-row items-center space-x-4">
-                    <FaVoicemail className="w-6 h-6 text-gray-500 " />
+                  <FaEnvelope className="w-6 h-6 text-gray-500" />
                     <p className="text-gray-500"> Info@Legofleets.com</p>
                   </div>
                   <div className="flex flex-row items-center space-x-4">
@@ -134,9 +163,9 @@ import {
         <div className="p-8 container mx-auto flex flex-row justify-between">
           <p>Copyright 2024 LEGOFLEETS </p>
           <div className="flex flex-row space-x-3">
-            <FaFacebook className="w-5 h-5 text-gray-500" />
+            {/* <FaFacebook className="w-5 h-5 text-gray-500" />
             <FaInstagram className="w-5 h-5 text-gray-500" />
-            <FaWhatsapp className="w-5 h-5 text-gray-500" />
+            <FaWhatsapp className="w-5 h-5 text-gray-500" /> */}
           </div>
         </div>
       </div>

@@ -199,6 +199,7 @@ const AirportServices = () => {
          onChange={(e) => setPickupLocation(e.target.value)}
          className="p-2 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50]"
        >
+                 <option value="">Select Pickup Location</option>
                  <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-2">Chhatrapati Shivaji Maharaj Airport – Terminal-2</option>
          <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-1">Chhatrapati Shivaji Maharaj Airport – Terminal-1</option>
 
@@ -312,6 +313,7 @@ const AirportServices = () => {
          onChange={(e) => setDropoffLocation(e.target.value)}
          className="p-2 w-full md:w-48 h-10 outline-none rounded-lg border border-[#541e50] focus:ring-[#541e50]"
        >
+          <option value="">Select Drop-Off Location</option>
                  <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-2">Chhatrapati Shivaji Maharaj Airport – Terminal-2</option>
          <option value="Chhatrapati Shivaji Maharaj Airport – Terminal-1">Chhatrapati Shivaji Maharaj Airport – Terminal-1</option>
        </select>
@@ -369,7 +371,7 @@ const AirportServices = () => {
         <div className="flex items-center justify-center mb-4">
           <FaPhone className="text-4xl text-blue-500 mr-2" />
           <div>
-            <p className="text-lg font-semibold">Please call me on:</p>
+            <p className="text-lg font-semibold">To book within 24 hours from now, please call me on :</p>
             <p className="text-2xl font-bold mt-2">7667411501</p>
           </div>
         </div>

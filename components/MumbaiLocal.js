@@ -254,7 +254,7 @@ const MumbaiLocal = () => {
         <div className="flex items-center justify-center mb-4">
           <FaPhone className="text-4xl text-blue-500 mr-2" />
           <div>
-            <p className="text-lg font-semibold">Please call me on:</p>
+            <p className="text-lg font-semibold">To book within 24 hours from now, please call me on :</p>
             <p className="text-2xl font-bold mt-2">7667411501</p>
           </div>
         </div>

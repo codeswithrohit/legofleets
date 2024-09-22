@@ -83,7 +83,7 @@ export default TabsPage;
 
 const items = [
   {
-    title: 'AirPort Services',
+    title: 'Airport Services',
   },
   {
     title: 'Pune <=> Mumbai',

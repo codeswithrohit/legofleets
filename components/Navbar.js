@@ -82,7 +82,7 @@ const Navbar = () => {
     const navigation = [
         { title: "HOME", path: "/Home", isDrapdown: false, navs: dropdownNavs },
         { title: "CAR RENTAL SERVICE", path: "/services", isDrapdown: false },
-        { title: "TOUR PACKAGES", path: "/tourpackage", isDrapdown: false },
+        // { title: "TOUR PACKAGES", path: "/tourpackage", isDrapdown: false },
         { title: "ABOUT US", path: "/aboutus", isDrapdown: false },
         { title: "CONTACT US", path: "/contactus", isDrapdown: false }
     ];
@@ -104,6 +104,7 @@ const Navbar = () => {
                                 src="logo.png"
                                 width={120}
                                 height={50}
+                                className='object-contain'
                                 alt="Float UI logo"
                             />
                         </Link>

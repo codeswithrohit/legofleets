@@ -194,7 +194,7 @@ const Contact = () => {
             </div>
            
           </div>
-          <div className="">
+          {/* <div className="">
           <iframe
   title="Pune map"
   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15136478.317870487!2d73.67731827626207!3d18.520306892131553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf3ffacdd3d5%3A0x5d6e03d657baf204!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1641465195130!5m2!1sen!2sin"
@@ -204,7 +204,7 @@ const Contact = () => {
   loading="lazy"
 ></iframe>
 
-            </div>
+            </div> */}
         </div>
 
       {/*====== End Contact Map Section ======*/}
