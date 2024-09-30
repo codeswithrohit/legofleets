@@ -483,7 +483,9 @@ useEffect(() => {
           ) : (
             filteredTravelData.map((item, index) => (
                 <div key={index} className="relative mb-2 mt-2 max-w-xs md:max-w-3xl mx-auto">
-                <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-[#541e50] bg-white">
+                   <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-[#541e50] bg-white">
+                   <div className="flex flex-col" >
+                            <div className="flex flex-col md:flex-row"  >
                   <div style={{ width: '30%' }}>
                     <img src={item.carImage} alt={item.brand} className="rounded-xl" />
                   </div>
@@ -506,67 +508,73 @@ useEffect(() => {
                         <p className="text-gray-800 text-sm ml-1">{selectedSuitcase} Bags</p>
                       </div>
                     </div>
-                    {showMoreInfo && (
+                 
+                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
+                      Book This Vehicle
+                    </button>
+                  </div>
+                  </div>
+                  <div>
+                  {showMoreInfo && (
                         <div>
   {selectedType.toLowerCase() === 'sedan' && (
-   <div style={{ textAlign: 'center', marginTop: '20px' }}>
-   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+   <div style={{  marginTop: '20px' }}>
+   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
    <p className="text-gray-700 mb-2">
-        Per KM: ₹15
+   <span className="font-bold" >⦿</span>    Per KM: ₹15
       </p>
       <p className="text-gray-700 mb-2">
-        Driver Charges per night: ₹500 (In case the driver stays overnight)
+      <span className="font-bold" >⦿</span>   Driver Charges per night: ₹500 (In case the driver stays overnight)
       </p>
       <p className="text-gray-700 mb-2">
-        Driver allowance per day: ₹500 (Allowance for the driver per day)
+      <span className="font-bold" >⦿</span>    Driver allowance per day: ₹500 (Allowance for the driver per day)
       </p>
  </div>
  </div>
   )}
 
   {selectedType.toLowerCase() === 'minisuv' && (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+    <div style={{ marginTop: '20px' }}>
+    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
     <p className="text-gray-700 mb-2">
-        Per KM: ₹18
+    <span className="font-bold" >⦿</span>     Per KM: ₹18
       </p>
       <p className="text-gray-700 mb-2">
-        Driver Charges per night: ₹500 (In case the driver stays overnight)
+      <span className="font-bold" >⦿</span>     Driver Charges per night: ₹500 (In case the driver stays overnight)
       </p>
       <p className="text-gray-700 mb-2">
-        Driver allowance per day: ₹500 (Allowance for the driver per day)
+      <span className="font-bold" >⦿</span>     Driver allowance per day: ₹500 (Allowance for the driver per day)
       </p>
   </div>
   </div>
   )}
 
   {selectedType.toLowerCase() === 'suv' && (
- <div style={{ textAlign: 'center', marginTop: '20px' }}>
- <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+ <div style={{ marginTop: '20px' }}>
+ <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
  <p className="text-gray-700 mb-2">
-        Per KM: ₹22
+ <span className="font-bold" >⦿</span>    Per KM: ₹22
       </p>
       <p className="text-gray-700 mb-2">
-        Driver Charges per night: ₹500 (In case the driver stays overnight)
+      <span className="font-bold" >⦿</span>    Driver Charges per night: ₹500 (In case the driver stays overnight)
       </p>
       <p className="text-gray-700 mb-2">
-        Driver allowance per day: ₹500 (Allowance for the driver per day)
+      <span className="font-bold" >⦿</span>     Driver allowance per day: ₹500 (Allowance for the driver per day)
       </p>
 </div>
 </div>
   )}
 </div>
                     )}
-                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
-                      Book This Vehicle
-                    </button>
-                  </div>
+                    </div>
+                    </div>
+
                 </div>
               </div>
               
@@ -712,54 +720,54 @@ useEffect(() => {
         {showMoreInfo && (
             <div>
             {selectedType.toLowerCase() === 'sedan' && (
-             <div style={{ textAlign: 'center', marginTop: '20px' }}>
+             <div style={{ marginTop: '20px' }}>
              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
              <p className="text-gray-700 mb-2">
-        Per KM: ₹15
+             <span className="font-bold" >⦿</span> Per KM: ₹15
       </p>
       <p className="text-gray-700 mb-2">
-        Driver Charges per night: ₹500 (In case the driver stays overnight)
+      <span className="font-bold" >⦿</span>  Driver Charges per night: ₹500 (In case the driver stays overnight)
       </p>
       <p className="text-gray-700 mb-2">
-        Driver allowance per day: ₹500 (Allowance for the driver per day)
+      <span className="font-bold" >⦿</span>  Driver allowance per day: ₹500 (Allowance for the driver per day)
       </p>
            </div>
            </div>
             )}
           
             {selectedType.toLowerCase() === 'minisuv' && (
-              <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              <div style={{ marginTop: '20px' }}>
               <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
               <p className="text-gray-700 mb-2">
-        Per KM: ₹18
+              <span className="font-bold" >⦿</span>   Per KM: ₹18
       </p>
       <p className="text-gray-700 mb-2">
-        Driver Charges per night: ₹500 (In case the driver stays overnight)
+      <span className="font-bold" >⦿</span>   Driver Charges per night: ₹500 (In case the driver stays overnight)
       </p>
       <p className="text-gray-700 mb-2">
-        Driver allowance per day: ₹500 (Allowance for the driver per day)
+      <span className="font-bold" >⦿</span>   Driver allowance per day: ₹500 (Allowance for the driver per day)
       </p>
             </div>
             </div>
             )}
           
             {selectedType.toLowerCase() === 'suv' && (
-           <div style={{ textAlign: 'center', marginTop: '20px' }}>
+           <div style={{ marginTop: '20px' }}>
            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
            <p className="text-gray-700 mb-2">
-        Per KM: ₹22
+           <span className="font-bold" >⦿</span>   Per KM: ₹22
       </p>
       <p className="text-gray-700 mb-2">
-        Driver Charges per night: ₹500 (In case the driver stays overnight)
+      <span className="font-bold" >⦿</span>   Driver Charges per night: ₹500 (In case the driver stays overnight)
       </p>
       <p className="text-gray-700 mb-2">
-        Driver allowance per day: ₹500 (Allowance for the driver per day)
+      <span className="font-bold" >⦿</span>    Driver allowance per day: ₹500 (Allowance for the driver per day)
       </p>
           </div>
           </div>

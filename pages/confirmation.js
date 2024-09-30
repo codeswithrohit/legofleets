@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { firebase } from '../Firebase/config';
-
+import { format } from 'date-fns';
 const db = firebase.firestore();
 import Link from 'next/link';
 const Invoice = () => {
@@ -27,9 +27,17 @@ const Invoice = () => {
     }
   }, [router.query]);
 
+  console.log("bookingdata",bookingData)
+
   const printInvoice = () => {
     window.print();
   };
+  const addSixHours = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(newDate.getHours() + 6);
+    return format(newDate, 'dd-MMM-yy h:mm aa'); // Use date-fns to format the date
+  };
+ 
   return (
     <div className='min-h-screen' >
        {bookingData ? (
@@ -90,22 +98,12 @@ const Invoice = () => {
                   <dl className="grid sm:grid-cols-5 gap-x-3">
   <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Drop-off date:</dt>
   <dd className="col-span-2 text-gray-500">
-    {bookingData ? (
-      bookingData.selectedDropoffDate ? (
-        bookingData.selectedDropoffDate
-      ) : (
-        // Calculate six hours after pickup date if drop-off date is not available
-        bookingData.selectedPickupDate ? (
-          new Date(new Date(bookingData.selectedPickupDate).getTime() + 6 * 60 * 60 * 1000).toLocaleString()
-        ) : (
-          "---------"
-        )
-      )
-    ) : (
-      "----------"
-    )}
-  </dd>
+                          {bookingData.selectedDropoffDate
+                            ? bookingData.selectedDropoffDate
+                            : addSixHours(bookingData.selectedPickupDate)}
+                        </dd>
 </dl>
+
 
 
                 </div>

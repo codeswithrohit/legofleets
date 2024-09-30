@@ -12,7 +12,7 @@ const Services = () => {
  
   const handleBookNow = (packageId) => {
       // Redirect to the Home page with the selected packageId
-      router.push(`/Home?activeTab=0&selectedPackage=${packageId}`);
+      router.push(`/?activeTab=0&selectedPackage=${packageId}`);
     };
 
   return (
@@ -24,20 +24,20 @@ const Services = () => {
         Whether you are traveling from Pune to Mumbai airports or planning a local or national journey, we have the perfect car for you.
         Our rates are designed to fit your budget, without compromising on quality and comfort.
       </p>
-      <p className="mb-6 text-lg">
+      <p className="mb-6 text-xl">
         Choose from our wide range of well-maintained and reliable vehicles that cater to different needs and preferences.
         We have Sedans, Mini-SUVs & SUVs for solo travellers or couples, for families, and larger groups or those seeking extra space.
         Our transparent pricing policy ensures there are no hidden costs.
       </p>
-      <p className="mb-6 text-lg">
+      <p className="mb-6 text-xl">
         Our pricing structure is designed to be transparent and flexible, ensuring that you get the best value for your money.
         We offer competitive rates for airport transfers, local trips, and long-distance journeys.
         With LEGOFLEETS, you can enjoy the convenience of renting a car at affordable prices.
       </p>
-      <p className="mb-6 text-lg">
+      <p className="mb-6 text-xl">
         While you can choose a Mini-SUV, Sedan, or SUV, you may be provided any of these cars within your chosen car type, depending on their availability.
       </p>
-      <p className="mb-6 text-lg">
+      <p className="mb-6 text-xl">
         To ensure you have a safe and comfortable journey, we recommend you to keep luggage to boot capacity and avoid putting large bags on passenger seats.
         Following table is for guidance.
       </p>

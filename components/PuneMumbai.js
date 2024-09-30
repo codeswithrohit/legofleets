@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaPhone } from 'react-icons/fa';
 import Select from 'react-select';
-
+import { format } from 'date-fns';
 const locations = [
   'Lonavala', 'Panvel', 'Khopoli', 'Khandala', 'Belapur', 'Kharghar', 'Nerul', 'Sanpada', 'Seawood',
   'Vashi', 'Airoli', 'Rabale', 'Mulund East', 'Mulund West', 'Bhandup East', 'Bhandup West', 'Mankhurd',
@@ -115,7 +115,7 @@ const PuneMumbai = () => {
         // Show modal if selected time is within the next 6 hours
         setModalOpen(true);
       } else {
-      router.push(`/mumbaipune?pickupLocation=${selectedLocation.value}&dropoffLocation=${dropoffLocation}&pickupDate=${startDate.toLocaleString()}`);
+      router.push(`/mumbaipune?pickupLocation=${selectedLocation.value}&dropoffLocation=${dropoffLocation}&pickupDate=${format(startDate, 'dd-MMM-yy h:mm aa')}`);
     }};
     const handlePuneToMumbaiSearch = () => {
       const currentTime = new Date().getTime();
@@ -126,7 +126,7 @@ const PuneMumbai = () => {
         // Show modal if selected time is within the next 6 hours
         setModalOpen(true);
       } else {
-      router.push(`/punemumbai?pickupLocation=${pickupLocation}&dropoffLocation=${selectedLocation.value}&pickupDate=${startDate.toLocaleString()}`);
+      router.push(`/punemumbai?pickupLocation=${pickupLocation}&dropoffLocation=${selectedLocation.value}&pickupDate=${format(startDate, 'dd-MMM-yy h:mm aa')}`);
       }};
       const [selectedOption, setSelectedOption] = useState('PuneToMumbai');
       const handleOptionChange = (e) => {

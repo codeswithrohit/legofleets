@@ -175,8 +175,8 @@ function MyApp() {
           selectedSuitcase: selectedSuitcase,
           selectedPickupLocation: pickupLocation,
           selectedDropoffLocation: dropoffLocation,
-          selectedPickupDate: new Date(pickupDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
-          selectedDropoffDate: new Date(dropDate).toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'short' }),
+          selectedPickupDate: pickupDate,
+          selectedDropoffDate: dropDate,
           selectedDistance: distance,
           selectedService:'Mumbai Local ',
         },
@@ -444,7 +444,9 @@ function MyApp() {
           ) : (
             filteredTravelData.map((item, index) => (
                 <div key={index} className="relative mb-2 mt-2 max-w-xs md:max-w-3xl mx-auto">
-                <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-[#541e50] bg-white">
+                  <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-[#541e50] bg-white">
+                   <div className="flex flex-col" >
+                            <div className="flex flex-col md:flex-row"  >
                   <div style={{ width: '30%' }}>
                     <img src={item.carImage} alt={item.brand} className="rounded-xl" />
                   </div>
@@ -467,69 +469,76 @@ function MyApp() {
                         <p className="text-gray-800 text-sm ml-1">{selectedSuitcase} Bags</p>
                       </div>
                     </div>
-                    {showMoreInfo && (
+                   
+                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
+                      Book This Vehicle
+                    </button>
+                  </div>
+                  </div>
+<div>
+{showMoreInfo && (
                         <div>
   {selectedType.toLowerCase() === 'sedan' && (
-   <div style={{ textAlign: 'center', marginTop: '20px' }}>
-   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+   <div style={{ marginTop: '20px' }}>
+   <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
    <p className="text-gray-700 mb-2">
-     For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
+   <span className="font-bold" >⦿</span>   For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
    </p>
    <p className="text-gray-700 mb-2">
-     After 8 hours, additional charges of ₹ 300 per hour will be added.
+   <span className="font-bold" >⦿</span>  After 8 hours, additional charges of ₹ 300 per hour will be added.
    </p>
    <p className="text-gray-700 mb-2">
-     After 80 kilometers, extra charges of ₹ 17 per kilometer will be applied.
+   <span className="font-bold" >⦿</span>  After 80 kilometers, extra charges of ₹ 17 per kilometer will be applied.
    </p>
  </div>
  </div>
   )}
 
   {selectedType.toLowerCase() === 'minisuv' && (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+    <div style={{  marginTop: '20px' }}>
+    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
     <p className="text-gray-700 mb-2">
-      For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
+    <span className="font-bold" >⦿</span>    For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
     </p>
     <p className="text-gray-700 mb-2">
-      After 8 hours, additional charges of ₹ 400 per hour will be added.
+    <span className="font-bold" >⦿</span>   After 8 hours, additional charges of ₹ 400 per hour will be added.
     </p>
     <p className="text-gray-700 mb-2">
-      After 80 kilometers, extra charges of ₹ 20 per kilometer will be applied.
+    <span className="font-bold" >⦿</span>   After 80 kilometers, extra charges of ₹ 20 per kilometer will be applied.
     </p>
   </div>
   </div>
   )}
 
   {selectedType.toLowerCase() === 'suv' && (
- <div style={{ textAlign: 'center', marginTop: '20px' }}>
- <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
+ <div style={{  marginTop: '20px' }}>
+ <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
 
  <p className="text-gray-700 mb-2">
-   For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
+ <span className="font-bold" >⦿</span>   For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
  </p>
  <p className="text-gray-700 mb-2">
-   After 8 hours, additional charges of ₹ 450 per hour will be added.
+ <span className="font-bold" >⦿</span>  After 8 hours, additional charges of ₹ 450 per hour will be added.
  </p>
  <p className="text-gray-700 mb-2">
-   After 80 kilometers, extra charges of ₹ 25 per kilometer will be applied.
+ <span className="font-bold" >⦿</span>  After 80 kilometers, extra charges of ₹ 25 per kilometer will be applied.
  </p>
 </div>
 </div>
   )}
 </div>
                     )}
-                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
-                      Book This Vehicle
-                    </button>
-                  </div>
+  </div>
+
                 </div>
               </div>
+              </div>
+
               
      ))
      )}
@@ -674,54 +683,54 @@ function MyApp() {
         {showMoreInfo && (
             <div>
             {selectedType.toLowerCase() === 'sedan' && (
-             <div style={{ textAlign: 'center', marginTop: '20px' }}>
+             <div style={{  marginTop: '20px' }}>
              <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
              <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
              <p className="text-gray-700 mb-2">
-               For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
+             <span className="font-bold" >⦿</span>  For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
              </p>
              <p className="text-gray-700 mb-2">
-               After 8 hours, additional charges of ₹ 300 per hour will be added.
+             <span className="font-bold" >⦿</span>  After 8 hours, additional charges of ₹ 300 per hour will be added.
              </p>
              <p className="text-gray-700 mb-2">
-               After 80 kilometers, extra charges of ₹ 17 per kilometer will be applied.
+             <span className="font-bold" >⦿</span>  After 80 kilometers, extra charges of ₹ 17 per kilometer will be applied.
              </p>
            </div>
            </div>
             )}
 
             {selectedType.toLowerCase() === 'minisuv' && (
-              <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              <div style={{  marginTop: '20px' }}>
               <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
               <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
               <p className="text-gray-700 mb-2">
-                For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
+              <span className="font-bold" >⦿</span>  For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
               </p>
               <p className="text-gray-700 mb-2">
-                After 8 hours, additional charges of ₹ 400 per hour will be added.
+              <span className="font-bold" >⦿</span>   After 8 hours, additional charges of ₹ 400 per hour will be added.
               </p>
               <p className="text-gray-700 mb-2">
-                After 80 kilometers, extra charges of ₹ 20 per kilometer will be applied.
+              <span className="font-bold" >⦿</span>   After 80 kilometers, extra charges of ₹ 20 per kilometer will be applied.
               </p>
             </div>
             </div>
             )}
           
             {selectedType.toLowerCase() === 'suv' && (
-           <div style={{ textAlign: 'center', marginTop: '20px' }}>
+           <div style={{ marginTop: '20px' }}>
            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
           
            <p className="text-gray-700 mb-2">
-             For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
+           <span className="font-bold" >⦿</span>  For the first 8 hours of travel and up to 80 kilometers, standard charges apply.
            </p>
            <p className="text-gray-700 mb-2">
-             After 8 hours, additional charges of ₹ 450 per hour will be added.
+           <span className="font-bold" >⦿</span>  After 8 hours, additional charges of ₹ 450 per hour will be added.
            </p>
            <p className="text-gray-700 mb-2">
-             After 80 kilometers, extra charges of ₹ 25 per kilometer will be applied.
+           <span className="font-bold" >⦿</span>  After 80 kilometers, extra charges of ₹ 25 per kilometer will be applied.
            </p>
           </div>
           </div>

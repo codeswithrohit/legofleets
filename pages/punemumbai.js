@@ -449,71 +449,81 @@ function MyApp() {
             filteredTravelData.map((item, index) => (
                 <div key={index} className="relative mb-2 mt-2 max-w-xs md:max-w-3xl mx-auto">
                 <div className="flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 border border-[#541e50] bg-white">
-                  <div style={{ width: '30%' }}>
-                    <img src={item.carImage} alt={item.brand} className="rounded-xl" />
-                  </div>
-                  <div style={{ width: '70%', paddingLeft: '20px' }}>
-                    <h3 className="font-black text-gray-800 md:text-3xl text-xl uppercase">{item.vehicleType}</h3>
-                    <p className="text-4xl font-black font-normal text-[#541e50]">{`₹${item.price}`}</p>
-                    <div className="flex flex-row items-center" onClick={toggleMoreInfo}>
-                      <p className="text-xl font-normal font-black text-gray-800 uppercase cursor-pointer">
-                        {showMoreInfo ? 'Less Info' : 'More Info'}
-                      </p>
-                      {showMoreInfo ? (
-                        <ChevronUpIcon className="h-10 w-10 text-[#541e50] ml-2 cursor-pointer" />
-                      ) : (
-                        <ChevronDownIcon className="h-10 w-10 text-[#541e50] ml-2 cursor-pointer" />
-                      )}
-                      <div className="flex flex-row ml-16">
-                        <UserIcon className="h-5 w-5 text-gray-800 ml-2" />
-                        <p className="text-gray-800 text-sm ml-1">{selectedPassengers} People</p>
-                        <ShoppingBagIcon className="h-5 w-5 text-gray-800 ml-2" />
-                        <p className="text-gray-800 text-sm ml-1">{selectedSuitcase} Bags</p>
-                      </div>
-                    </div>
-                    {showMoreInfo && (
-                   <div>
-                   {selectedType.toLowerCase() === 'sedan' && (
-                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-                    <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-                 
-                    <p className="text-gray-700 mb-2">
-                           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-                         </p>
-                  </div>
-                  </div>
-                   )}
-                 
-                   {selectedType.toLowerCase() === 'minisuv' && (
-                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                     <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-                     <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-                 
-                     <p className="text-gray-700 mb-2">
-                           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-                         </p>
-                   </div>
-                   </div>
-                   )}
-                 
-                   {selectedType.toLowerCase() === 'suv' && (
-                  <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                  <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
-                  <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
-                 
-                  <p className="text-gray-700 mb-2">
-                           Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
-                         </p>
-                 </div>
-                 </div>
-                   )}
-                 </div>
-                    )}
-                    <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
-                      Book This Vehicle
-                    </button>
-                  </div>
+                   <div className="flex flex-col" >
+                            <div className="flex flex-col md:flex-row"  >
+                              <div style={{ width: '30%' }}>
+                                <img src={item.carImage} alt={item.brand} className="rounded-xl" />
+                              </div>
+                              <div style={{ width: '70%', paddingLeft: '20px' }}>
+                                <h3 className="font-black text-gray-800 md:text-3xl text-xl uppercase">{item.vehicleType}</h3>
+                                <p className="text-4xl font-black font-normal text-[#541e50]">{`₹${item.price}`}</p>
+                                <div className="flex flex-row items-center" onClick={toggleMoreInfo}>
+                                  <p className="text-xl font-normal font-black text-gray-800 uppercase cursor-pointer">
+                                    {showMoreInfo ? 'Less Info' : 'More Info'}
+                                  </p>
+                                  {showMoreInfo ? (
+                                    <ChevronUpIcon className="h-10 w-10 text-[#541e50] ml-2 cursor-pointer" />
+                                  ) : (
+                                    <ChevronDownIcon className="h-10 w-10 text-[#541e50] ml-2 cursor-pointer" />
+                                  )}
+                                  <div className="flex flex-row ml-16">
+                                    <UserIcon className="h-5 w-5 text-gray-800 ml-2" />
+                                    <p className="text-gray-800 text-sm ml-1">{selectedPassengers} People</p>
+                                    <ShoppingBagIcon className="h-5 w-5 text-gray-800 ml-2" />
+                                    <p className="text-gray-800 text-sm ml-1">{selectedSuitcase} Bags</p>
+                                  </div>
+                                </div>
+
+                                <button className="bg-[#541e50] w-full hover:bg-[#541e50] text-white font-bold py-2 px-4 rounded-xl mt-2" onClick={() => handleSelect(item)}>
+                                  Book This Vehicle
+                                </button>
+                              </div>
+                            </div>
+                            <div>
+                              {showMoreInfo && (
+                                <div>
+                                  {selectedType.toLowerCase() === 'sedan' && (
+                                    <div style={{ marginTop: '20px' }}>
+                                      <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
+                                        <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+
+                                        <p className="text-gray-700 mb-2 whitespace-pre-line">
+                                          <span className="font-bold" >⦿</span>Additional drop-off/pick-up points: ₹ 300 per 30 minutes. <br />
+                                        </p>
+
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {selectedType.toLowerCase() === 'minisuv' && (
+                                    <div style={{ marginTop: '20px' }}>
+                                      <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
+                                        <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+
+                                        <p className="text-gray-700 mb-2 whitespace-pre-line">
+                                          <span className="font-bold" >⦿</span>Additional drop-off/pick-up points: ₹ 300 per 30 minutes. <br />
+                                        </p>
+
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {selectedType.toLowerCase() === 'suv' && (
+                                    <div style={{ marginTop: '20px' }}>
+                                      <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md w-full mx-auto mt-8">
+                                        <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
+
+                                        <p className="text-gray-700 mb-2 whitespace-pre-line">
+                                          <span className="font-bold" >⦿</span>Additional drop-off/pick-up points: ₹ 300 per 30 minutes. <br />
+                                        </p>
+
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
                 </div>
               </div>
               
@@ -660,36 +670,36 @@ function MyApp() {
         {showMoreInfo && (
           <div>
           {selectedType.toLowerCase() === 'sedan' && (
-           <div style={{ textAlign: 'center', marginTop: '20px' }}>
+           <div style={{  marginTop: '20px' }}>
            <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
            <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
         
            <p className="text-gray-700 mb-2">
-                  Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+           ⦿ Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
                 </p>
          </div>
          </div>
           )}
         
           {selectedType.toLowerCase() === 'minisuv' && (
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <div style={{  marginTop: '20px' }}>
             <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
             <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
         
             <p className="text-gray-700 mb-2">
-                  Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+            ⦿ Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
                 </p>
           </div>
           </div>
           )}
         
           {selectedType.toLowerCase() === 'suv' && (
-         <div style={{ textAlign: 'center', marginTop: '20px' }}>
+         <div style={{  marginTop: '20px' }}>
          <div className="bg-gray-100 p-6 rounded-lg border border-[#541e50] shadow-md max-w-md mx-auto mt-8">
          <h2 className="text-xl font-semibold mb-4">Taxi Charges Information</h2>
         
          <p className="text-gray-700 mb-2">
-                  Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
+         ⦿ Additional drop-off/pick-up points: ₹ 300 per 30 minutes.
                 </p>
         </div>
         </div>

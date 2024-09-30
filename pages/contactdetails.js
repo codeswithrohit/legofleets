@@ -23,7 +23,7 @@ const ContactSummary = () => {
     selectedDropoffDate
   } = router.query;
   const [showFlightInputs, setShowFlightInputs] = useState(false);
-console.log(selectedService)
+console.log("pickupdate",selectedPickupDate)
   useEffect(() => {
     // Check if selected service requires flight details
     if (selectedService === "Pune To Mumbai Airport " || selectedService === "Mumbai Airport To Pune  ") {

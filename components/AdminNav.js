@@ -103,6 +103,18 @@ function SideNavbar() {
          Order
       </h3>
     </Link>
+              <Link href='/Admin/Testimonial' className={`flex  mb-2 justify-start items-center gap-4 pl-5 p-2 rounded-md group cursor-pointer m-auto ${
+      router.pathname === '/Admin/Testimonial' ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-900'
+    }`}>
+      <IoIosAddCircle className={`text-2xl ${
+        router.pathname === '/Admin/Testimonial' ? 'text-white' : 'text-gray-600 group-hover:text-white'
+      }`} />
+      <h3 className={`text-base ${
+        router.pathname === '/Admin/Testimonial' ? 'text-white' : 'text-gray-800 group-hover:text-white'
+      } font-semibold`}>
+         Testimonial
+      </h3>
+    </Link>
              
     {/* <Link href='/Admin/Message' className={`flex  mb-2 justify-start items-center gap-4 pl-5 p-2 rounded-md group cursor-pointer m-auto ${
       router.pathname === '/Admin/Message' ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-900'

@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { firebase } from '../Firebase/config';
-import { format, addHours } from 'date-fns';
+import { format, addHours,parse, isValid } from 'date-fns';
 const db = firebase.firestore();
-
 const BookingSummary = () => {
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -47,12 +46,44 @@ const BookingSummary = () => {
     arrivaldeparturetime,
     flightnumber
   } = router.query;
+  const [formattedTime, setFormattedTime] = useState('');
 
+  useEffect(() => {
+    if (arrivaldeparturetime) {
+      // Ensure arrivaldeparturetime is a valid string
+      if (typeof arrivaldeparturetime === 'string' && arrivaldeparturetime.trim() !== '') {
+        const timeFormat24Hour = parse(arrivaldeparturetime, 'HH:mm', new Date());
+        
+        if (isValid(timeFormat24Hour)) {
+          // Format the time to 12-hour format (AM/PM)
+          const timeIn12HourFormat = format(timeFormat24Hour, 'hh:mm a');
+          setFormattedTime(timeIn12HourFormat);
+        } else {
+          console.error("Invalid time format:", arrivaldeparturetime);
+          setFormattedTime('Invalid time');
+        }
+      } else {
+        console.error("Empty or invalid arrivaldeparturetime");
+        setFormattedTime('Invalid time');
+      }
+    }
+  }, [arrivaldeparturetime]);
+  
+  
   const submitBookingData = async () => {
     try {
-      const currentDate = new Date();
-      const formattedCurrentDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-  
+   const currentDate = new Date();
+    const formattedCurrentDate = format(currentDate, 'dd-MMM-yy h:mm a');
+    
+    // Ensure selectedPickupDate is valid
+    if (!isValid(new Date(selectedPickupDate))) {
+      throw new Error("Invalid Pickup Date");
+    }
+    
+    // Ensure selectedDropoffDate is valid, if present
+    if (selectedDropoffDate && !isValid(new Date(selectedDropoffDate))) {
+      throw new Error("Invalid Dropoff Date");
+    }
       // Generate the order ID
       const orderId = await generateOrderId();
       if (!orderId) throw new Error("Failed to generate order ID");
@@ -88,36 +119,39 @@ const BookingSummary = () => {
   };
   
   // Function to generate a unique order ID
-  const generateOrderId = async () => {
-    // Get the current year
-    const year = new Date().getFullYear();
+  // Function to generate a unique order ID in the format LFYYYYMM-0001
+const generateOrderId = async () => {
+  try {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear(); // Get the current year
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get the current month and pad with '0' if necessary
 
-    try {
-      // Get the current serial number from Firestore
-      const serialDocRef = db.collection('orderSerial').doc('currentSerial');
-      const serialDoc = await serialDocRef.get();
+    // Get the current serial number from Firestore
+    const serialDocRef = db.collection('orderSerial').doc('currentSerial');
+    const serialDoc = await serialDocRef.get();
 
-      let currentSerial = 1; // Default to 1 if no serial is found
-      if (serialDoc.exists) {
-        currentSerial = serialDoc.data().serial;
-      }
-
-      // Increment the serial number
-      const newSerial = currentSerial + 1;
-
-      // Save the new serial number back to Firestore
-      await serialDocRef.set({ serial: newSerial });
-
-      // Concatenate "LF", the year, and the incremented serial number
-      const serialString = newSerial.toString().padStart(5, '0');
-      const orderId = `LF${year}$-{serialString}`;
-
-      return orderId;
-    } catch (error) {
-      console.error('Error generating order ID:', error);
-      return null;
+    let currentSerial = 1; // Default to 1 if no serial is found
+    if (serialDoc.exists) {
+      currentSerial = serialDoc.data().serial;
     }
-  };
+
+    // Increment the serial number
+    const newSerial = currentSerial + 1;
+
+    // Save the new serial number back to Firestore
+    await serialDocRef.set({ serial: newSerial });
+
+    // Concatenate "LF", year, month, and the incremented serial number (padded to 4 digits)
+    const serialString = newSerial.toString().padStart(4, '0');
+    const orderId = `LF${year}${month}-${serialString}`;
+
+    return orderId;
+  } catch (error) {
+    console.error('Error generating order ID:', error);
+    return null;
+  }
+};
+
   
 
   const initiatePayment = async () => {
@@ -215,7 +249,10 @@ const BookingSummary = () => {
   };
   const calculatedDropoffDate = selectedDropoffDate 
   ? selectedDropoffDate 
-  : addHours(new Date(selectedPickupDate), 6);  // Add 6 hours if drop-off date is missing
+  : isValid(new Date(selectedPickupDate)) 
+    ? addHours(new Date(selectedPickupDate), 6) 
+    : null; // Fallback to null if both dates are invalid
+// Add 6 hours if drop-off date is missing
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -377,7 +414,7 @@ const BookingSummary = () => {
                       <li className="font-bold text-[#541e50] text-md">Flight Number:  <span className="ml-auto text-gray-900">{flightnumber}</span></li>
                     )}
                      {istimedepAvailable && (
-              <li class="font-bold text-[#541e50] text-md">Arrival/Departure Time:  <span class="ml-auto font-bold text-gray-900">{arrivaldeparturetime}</span></li>
+              <li class="font-bold text-[#541e50] text-md">Arrival/Departure Time:  <span class="ml-auto font-bold text-gray-900">{formattedTime}</span></li>
                      )}
               <li class=" border-t pt-4"></li>
                           <h3 class="text-xl font-bold text-[#541e50]">Booking Details</h3>
@@ -389,7 +426,7 @@ const BookingSummary = () => {
               <li class="font-bold text-md text-[#541e50]">Suitcase:  <span class="ml-auto font-normal text-gray-900">{selectedSuitcase}</span></li>
               <li class="font-bold text-md text-[#541e50]">Pickup Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(selectedPickupDate), 'dd-MMM-yy h:mm aa')}</span></li>
            
-              <li class="font-bold text-md text-[#541e50]">Dop-off Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(calculatedDropoffDate), 'dd-MMM-yy h:mm aa')}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Drop-off Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(calculatedDropoffDate), 'dd-MMM-yy h:mm aa')}</span></li>
             
               <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900">{comment}</span></li>
               <li class="font-bold text-md text-[#541e50]">Distance:  <span class="ml-auto font-normal text-gray-900">{selectedDistance}</span></li>
