@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { firebase } from '../../Firebase/config';
-
+import { format } from 'date-fns';
 const db = firebase.firestore();
 import Link from 'next/link';
 const Invoice = () => {
@@ -27,43 +27,51 @@ const Invoice = () => {
     }
   }, [router.query]);
 
+  console.log("bookingdata",bookingData)
+
   const printInvoice = () => {
     window.print();
   };
+  const addSixHours = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(newDate.getHours() + 6);
+    return format(newDate, 'dd-MMM-yy h:mm aa'); // Use date-fns to format the date
+  };
   return (
-    <div className='min-h-screen' >
+    <div className='min-h-screen bg-white' >
+      <div className='md:ml-64 bg-white' >
        {bookingData ? (
-    <div className="bg-white lg:ml-64 dark:bg-white">
+    <div className="bg-white dark:bg-white">
       <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto ">
-        <div className="sm:w-11/12 lg:w-3/4 mx-auto">
-          <div className="flex flex-col p-4 sm:p-10 bg-white shadow-md rounded-sm dark:bg-gray-800">
-            <div className="flex justify-between">
-              <div>
+        <div className="sm:w-11/12 lg:w-3/4 mx-auto py-4">
+        <div className="flex bg-[#541e50] justify-between">
+              <div className='p-4' >
               <Link href="/">
                             <img
-                                src="https://legofleetsservices.vercel.app/logo.png"
+                                src="logo.png"
                                 width={120}
                                 height={50}
-                                alt="Float UI logo"
+                                alt="logo"
                             />
                         </Link>
 
   
               </div>
 
-              <div className="text-end">
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">Invoice #</h2>
-                <span className="mt-1 block text-gray-500">{bookingData.orderId}</span>
+              <div className="text-end p-4">
+                <h2 className="text-2xl md:text-3xl font-semibold text-white dark:text-white">Invoice #</h2>
+                <span className="mt-1 block text-white">{bookingData.orderId}</span>
 
-                <address className="mt-4 not-italic text-gray-800 dark:text-gray-200">
-                2507 Parker Boulevard, Pune
+                <address className="mt-4 not-italic text-white dark:text-white">
+                Add : Undri, Pune. 
                 </address>
               </div>
             </div>
+          <div className="flex flex-col p-4 sm:p-10 bg-white shadow-md rounded-sm dark:bg-gray-800">
+           
 
             <div className="mt-8 grid sm:grid-cols-2 gap-3">
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Bill to:</h3>
                 <h3 className="text-md font-semibold text-gray-800 dark:text-gray-200">{bookingData.firstName} {bookingData.lastName}</h3>
                 <h3 className="text-md font-semibold text-gray-800 dark:text-gray-200">{bookingData.email}</h3>
                 <h3 className="text-md font-semibold text-gray-800 dark:text-gray-200">{bookingData.phoneNumber}</h3>
@@ -80,7 +88,7 @@ const Invoice = () => {
               <div className="sm:text-end space-y-2">
                 <div className="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
                   <dl className="grid sm:grid-cols-5 gap-x-3">
-                    <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Invoice date:</dt>
+                    <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Booking date:</dt>
                     <dd className="col-span-2 text-gray-500">{bookingData.bookingDate}</dd>
                   </dl>
                   <dl className="grid sm:grid-cols-5 gap-x-3">
@@ -90,13 +98,13 @@ const Invoice = () => {
                   <dl className="grid sm:grid-cols-5 gap-x-3">
   <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Drop-off date:</dt>
   <dd className="col-span-2 text-gray-500">
-    {bookingData ? (
-      bookingData.selectedDropoffDate ? bookingData.selectedDropoffDate : "---------"
-    ) : (
-      "----------"
-    )}
-  </dd>
+                          {bookingData.selectedDropoffDate
+                            ? bookingData.selectedDropoffDate
+                            : addSixHours(bookingData.selectedPickupDate)}
+                        </dd>
 </dl>
+
+
 
                 </div>
               </div>
@@ -161,8 +169,8 @@ const Invoice = () => {
           </div>
         </div>
         <div class="mt-8 sm:mt-12">
-          <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Thank you!</h4>
-          <p class="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
+          <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Thank you! with </h4>
+          <p class="text-gray-500">“If you have any questions concerning this invoice, use the following contact information”</p>
           <div class="mt-2">
             <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">legofleets@info.com</p>
             <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">+91 7875120099</p>
@@ -197,6 +205,7 @@ const Invoice = () => {
        <div class='h-8 w-8 bg-black rounded-full animate-bounce'></div>
      </div>
       )}
+      </div>
     </div>
   );
 }

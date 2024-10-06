@@ -33,7 +33,7 @@ function MyApp() {
       const pickupTime = new Date(pickupDate).getTime();
       const dropTime = new Date(dropDate).getTime();
       const timeDifference = Math.abs(dropTime - pickupTime);
-      const days = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Calculate days
+      const days = Math.ceil(timeDifference / (1000 * 60 * 60 * 24))+1; // Calculate days
       const nights = days - 1; // Nights are one less than days
       return { days, nights };
     }

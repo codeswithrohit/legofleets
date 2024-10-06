@@ -47,6 +47,14 @@ const BookingSummary = () => {
     flightnumber
   } = router.query;
   const [formattedTime, setFormattedTime] = useState('');
+// Update the formatted date declarations
+const formattedPickupDate = selectedPickupDate && isValid(new Date(selectedPickupDate))
+  ? format(new Date(selectedPickupDate), 'dd-MMM-yy h:mm aa')
+  : 'Invalid Pickup Date';
+
+const formattedDropoffDate = selectedDropoffDate && isValid(new Date(selectedDropoffDate))
+  ? format(new Date(selectedDropoffDate), 'dd-MMM-yy h:mm aa')
+  : 'Invalid Dropoff Date';
 
   useEffect(() => {
     if (arrivaldeparturetime) {
@@ -247,13 +255,11 @@ const generateOrderId = async () => {
       setLoading(false);
     }
   };
-  const calculatedDropoffDate = selectedDropoffDate 
-  ? selectedDropoffDate 
-  : isValid(new Date(selectedPickupDate)) 
-    ? addHours(new Date(selectedPickupDate), 6) 
-    : null; // Fallback to null if both dates are invalid
-// Add 6 hours if drop-off date is missing
-
+  const addSixHours = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(newDate.getHours() + 6);
+    return format(newDate, 'dd-MMM-yy h:mm aa'); // Use date-fns to format the date
+  };
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -263,7 +269,6 @@ const generateOrderId = async () => {
 
   const isFlightNumberAvailable = flightnumber && flightnumber !== '';
   const istimedepAvailable = arrivaldeparturetime && arrivaldeparturetime !== '';
-  const isdropdate = selectedDropoffDate && selectedDropoffDate !== '';
   const handleBack = () => {
     router.back(); // Navigate to the previous page
   };
@@ -424,9 +429,19 @@ const generateOrderId = async () => {
               <li class="font-bold text-md text-[#541e50]">Vehicle:  <span class="ml-auto font-normal text-gray-900 uppercase">{selectedVehicleType}</span></li>
               <li class="font-bold text-md text-[#541e50]">Passenger:  <span class="ml-auto font-normal text-gray-900">{selectedPassenger}</span></li>
               <li class="font-bold text-md text-[#541e50]">Suitcase:  <span class="ml-auto font-normal text-gray-900">{selectedSuitcase}</span></li>
-              <li class="font-bold text-md text-[#541e50]">Pickup Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(selectedPickupDate), 'dd-MMM-yy h:mm aa')}</span></li>
+              <li class="font-bold text-md text-[#541e50]">Pickup Date:  <span class="ml-auto font-normal text-gray-900">{formattedPickupDate}</span></li>
            
-              <li class="font-bold text-md text-[#541e50]">Drop-off Date:  <span class="ml-auto font-normal text-gray-900"> {format(new Date(calculatedDropoffDate), 'dd-MMM-yy h:mm aa')}</span></li>
+              <li className="font-bold text-md text-[#541e50]">
+  Drop-off Date:  
+  <span className="ml-auto font-normal text-gray-900">
+    {selectedDropoffDate && isValid(new Date(selectedDropoffDate))
+      ? formattedDropoffDate
+      : selectedPickupDate && isValid(new Date(selectedPickupDate))
+        ? addSixHours(selectedPickupDate)
+        : 'No valid date available'}
+  </span>
+</li>
+
             
               <li class="font-bold text-md text-[#541e50]">Comment:  <span class="ml-auto font-normal text-gray-900">{comment}</span></li>
               <li class="font-bold text-md text-[#541e50]">Distance:  <span class="ml-auto font-normal text-gray-900">{selectedDistance}</span></li>
